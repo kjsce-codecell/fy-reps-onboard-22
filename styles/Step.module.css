@@ -1,0 +1,25 @@
+.icon {
+	border-radius: 50%;
+	background-color: #494a7d;
+	padding: 10%;
+	text-align: center;
+}
+.container {
+	display: flex;
+
+	width: 100%;
+	justify-content: space-around;
+	padding: 10% 0;
+    cursor: pointer;
+}
+.leftcontainer {
+	text-align: right;
+	width: 50%;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+.title {
+	font-weight: bold;
+}

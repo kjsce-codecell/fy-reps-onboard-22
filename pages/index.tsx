@@ -7,8 +7,9 @@ import { Steps, ConfigProvider } from "antd";
 import PersonalDetails from "./components/PersonalDetails";
 import Show from "./components/Show";
 import Motivation from "./components/Motivation";
+import Stepper from "./components/Stepper";
+import {code, fire, user} from '../assets'
 const Step = Steps.Step;
-
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default function Home() {
 		{
 			id: 1,
 			title: "Personal Details",
+
 		},
 		{
 			id: 2,
@@ -41,36 +43,36 @@ export default function Home() {
 			<main className={styles.main}>
 				<div className={styles.container}>
 					<div className={styles.leftcontainer}>
-						<ConfigProvider
-							theme={{
-								token: {
-                  // colorText:"#fff",
-									colorPrimaryActive: "#F5222D",
-									// colorPrimaryTextActive: "#F5222D",
-                  
+						<Stepper
+							items={[
+								{
+									title: "Personal Details",
+									description:"Add your detail",
+									icon:user
+									
 								},
-								components: {
-									Steps: {
-										colorPrimary: "#dc4446",
-									},
+								{
+									title: "Show us what you got",
+									description:"",
+									icon:code
 								},
-							}}
-						>
-							<Steps
-								current={currentSlide}
-								style={{ height: "100%" }}
-								onChange={setCurrentSlide}
-								direction="vertical"
-							>
-								{items.map((item) => (
-									<Step title={item.title} key={item.id} />
-								))}
-							</Steps>
-						</ConfigProvider>
+								{
+									title: "Motivation",
+									description:"",
+									icon:fire
+								},
+							]}
+						/>
 					</div>
 					<div className={styles.rightcontainer}>
-            {currentSlide===0?<PersonalDetails/>:(currentSlide===1?<Show/>:<Motivation/>)}
-          </div>
+						{currentSlide === 0 ? (
+							<PersonalDetails />
+						) : currentSlide === 1 ? (
+							<Show />
+						) : (
+							<Motivation />
+						)}
+					</div>
 				</div>
 			</main>
 		</>
