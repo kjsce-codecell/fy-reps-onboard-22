@@ -4,7 +4,11 @@ import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
 import { Steps, ConfigProvider } from "antd";
+import PersonalDetails from "./components/PersonalDetails";
+import Show from "./components/Show";
+import Motivation from "./components/Motivation";
 const Step = Steps.Step;
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,15 +16,15 @@ export default function Home() {
 	const items = [
 		{
 			id: 1,
-			title: "Step 1",
+			title: "Personal Details",
 		},
 		{
 			id: 2,
-			title: "Step 2",
+			title: "Show us what you got",
 		},
 		{
 			id: 3,
-			title: "Step 3",
+			title: "Motivation",
 		},
 	];
 
@@ -40,9 +44,9 @@ export default function Home() {
 						<ConfigProvider
 							theme={{
 								token: {
-                  colorText:"#fff",
+                  // colorText:"#fff",
 									colorPrimaryActive: "#F5222D",
-									colorPrimaryTextActive: "#F5222D",
+									// colorPrimaryTextActive: "#F5222D",
                   
 								},
 								components: {
@@ -64,7 +68,9 @@ export default function Home() {
 							</Steps>
 						</ConfigProvider>
 					</div>
-					<div className={styles.rightcontainer}></div>
+					<div className={styles.rightcontainer}>
+            {currentSlide===0?<PersonalDetails/>:(currentSlide===1?<Show/>:<Motivation/>)}
+          </div>
 				</div>
 			</main>
 		</>
