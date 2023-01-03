@@ -5,6 +5,11 @@ import styles from "../styles/Home.module.css";
 import detailsStyles from "../styles/Details.module.css";
 import { useState } from "react";
 import { Steps, ConfigProvider } from "antd";
+import PersonalDetails from "./components/PersonalDetails";
+import Show from "./components/Show";
+import Motivation from "./components/Motivation";
+import Stepper from "./components/Stepper";
+import {code, fire, user} from '../assets'
 const Step = Steps.Step;
 
 const inter = Inter({ subsets: ["latin"] });
@@ -13,7 +18,8 @@ export default function Home() {
 	const items = [
 		{
 			id: 1,
-			title: "Step 1",
+			title: "Personal Details",
+
 		},
 		{
 			id: 2,
@@ -21,7 +27,7 @@ export default function Home() {
 		},
 		{
 			id: 3,
-			title: "Step 3",
+			title: "Motivation",
 		},
 		{
 			id: 4,
@@ -46,33 +52,32 @@ export default function Home() {
 			<main className={styles.main}>
 				<div className={styles.container}>
 					<div className={styles.leftcontainer}>
-						<ConfigProvider
-							theme={{
-								token: {
-                  				colorText:"#fff",
-									colorPrimaryActive: "#F5222D",
-									colorPrimaryTextActive: "#F5222D",
-                  
+					<Stepper 
+							current={currentSlide}
+							Change={(n:number)=>setCurrentSlide(n)}
+							items={[
+								{
+									title: "Personal Details",
+									description:"Add your detail",
+									icon:user
+									
 								},
-								components: {
-									Steps: {
-										colorPrimary: "#dc4446",
-									},
+								{
+									title: "Show us what you got",
+									description:"",
+									icon:code
 								},
-							}}
-						>
-							<Steps
-								current={currentSlide}
-								style={{ height: "100%" }}
-								onChange={setCurrentSlide}
-								direction="vertical"
-							>
-								{items.map((item) => (
-									<Step title={item.title} key={item.id} />
-								))}
-							</Steps>
-						</ConfigProvider>
+								{
+									title: "Motivation",
+									description:"",
+									icon:fire
+								},
+							]}
+						/>
 					</div>
+
+
+
 					<div className={styles.rightcontainer}>
 						{currentSlide === 0 && (
 							<div className={detailsStyles.oneSection}>
@@ -95,7 +100,7 @@ export default function Home() {
 										<input type="text" />
 									</div>
 									<div>
-										<button type="button">Submit</button>
+										<button type="button" onClick={() => {setCurrentSlide(currentSlide+1)}}>Next</button>
 									</div>
 								</div>
 							</div>
@@ -126,14 +131,33 @@ export default function Home() {
 									<input type="text" />
 								</div> */}
 								<div>
-									<button type="button">Submit</button>
+									<button type="button" onClick={() => {setCurrentSlide(currentSlide+1)}}>Next</button>
 								</div>
 							</div>
 						</div>
 						)}
 
 						{currentSlide === 2 && (
-							<h1>HelloWorld 3</h1>
+							<div className={detailsStyles.oneSection}>
+								<div className={detailsStyles.sectionHeader}>
+									<span>Step {currentSlide+1}/5</span>
+									<h1>Showcase your Profiles</h1>
+									<p>Show us What you got</p>
+								</div>
+								<div className={detailsStyles.sectionContent}>
+									<div className={detailsStyles.oneField}>
+										<label>Describe yourself in 1 line</label>
+										<input type="text" />
+									</div>
+									<div className={detailsStyles.oneField}>
+										<label>What are you planning to make into CodeCell</label>
+										<input type="text" />
+									</div>
+									<div>
+										<button type="button">Submit</button>
+									</div>
+								</div>
+							</div>
 						)}
 
 						{currentSlide === 3 && (
