@@ -10,12 +10,10 @@
 
 
 .container{
-  /* background-color: #252525; */
   width: 80vw;
   height: 80vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   padding:7%
 
 }
@@ -24,10 +22,14 @@
   width:30%;
   height: 100%;
   color: aliceblue;
+  padding-right: 3%;
 }
 
 .rightcontainer {
   /* margin-top: -8%; */
-  height: 140%;
+  height: 100%;
+  width: 70%;
+  padding: 0 5%;
   color: gray;
+  border-left: 2px solid white ;
 }
