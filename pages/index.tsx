@@ -3,23 +3,28 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
-import { Steps } from "antd";
-const Step=Steps.Step
+import { Steps, ConfigProvider } from "antd";
+const Step = Steps.Step;
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+	const items = [
+		{
+			id: 1,
+			title: "Step 1",
+		},
+		{
+			id: 2,
+			title: "Step 2",
+		},
+		{
+			id: 3,
+			title: "Step 3",
+		},
+	];
 
-  const items=[{
-    id:1,
-    title:"Step 1"
-  },{
-    id:2,
-    title:"Step 2"
-  }]
-
-
-	const [currentSlide, setCurrentSlide] = useState(1);
+	const [currentSlide, setCurrentSlide] = useState<number>(0);
 
 	return (
 		<>
@@ -31,28 +36,35 @@ export default function Home() {
 			</Head>
 			<main className={styles.main}>
 				<div className={styles.container}>
-          
 					<div className={styles.leftcontainer}>
-						{/* <Steps
-							current={currentSlide}
-							style={{ height:"100%" }}
-							onChange={setCurrentSlide}
-							direction="vertical"
-							// items={[
-							// 	{
-							// 		title: "Step 1",
-							// 	},
-							// 	{
-							// 		title: "Step 2",
-							// 	},
-							// ]}
+						<ConfigProvider
+							theme={{
+								token: {
+                  colorText:"#fff",
+									colorPrimaryActive: "#F5222D",
+									colorPrimaryTextActive: "#F5222D",
+                  
+								},
+								components: {
+									Steps: {
+										colorPrimary: "#dc4446",
+									},
+								},
+							}}
 						>
-              {items.map((item)=><Step title={item.title} key={item.id} />)}
-            </Steps> */}
+							<Steps
+								current={currentSlide}
+								style={{ height: "100%" }}
+								onChange={setCurrentSlide}
+								direction="vertical"
+							>
+								{items.map((item) => (
+									<Step title={item.title} key={item.id} />
+								))}
+							</Steps>
+						</ConfigProvider>
 					</div>
-          <div className={styles.rightcontainer}>
-
-          </div>
+					<div className={styles.rightcontainer}></div>
 				</div>
 			</main>
 		</>
