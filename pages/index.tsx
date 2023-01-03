@@ -43,7 +43,9 @@ export default function Home() {
 			<main className={styles.main}>
 				<div className={styles.container}>
 					<div className={styles.leftcontainer}>
-						<Stepper
+						<Stepper 
+							current={currentSlide}
+							Change={(n:number)=>setCurrentSlide(n)}
 							items={[
 								{
 									title: "Personal Details",
