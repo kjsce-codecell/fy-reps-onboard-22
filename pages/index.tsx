@@ -10,6 +10,7 @@ import Show from "./components/Show";
 import Motivation from "./components/Motivation";
 import Stepper from "./components/Stepper";
 import {code, fire, user} from '../assets'
+import Modal from "./components/Modal";
 const Step = Steps.Step;
 
 const inter = Inter({ subsets: ["latin"] });
@@ -50,6 +51,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.main}>
+				<Modal/>
 				<div className={styles.container}>
 					<div className={styles.leftcontainer}>
 					<Stepper 
