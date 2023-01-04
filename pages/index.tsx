@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import detailsStyles from "../styles/Details.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Steps, ConfigProvider } from "antd";
 import PersonalDetails from "./components/PersonalDetails";
 import Show from "./components/Show";
@@ -21,9 +21,17 @@ export default function Home() {
 
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
 
+	// Main Data
 	const [formData, setFormData] = useState<object | undefined>({});
+
+	// 3 Sections Data
+	const [personalDetailsData, setpersonalDetailsData] = useState<object | undefined>({});
 	const [showUsData, setshowUsData] = useState<object | undefined>({});
 	const [motivationData, setmotivationData] = useState<object | undefined>({});
+
+	useEffect(() => {
+		setFormData({...personalDetailsData, ...showUsData, ...motivationData});
+	  }, [personalDetailsData, showUsData, motivationData]);
 
 	return (
 		<>
@@ -70,6 +78,7 @@ export default function Home() {
 								<PersonalDetails
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
+									updateForm={setpersonalDetailsData}
 								
 								/>
 							)}
@@ -88,9 +97,6 @@ export default function Home() {
 								/>
 							)}
 
-							{currentSlide === 3 && <h1>HelloWorld 4</h1>}
-
-							{currentSlide === 4 && <h1>HelloWorld 5</h1>}
 						</div>
 					</div>
 				</div>
