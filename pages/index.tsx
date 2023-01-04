@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
@@ -9,35 +10,14 @@ import PersonalDetails from "./components/PersonalDetails";
 import Show from "./components/Show";
 import Motivation from "./components/Motivation";
 import Stepper from "./components/Stepper";
-import { code, fire, user } from "../assets";
+import { code, CodecellLogo, fire, user } from "../assets";
 import Modal from "./components/Modal";
 const Step = Steps.Step;
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-	const items = [
-		{
-			id: 1,
-			title: "Personal Details",
-		},
-		{
-			id: 2,
-			title: "Step 2",
-		},
-		{
-			id: 3,
-			title: "Motivation",
-		},
-		{
-			id: 4,
-			title: "Step 3",
-		},
-		{
-			id: 3,
-			title: "Step 3",
-		},
-	];
+	console.log(CodecellLogo);
 
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
 
@@ -53,7 +33,8 @@ export default function Home() {
 				<Modal />
 				<div className={styles.mainContainer}>
 					<div className={styles.heading}>
-						<h1>KJSCE CodeCell</h1>
+						{/* <h1>KJSCE CodeCell</h1> */}
+						<img src={CodecellLogo.src} alt="Codecell Logo" />
 					</div>
 					<div className={styles.container}>
 						<div className={styles.leftcontainer}>

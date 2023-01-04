@@ -39,10 +39,16 @@
 .heading {
 	height: 30%;
 	border-bottom: 2px solid white;
-	padding: 2rem;
+	padding: 2rem 2rem;
+}
+.heading>img{
+  width: 30%;
 }
 
 @media only screen and (max-width: 1120px) {
+  .main{
+    justify-content: flex-start;
+  }
 	.container {
 		flex-direction: column;
 		width: 100%;
@@ -57,4 +63,11 @@
 		border-left: none;
     border-top: 2px solid white;
 	}
+  .heading{
+    text-align: center;
+    
+  }
+  .heading>img{
+    width: 80%;
+  }
 }
