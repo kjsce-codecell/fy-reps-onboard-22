@@ -8,10 +8,12 @@
 }
 
 .container {
-  width: 80vw;
+  width: 70vw;
   display: flex;
   flex-direction: row;
+  height:60vh;
   /* padding: 7%; */
+  
 }
 
 .leftcontainer {
@@ -48,10 +50,12 @@
 @media only screen and (max-width: 1120px) {
   .main {
     justify-content: flex-start;
+    align-items: flex-start;
   }
   .container {
     flex-direction: column;
     width: 100%;
+    height:auto;
     justify-content: flex-start;
   }
   .leftcontainer {

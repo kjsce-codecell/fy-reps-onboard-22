@@ -17,17 +17,25 @@ const Step = Steps.Step;
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
+	useEffect(() => {
+		const defaultSlide=localStorage.getItem("slide") || '0';
+		setCurrentSlide(parseInt(defaultSlide)) ;
+	}, []);
+
+	useEffect(()=>{
+		localStorage.setItem('slide',currentSlide)
+	},[currentSlide])
 
 	// Main Data
 	const [formData, setFormData] = useState<object | undefined>({});
 
 	// 3 Sections Data
-	const [personalDetailsData, setpersonalDetailsData] = useState<object | undefined>({});
+	const [personalDetailsData, setpersonalDetailsData] = useState<
+		object | undefined
+	>({});
 	const [showUsData, setshowUsData] = useState<object | undefined>({});
 	const [motivationData, setmotivationData] = useState<object | undefined>({});
-
 
 	// useEffect(() => {
 	// 	console.log(personalDetailsData);
@@ -35,24 +43,23 @@ export default function Home() {
 
 	const updatePersonalDetailsData = (newData: any) => {
 		setpersonalDetailsData(newData);
-	}
+	};
 
 	const updateshowUsData = (newData: any) => {
 		setshowUsData(newData);
-	}
+	};
 
 	const updatemotivationData = (newData: any) => {
 		setmotivationData(newData);
-	}
-
+	};
 
 	useEffect(() => {
-		setFormData({...personalDetailsData, ...showUsData, ...motivationData});
-	  }, [personalDetailsData, showUsData, motivationData]);
+		setFormData({ ...personalDetailsData, ...showUsData, ...motivationData });
+	}, [personalDetailsData, showUsData, motivationData]);
 
 	useEffect(() => {
 		console.log(formData);
-	}, [formData])
+	}, [formData]);
 
 	return (
 		<>
@@ -100,7 +107,6 @@ export default function Home() {
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
 									updateForm={updatePersonalDetailsData}
-								
 								/>
 							)}
 
@@ -119,7 +125,6 @@ export default function Home() {
 									updateForm={updatemotivationData}
 								/>
 							)}
-
 						</div>
 					</div>
 				</div>
