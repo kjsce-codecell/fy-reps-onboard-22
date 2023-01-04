@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
+import { CodecellLogo } from "../../assets";
 import styles from "../../styles/Modal.module.css";
 
 type Props = {};
@@ -21,7 +22,7 @@ const Modal = (props: Props) => {
 			{visible && (
 				<div className={styles.overlay} onClick={handleClose}>
 					<div className={styles.container}>
-						<img src="https://picsum.photos/400/300" />
+						<img src={CodecellLogo.src}  alt="Codecell logo"/>
 						<h3>Hello There 👋</h3>
 						<p>Welcome to KJSCE CodeCell FY Rep Application form </p>
 						<div onClick={handleClose}>Let's Go</div>

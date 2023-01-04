@@ -4,7 +4,6 @@ import detailsStyles from "../../styles/Details.module.css";
 type Props = {
   currentSlide: number,
   setCurrentSlide: any,
-  updateForm: any
 }
 
 const PersonalDetails = (props: Props) => {
@@ -23,10 +22,10 @@ const PersonalDetails = (props: Props) => {
     setBranch(e.target.value);
   };
 
-  const handleNext = () => {
-    props.updateForm({name, email, branch});
-    props.setCurrentSlide(props.currentSlide+1);
-  }
+  // const handleNext = () => {
+  //   props.updateForm({name, email, branch});
+  //   props.setCurrentSlide(props.currentSlide+1);
+  // }
 
   return (
     <div className={detailsStyles.oneSection}>
@@ -49,7 +48,7 @@ const PersonalDetails = (props: Props) => {
           <input type="text" onChange={handleBranchChange}/>
         </div>
         <div>
-          <button type="button" onClick={handleNext}>Next</button>
+          <button type="button">Next</button>
         </div>
       </div>
     </div>

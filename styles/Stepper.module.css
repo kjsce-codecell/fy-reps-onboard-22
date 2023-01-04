@@ -4,4 +4,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    overflow-y: visible;
+}
+
+
+@media only screen and (max-width: 1120px) {
+	.container{
+        flex-direction: row;
+    }
 }

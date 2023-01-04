@@ -44,17 +44,17 @@
 	font-size: 17px;
 	font-weight: bold;
 	color: whitesmoke;
-	border: 2px solid black;
+	border: 2px solid green;
 	background-color: transparent;
 	outline: none;
 }
 .sectionContent {
 	position: relative;
 	height: 100%;
-    
 }
 .sectionContent > div > button {
 	position: absolute;
 	bottom: 0;
 	right: 10%;
+	width:10%
 }
