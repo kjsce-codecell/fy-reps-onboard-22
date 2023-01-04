@@ -1,17 +1,21 @@
 .container {
-
 	background-color: #252525;
 	left: 50%;
 	top: 50%;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	border-radius: 20px;
 	overflow: hidden;
 	color: white;
 	z-index: 100;
 }
 .container > img {
-	height: 50%;
-	width: min(100%, 50vw);
+	/* height: 50%; */
+	width: 80%;
+	margin: 10%;
 }
 .overlay {
 	position: absolute;
@@ -31,7 +35,7 @@
 .container > div {
 	cursor: pointer;
 	margin: 10%;
-    transform: translateX(25%);
+	/* transform: translateX(25%); */
 }
 
 .container > div,
