@@ -1,15 +1,15 @@
-.container{
-    height:100%;
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    overflow-y: visible;
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  overflow-y: visible;
+  padding-top: 20px;
 }
 
-
 @media only screen and (max-width: 1120px) {
-	.container{
-        flex-direction: row;
-    }
+  .container {
+    flex-direction: row;
+  }
 }
