@@ -4,6 +4,7 @@ import detailsStyles from "../../styles/Details.module.css";
 type Props = {
 	currentSlide: number;
 	setCurrentSlide(c: number): void;
+	updateForm(c: object): void
 };
 
 const Motivation = (props: Props) => {

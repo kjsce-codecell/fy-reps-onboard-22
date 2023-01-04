@@ -17,7 +17,7 @@ const Step = Steps.Step;
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-	console.log(CodecellLogo);
+	// console.log(CodecellLogo);
 
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
 
@@ -29,9 +29,31 @@ export default function Home() {
 	const [showUsData, setshowUsData] = useState<object | undefined>({});
 	const [motivationData, setmotivationData] = useState<object | undefined>({});
 
+
+	useEffect(() => {
+		console.log(personalDetailsData);
+	}, [personalDetailsData])
+
+	const updatePersonalDetailsData = (newData: any) => {
+		setpersonalDetailsData(newData);
+	}
+
+	const updateshowUsData = (newData: any) => {
+		setshowUsData(newData);
+	}
+
+	const updatemotivationData = (newData: any) => {
+		setmotivationData(newData);
+	}
+
+
 	useEffect(() => {
 		setFormData({...personalDetailsData, ...showUsData, ...motivationData});
 	  }, [personalDetailsData, showUsData, motivationData]);
+
+	useEffect(() => {
+		console.log(formData);
+	}, [formData])
 
 	return (
 		<>
@@ -78,7 +100,7 @@ export default function Home() {
 								<PersonalDetails
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
-									updateForm={setpersonalDetailsData}
+									updateForm={updatePersonalDetailsData}
 								
 								/>
 							)}
@@ -87,6 +109,7 @@ export default function Home() {
 								<Show
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
+									updateForm={updateshowUsData}
 								/>
 							)}
 
@@ -94,6 +117,7 @@ export default function Home() {
 								<Motivation
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
+									updateForm={updatemotivationData}
 								/>
 							)}
 

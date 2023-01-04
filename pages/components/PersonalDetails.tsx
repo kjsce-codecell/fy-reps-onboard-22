@@ -3,8 +3,8 @@ import detailsStyles from "../../styles/Details.module.css";
 
 type Props = {
   currentSlide: number,
-  setCurrentSlide: any,
-  updateForm: any
+	setCurrentSlide(c: number): void;
+	updateForm(c: object): void
 }
 
 const PersonalDetails = (props: Props) => {
@@ -49,7 +49,7 @@ const PersonalDetails = (props: Props) => {
           <input type="text" onChange={handleBranchChange}/>
         </div>
         <div>
-          <button type="button" onChange={handleNext}>Next</button>
+          <button type="button" onClick={handleNext}>Next</button>
         </div>
       </div>
     </div>
