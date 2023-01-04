@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import detailsStyles from "../../styles/Details.module.css";
 
 type Props = {
 	currentSlide: number;
 	setCurrentSlide(c: number): void;
+	updateForm(c: object): void
 };
 const Show = (props: Props) => {
 	const { currentSlide, setCurrentSlide } = props;
+
+	const githubRef = useRef<HTMLInputElement>(null);
+	const cpRef = useRef<HTMLInputElement>(null);
+	const linkedinRef = useRef<HTMLInputElement>(null);
+
+	const [githubError, setGithubError] = useState<boolean>(false);
+	const [linkedinError, setLinkedinError] = useState<boolean>(false);
+
+	const handleSubmit = () => {
+		if (!githubRef.current!.value.includes("github.com")) {
+			setGithubError(true);
+		} else {
+			setGithubError(false);
+		}
+		
+		if (!linkedinRef.current!.value.includes("linkedin.com")) {
+			setLinkedinError(true);
+		} else {
+			setLinkedinError(false);
+		}
+
+		console.log(githubError, linkedinError, cpError);
+	};
+
 	return (
 		<div>
 			<div className={detailsStyles.oneSection}>
@@ -18,23 +43,21 @@ const Show = (props: Props) => {
 				<div className={detailsStyles.sectionContent}>
 					<div className={detailsStyles.oneField}>
 						<label>GitHub Profile</label>
-						<input type="text" />
+						<input type="text" ref={githubRef} />
+						<div>{!githubError ? "" : "Enter correct github ID"}</div>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>CP Platform Profile</label>
-						<input type="text" />
+						<input type="text" ref={cpRef} />
+						
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>LinkedIn Profile</label>
-						<input type="text" />
+						<input type="text" ref={linkedinRef} />
+						{!linkedinError ? "" : "Enter correct Linkedin profile"}
 					</div>
 					<div>
-						<button
-							type="button"
-							onClick={() => {
-								setCurrentSlide(currentSlide + 1);
-							}}
-						>
+						<button type="submit" onClick={handleSubmit}>
 							Next
 						</button>
 					</div>
