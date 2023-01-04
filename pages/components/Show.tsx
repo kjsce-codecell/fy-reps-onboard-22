@@ -4,7 +4,7 @@ import detailsStyles from "../../styles/Details.module.css";
 type Props = {
 	currentSlide: number;
 	setCurrentSlide(c: number): void;
-	updateForm(c: object): void
+	updateForm(c: object): void;
 };
 const Show = (props: Props) => {
 	const { currentSlide, setCurrentSlide } = props;
@@ -17,19 +17,24 @@ const Show = (props: Props) => {
 	const [linkedinError, setLinkedinError] = useState<boolean>(false);
 
 	const handleSubmit = () => {
+		let error=false;
 		if (!githubRef.current!.value.includes("github.com")) {
 			setGithubError(true);
+			error=true
 		} else {
+			
 			setGithubError(false);
 		}
-		
+
 		if (!linkedinRef.current!.value.includes("linkedin.com")) {
+			error=true
 			setLinkedinError(true);
 		} else {
 			setLinkedinError(false);
 		}
-
-		console.log(githubError, linkedinError, cpError);
+		if(!error){
+			setCurrentSlide(currentSlide+1)
+		}
 	};
 
 	return (
@@ -49,7 +54,6 @@ const Show = (props: Props) => {
 					<div className={detailsStyles.oneField}>
 						<label>CP Platform Profile</label>
 						<input type="text" ref={cpRef} />
-						
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>LinkedIn Profile</label>
