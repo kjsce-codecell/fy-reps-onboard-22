@@ -30,9 +30,9 @@ export default function Home() {
 	const [motivationData, setmotivationData] = useState<object | undefined>({});
 
 
-	useEffect(() => {
-		console.log(personalDetailsData);
-	}, [personalDetailsData])
+	// useEffect(() => {
+	// 	console.log(personalDetailsData);
+	// }, [personalDetailsData])
 
 	const updatePersonalDetailsData = (newData: any) => {
 		setpersonalDetailsData(newData);
