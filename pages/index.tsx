@@ -17,7 +17,6 @@ const Step = Steps.Step;
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-	// console.log(CodecellLogo);
 
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
 
