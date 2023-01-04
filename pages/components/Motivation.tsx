@@ -20,7 +20,7 @@ const Motivation = (props: Props) => {
 		setOneLine(e.target.value);
 	};
 	const handlePlanChange = (e: any) => {
-	setPlan(e.target.value);
+		setPlan(e.target.value);
 	};
 
 	const submitForm = () => {
@@ -35,6 +35,7 @@ const Motivation = (props: Props) => {
 		}
 
 		if (!oneLineErr && !planErr) {
+			console.log(!oneLineErr, !planErr)
 		  props.updateForm({oneLine, plan});
 		  console.log("hurrayyyy");
 		  props.finalSubmit(true);

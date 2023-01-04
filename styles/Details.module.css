@@ -54,5 +54,6 @@
   font-size: 18px;
   color: white;
   text-align: center;
+  cursor: pointer;
   font-weight: 500;
 }

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import detailsStyles from "../../styles/Details.module.css";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../config/firebase"
 
 type Props = {
   currentSlide: number,
@@ -15,9 +17,22 @@ const PersonalDetails = (props: Props) => {
   const [branch, setBranch] = useState("");
 
   const [nameErr, setNameErr] = useState<boolean>(false);
-  const [emailErr, setEmailErr] = useState<boolean>(false);
+  const [emailErr, setEmailErr] = useState("");
   const [phoneErr, setPhoneErr] = useState<boolean>(false);
   // const [branchErr, setBranchErr] = useState<boolean>(false);
+
+  const checkRegistered = async(emailID: string) => {
+    const docRef = doc(db, "FY_2022-23", emailID);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      return true;
+    } else {
+      // console.log("No such document!");
+    }
+    return false;
+  }
+
 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
@@ -32,14 +47,19 @@ const PersonalDetails = (props: Props) => {
     setBranch(e.target.value);
   };
 
-  const handleNext = () => {
-    setEmailErr(false);
+  const handleNext = async() => {
+    setEmailErr("");
     setPhoneErr(false);
     setNameErr(false);
 
     if (!email.includes("@") || !email.includes(".") || (email.indexOf("@")+1)>=email.indexOf(".") || email.indexOf("@") === 0 || email.length < 5 || email.indexOf(".") === (email.length-1) || email.includes(" ")) {
-      console.log("Wrong Email ID!!");
-      setEmailErr(true);
+      if (await checkRegistered(email)===true) {
+        setEmailErr("Email ID already registered!!");
+      }
+      else {
+        console.log("Wrong Email ID!!");
+        setEmailErr("Wrong Email ID!!");
+      }
     }
     if (phone.length!=10) {
       console.log("Wrong Phone Number!!");
@@ -52,6 +72,7 @@ const PersonalDetails = (props: Props) => {
 
     if ( !emailErr && !phoneErr && !nameErr)  {
       props.updateForm({name, email, phone, branch});
+      localStorage.setItem("email", email);
       props.setCurrentSlide(props.currentSlide+1);
     }
   }
@@ -67,7 +88,7 @@ const PersonalDetails = (props: Props) => {
         <div className={detailsStyles.oneField}>
           <label>Enter Your Email ID</label>
           <input type="email" onChange={handleEmailChange}/>
-          {emailErr ? `Enter Correct Email ID` : ``}
+          {emailErr}
         </div>
         <div className={detailsStyles.oneField}>
           <label>Enter Your Name</label>
