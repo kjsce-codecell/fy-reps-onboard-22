@@ -35,7 +35,6 @@
 .container > div {
 	cursor: pointer;
 	margin: 10%;
-	/* transform: translateX(25%); */
 }
 
 .container > div,

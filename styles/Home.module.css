@@ -1,6 +1,7 @@
 .main {
   background-color: var(--bg-black);
-  height: 100vh;
+  height: fit-content;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +9,6 @@
 
 .container {
   width: 80vw;
-  height: 70vh;
   display: flex;
   flex-direction: row;
   /* padding: 7%; */
