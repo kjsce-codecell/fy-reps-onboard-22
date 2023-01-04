@@ -24,7 +24,7 @@ export default function Home() {
 	}, []);
 
 	useEffect(()=>{
-		localStorage.setItem('slide',currentSlide)
+		localStorage.setItem('slide', currentSlide.toString())
 	},[currentSlide])
 
 	// Main Data
@@ -69,6 +69,7 @@ export default function Home() {
 
 	useEffect(() => {
 		// console.log(formData);
+		setFormData(formData);
 	}, [formData])
 
 	return (
