@@ -11,10 +11,12 @@ import Modal from "./components/Modal";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-const registerStudent = async(formData: object, email: string) => {
+const registerStudent = async(formData: object) => {
 	try {
 		// console.log(formData)
-		const docRef = await addDoc(collection(db, "FY_2022-23", email), {...formData, timestamp: serverTimestamp()});
+		let email = localStorage.getItem("email") || "no-email";
+		console.log(email)
+		const docRef = await addDoc(collection(db, "FY_2022-23", email), {...formData, serverID: Date.now(), timestamp: serverTimestamp()});
 		console.log("Registration ID: ", docRef.id);
 	} catch (e) {
 		console.error("Error adding document: ", e);
@@ -23,10 +25,10 @@ const registerStudent = async(formData: object, email: string) => {
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
-	let registredEmail: string;
+	let registredEmail="";
 	useEffect(() => {
 		const defaultSlide=localStorage.getItem("slide") || '0';
-		registredEmail=localStorage.getItem("email") || "no-email";
+
 		setCurrentSlide(parseInt(defaultSlide));
 	}, []);
 
@@ -72,7 +74,7 @@ export default function Home() {
 		setFormData(formData);
 		if (requestAPI === true) {
 			console.log(formData);
-			registerStudent(formData, registredEmail)
+			registerStudent(formData)
 			.then(() => console.log("Applied successfully"))
 			// Post request to API using formData object
 		}
