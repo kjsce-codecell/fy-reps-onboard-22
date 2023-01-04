@@ -32,7 +32,7 @@ const Step = (props: Props) => {
 				{description && <div className={styles.description}>{description}</div>}
 			</div>
 			<div className={active?(styles.icon):(styles.activeicon)}>
-				<img src={icon.src} alt={title} style={{ height: "100%" }} />
+				<img src={icon.src} alt={title} style={{ height: "2rem"}} />
 			</div>
 		</div>
 	);

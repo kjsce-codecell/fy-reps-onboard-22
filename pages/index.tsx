@@ -9,7 +9,7 @@ import PersonalDetails from "./components/PersonalDetails";
 import Show from "./components/Show";
 import Motivation from "./components/Motivation";
 import Stepper from "./components/Stepper";
-import {code, fire, user} from '../assets'
+import { code, fire, user } from "../assets";
 import Modal from "./components/Modal";
 const Step = Steps.Step;
 
@@ -20,7 +20,6 @@ export default function Home() {
 		{
 			id: 1,
 			title: "Personal Details",
-
 		},
 		{
 			id: 2,
@@ -51,125 +50,62 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.main}>
-				<Modal/>
-				<div className={styles.container}>
-					<div className={styles.leftcontainer}>
-					<Stepper 
-							current={currentSlide}
-							Change={(n:number)=>setCurrentSlide(n)}
-							items={[
-								{
-									title: "Personal Details",
-									description:"Add your detail",
-									icon:user
-									
-								},
-								{
-									title: "Show us what you got",
-									description:"",
-									icon:code
-								},
-								{
-									title: "Motivation",
-									description:"",
-									icon:fire
-								},
-							]}
-						/>
+				<Modal />
+				<div className={styles.mainContainer}>
+					<div className={styles.heading}>
+						<h1>KJSCE CodeCell</h1>
 					</div>
-
-
-
-					<div className={styles.rightcontainer}>
-						{currentSlide === 0 && (
-							<div className={detailsStyles.oneSection}>
-								<div className={detailsStyles.sectionHeader}>
-									<span>Step {currentSlide+1}/5</span>
-									<h1>Lets start with your Personal Details</h1>
-									<p>Please fill in your Name, Branch & Email ID</p>
-								</div>
-								<div className={detailsStyles.sectionContent}>
-									<div className={detailsStyles.oneField}>
-										<label>Enter Your Email ID</label>
-										<input type="text" />
-									</div>
-									<div className={detailsStyles.oneField}>
-										<label>Enter Your Name</label>
-										<input type="text" />
-									</div>
-									<div className={detailsStyles.oneField}>
-										<label>Enter Your Branch</label>
-										<input type="text" />
-									</div>
-									<div>
-										<button type="button" onClick={() => {setCurrentSlide(currentSlide+1)}}>Next</button>
-									</div>
-								</div>
-							</div>
-						)}
-
-						{currentSlide === 1 && (
-							<div className={detailsStyles.oneSection}>
-							<div className={detailsStyles.sectionHeader}>
-								<span>Step {currentSlide+1}/5</span>
-								<h1>Showcase your Profiles</h1>
-								<p>Show us What you got</p>
-							</div>
-							<div className={detailsStyles.sectionContent}>
-								<div className={detailsStyles.oneField}>
-									<label>GitHub Profile</label>
-									<input type="text" />
-								</div>
-								<div className={detailsStyles.oneField}>
-									<label>CP Platform Profile</label>
-									<input type="text" />
-								</div>
-								<div className={detailsStyles.oneField}>
-									<label>LinkedIn Profile</label>
-									<input type="text" />
-								</div>
-								{/* <div className={detailsStyles.oneField}>
-									<label>Describe yourself in one line</label>
-									<input type="text" />
-								</div> */}
-								<div>
-									<button type="button" onClick={() => {setCurrentSlide(currentSlide+1)}}>Next</button>
-								</div>
-							</div>
+					<div className={styles.container}>
+						<div className={styles.leftcontainer}>
+							<Stepper
+								current={currentSlide}
+								Change={(n: number) => setCurrentSlide(n)}
+								items={[
+									{
+										title: "Personal Details",
+										description: "",
+										icon: user,
+									},
+									{
+										title: "Show us what you got",
+										description: "",
+										icon: code,
+									},
+									{
+										title: "Motivation",
+										description: "",
+										icon: fire,
+									},
+								]}
+							/>
 						</div>
-						)}
 
-						{currentSlide === 2 && (
-							<div className={detailsStyles.oneSection}>
-								<div className={detailsStyles.sectionHeader}>
-									<span>Step {currentSlide+1}/5</span>
-									<h1>Showcase your Profiles</h1>
-									<p>Show us What you got</p>
-								</div>
-								<div className={detailsStyles.sectionContent}>
-									<div className={detailsStyles.oneField}>
-										<label>Describe yourself in 1 line</label>
-										<input type="text" />
-									</div>
-									<div className={detailsStyles.oneField}>
-										<label>What are you planning to make into CodeCell</label>
-										<input type="text" />
-									</div>
-									<div>
-										<button type="button">Submit</button>
-									</div>
-								</div>
-							</div>
-						)}
+						<div className={styles.rightcontainer}>
+							{currentSlide === 0 && (
+								<PersonalDetails
+									currentSlide={currentSlide}
+									setCurrentSlide={setCurrentSlide}
+								/>
+							)}
 
-						{currentSlide === 3 && (
-							<h1>HelloWorld 4</h1>
-						)}
+							{currentSlide === 1 && (
+								<Show
+									currentSlide={currentSlide}
+									setCurrentSlide={setCurrentSlide}
+								/>
+							)}
 
-						{currentSlide === 4 && (
-							<h1>HelloWorld 5</h1>
-						)}
-						
+							{currentSlide === 2 && (
+								<Motivation
+									currentSlide={currentSlide}
+									setCurrentSlide={setCurrentSlide}
+								/>
+							)}
+
+							{currentSlide === 3 && <h1>HelloWorld 4</h1>}
+
+							{currentSlide === 4 && <h1>HelloWorld 5</h1>}
+						</div>
 					</div>
 				</div>
 			</main>
