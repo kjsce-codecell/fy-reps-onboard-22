@@ -17,13 +17,13 @@ const PersonalDetails = (props: Props) => {
   const [nameErr, setNameErr] = useState<boolean>(false);
   const [emailErr, setEmailErr] = useState<boolean>(false);
   const [phoneErr, setPhoneErr] = useState<boolean>(false);
-  const [branchErr, setBranchErr] = useState<boolean>(false);
+  // const [branchErr, setBranchErr] = useState<boolean>(false);
 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
   };
   const handleEmailChange = (e: any) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value.toLowerCase());
   };
   const handlePhoneChange = (e: any) => {
     setPhone(e.target.value);
@@ -37,19 +37,20 @@ const PersonalDetails = (props: Props) => {
     setPhoneErr(false);
     setNameErr(false);
 
-    if (!email.includes("@") || !email.includes(".") || (email.indexOf("@")+1)>=email.indexOf(".") || email.indexOf("@") === 0 || email.length < 5 || email.indexOf(".") === (email.length-1)) {
+    if (!email.includes("@") || !email.includes(".") || (email.indexOf("@")+1)>=email.indexOf(".") || email.indexOf("@") === 0 || email.length < 5 || email.indexOf(".") === (email.length-1) || email.includes(" ")) {
       console.log("Wrong Email ID!!");
       setEmailErr(true);
     }
-    else if (phone.length!=10) {
+    if (phone.length!=10) {
       console.log("Wrong Phone Number!!");
       setPhoneErr(true);
     }
-    else if (name.length < 2) {
+    if (name.length < 2) {
       console.log("Wrong Name!!");
       setNameErr(true);
     }
-    else {
+
+    if ( !emailErr && !phoneErr && !nameErr)  {
       props.updateForm({name, email, phone, branch});
       props.setCurrentSlide(props.currentSlide+1);
     }

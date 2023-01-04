@@ -12,13 +12,15 @@ const Show = (props: Props) => {
 	const [github, setGithub] = useState("");
 	const [cp, setCP] = useState("");
 	const [linkedin, setLinkedin] = useState("");
+	const [resume, setResume] = useState("");
 
 	const [githubError, setGithubError] = useState<boolean>(false);
 	const [linkedinError, setLinkedinError] = useState<boolean>(false);
+	const [resumeError, setResumeError] = useState<boolean>(false);
 
 	const handleSubmit = () => {
 		let error = false;
-		if (!github.includes("github.com")) {
+		if (!github.includes("github.com/")) {
 			setGithubError(true);
 			error = true;
 		} else {
@@ -26,16 +28,24 @@ const Show = (props: Props) => {
 			setGithubError(false);
 		}
 
-		if (!linkedin.includes("linkedin.com")) {
+		if (!linkedin.includes("linkedin.com/in/")) {
 			error = true;
 			setLinkedinError(true);
 		} else {
 			error = false;
 			setLinkedinError(false);
 		}
+		
+		if (!resume.includes("drive.com/")) {
+			error = true;
+			setResumeError(true);
+		} else {
+			error = false;
+			setResumeError(false);
+		}
 
 		if (!error) {
-			updateForm({github,cp,linkedin})
+			updateForm({github, cp, linkedin})
 			setCurrentSlide(currentSlide + 1);
 		}
 	};
@@ -56,7 +66,7 @@ const Show = (props: Props) => {
 							value={github}
 							onChange={(e) => setGithub(e.target.value)}
 						/>
-						<div>{!githubError ? "" : "Enter correct github ID"}</div>
+						<div>{!githubError ? "" : "Enter Correct GitHub Profile Link"}</div>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>CP Platform Profile</label>
@@ -73,7 +83,16 @@ const Show = (props: Props) => {
 							value={linkedin}
 							onChange={(e) => setLinkedin(e.target.value)}
 						/>
-						{!linkedinError ? "" : "Enter correct Linkedin profile"}
+						{!linkedinError ? "" : "Enter Correct Linkedin Profile Link"}
+					</div>
+					<div className={detailsStyles.oneField}>
+						<label>Link to Resume</label>
+						<input
+							type="text"
+							value={resume}
+							onChange={(e) => setResume(e.target.value)}
+						/>
+						{!resumeError ? "" : "Enter Correct Link to Resume"}
 					</div>
 					<div>
 						<button type="submit" onClick={handleSubmit}>

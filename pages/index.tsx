@@ -21,7 +21,7 @@ export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
 
 	// Main Data
-	const [formData, setFormData] = useState<object | undefined>({});
+	const [formData, setFormData] = useState<object>({});
 
 	// 3 Sections Data
 	const [personalDetailsData, setpersonalDetailsData] = useState<object | undefined>({});
@@ -50,8 +50,18 @@ export default function Home() {
 		setFormData({...personalDetailsData, ...showUsData, ...motivationData});
 	  }, [personalDetailsData, showUsData, motivationData]);
 
+	const [requestAPI, setRequestAPI] = useState<boolean>(false);
+
 	useEffect(() => {
-		console.log(formData);
+		if (requestAPI === true) {
+			console.log(formData);
+			// Post request to API using formData object
+			// formData object readyy
+		}
+	}, [requestAPI])
+
+	useEffect(() => {
+		// console.log(formData);
 	}, [formData])
 
 	return (
@@ -117,6 +127,7 @@ export default function Home() {
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
 									updateForm={updatemotivationData}
+									finalSubmit={setRequestAPI}
 								/>
 							)}
 
