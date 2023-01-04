@@ -14,6 +14,11 @@ const PersonalDetails = (props: Props) => {
   const [phone, setPhone] = useState("");
   const [branch, setBranch] = useState("");
 
+  const [nameErr, setNameErr] = useState<boolean>(false);
+  const [emailErr, setEmailErr] = useState<boolean>(false);
+  const [phoneErr, setPhoneErr] = useState<boolean>(false);
+  const [branchErr, setBranchErr] = useState<boolean>(false);
+
   const handleNameChange = (e: any) => {
     setName(e.target.value);
   };
@@ -28,14 +33,21 @@ const PersonalDetails = (props: Props) => {
   };
 
   const handleNext = () => {
+    setEmailErr(false);
+    setPhoneErr(false);
+    setNameErr(false);
+
     if (!email.includes("@") || !email.includes(".") || (email.indexOf("@")+1)>=email.indexOf(".") || email.indexOf("@") === 0 || email.length < 5 || email.indexOf(".") === (email.length-1)) {
       console.log("Wrong Email ID!!");
+      setEmailErr(true);
     }
     else if (phone.length!=10) {
       console.log("Wrong Phone Number!!");
+      setPhoneErr(true);
     }
     else if (name.length < 2) {
       console.log("Wrong Name!!");
+      setNameErr(true);
     }
     else {
       props.updateForm({name, email, phone, branch});
@@ -54,18 +66,22 @@ const PersonalDetails = (props: Props) => {
         <div className={detailsStyles.oneField}>
           <label>Enter Your Email ID</label>
           <input type="email" onChange={handleEmailChange}/>
+          {emailErr ? `Enter Correct Email ID` : ``}
         </div>
         <div className={detailsStyles.oneField}>
           <label>Enter Your Name</label>
           <input type="text" onChange={handleNameChange}/>
+          {nameErr ? `Enter Correct Name` : ``}
         </div>
         <div className={detailsStyles.oneField}>
           <label>Enter Your Phone Number</label>
           <input type="phone" onChange={handlePhoneChange}/>
+          {phoneErr ? `Enter Correct Phone Number` : ``}
         </div>
         <div className={detailsStyles.oneField}>
           <label>Enter Your Branch</label>
           <input type="text" onChange={handleBranchChange}/>
+          {/* {branchErr ? `Enter Correct Branch` : ``} */}
         </div>
         <div>
           <button type="submit" onClick={handleNext}>Next</button>

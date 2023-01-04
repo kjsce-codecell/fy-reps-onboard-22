@@ -7,33 +7,36 @@ type Props = {
 	updateForm(c: object): void;
 };
 const Show = (props: Props) => {
-	const { currentSlide, setCurrentSlide } = props;
+	const { currentSlide, setCurrentSlide, updateForm } = props;
 
-	const githubRef = useRef<HTMLInputElement>(null);
-	const cpRef = useRef<HTMLInputElement>(null);
-	const linkedinRef = useRef<HTMLInputElement>(null);
+	const [github, setGithub] = useState("");
+	const [cp, setCP] = useState("");
+	const [linkedin, setLinkedin] = useState("");
 
 	const [githubError, setGithubError] = useState<boolean>(false);
 	const [linkedinError, setLinkedinError] = useState<boolean>(false);
 
 	const handleSubmit = () => {
-		let error=false;
-		if (!githubRef.current!.value.includes("github.com")) {
+		let error = false;
+		if (!github.includes("github.com")) {
 			setGithubError(true);
-			error=true
+			error = true;
 		} else {
-			
+			error = false;
 			setGithubError(false);
 		}
 
-		if (!linkedinRef.current!.value.includes("linkedin.com")) {
-			error=true
+		if (!linkedin.includes("linkedin.com")) {
+			error = true;
 			setLinkedinError(true);
 		} else {
+			error = false;
 			setLinkedinError(false);
 		}
-		if(!error){
-			setCurrentSlide(currentSlide+1)
+
+		if (!error) {
+			updateForm({github,cp,linkedin})
+			setCurrentSlide(currentSlide + 1);
 		}
 	};
 
@@ -48,16 +51,28 @@ const Show = (props: Props) => {
 				<div className={detailsStyles.sectionContent}>
 					<div className={detailsStyles.oneField}>
 						<label>GitHub Profile</label>
-						<input type="text" ref={githubRef} />
+						<input
+							type="text"
+							value={github}
+							onChange={(e) => setGithub(e.target.value)}
+						/>
 						<div>{!githubError ? "" : "Enter correct github ID"}</div>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>CP Platform Profile</label>
-						<input type="text" ref={cpRef} />
+						<input
+							type="text"
+							value={cp}
+							onChange={(e) => setCP(e.target.value)}
+						/>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>LinkedIn Profile</label>
-						<input type="text" ref={linkedinRef} />
+						<input
+							type="text"
+							value={linkedin}
+							onChange={(e) => setLinkedin(e.target.value)}
+						/>
 						{!linkedinError ? "" : "Enter correct Linkedin profile"}
 					</div>
 					<div>
