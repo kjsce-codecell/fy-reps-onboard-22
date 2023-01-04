@@ -11,6 +11,7 @@
 	overflow: hidden;
 	color: white;
 	z-index: 100;
+	margin: 10%;
 }
 .container > img {
 	/* height: 50%; */
@@ -134,11 +135,11 @@
 	}
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
 	.container > div,
 	.container > div:after {
-		width: 200px;
-		height: 86px;
-		line-height: 88px;
+		width: fit-content;
+		height: fit-content;
+		padding: 0 10%;
 	}
 }
