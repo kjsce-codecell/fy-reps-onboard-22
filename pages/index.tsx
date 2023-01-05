@@ -8,24 +8,43 @@ import Motivation from "./components/Motivation";
 import Stepper from "./components/Stepper";
 import { code, CodecellLogo, fire, user } from "../assets";
 import Modal from "./components/Modal";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 const registerStudent = async(formData: object) => {
 	try {
-		// console.log(formData)
+		console.log(formData)
 		let email = localStorage.getItem("email") || "no-email";
-		console.log(email)
-		const docRef = await addDoc(collection(db, "FY_2022-23", email), {...formData, serverID: Date.now(), timestamp: serverTimestamp()});
-		console.log("Registration ID: ", docRef.id);
+		// console.log(email)
+		const regRef = doc(db, 'FY_2022-23', email);
+		const registrationID = Date.now()+Math.round(Math.random()*10e4);
+		const timestamp = serverTimestamp();
+		const finalData = {registrationID, ...formData, timestamp}
+		const docRef = await setDoc(regRef, finalData, { merge: true });
+		var url = 'https://sheet2api.com/v1/eS8TBq7Q1Czp/fy-registrations-jan-2023/Sheet1';
+		fetch(url, {
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify(finalData),
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log("Registration ID: "+registrationID);
+			console.log(data)
+		})
+		.catch((error) => {
+		  console.error('Registration Failed: Error - ', error);
+		});
+		console.log("Registration ID: "+registrationID);
 	} catch (e) {
-		console.error("Error adding document: ", e);
+		console.error("Registration Failed: Error adding document - ", e);
 	}
 }
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
-	let registredEmail="";
 	useEffect(() => {
 		const defaultSlide=localStorage.getItem("slide") || '0';
 
@@ -73,10 +92,9 @@ export default function Home() {
 	useEffect(() => {
 		setFormData(formData);
 		if (requestAPI === true) {
-			console.log(formData);
+			// console.log(formData);
 			registerStudent(formData)
 			.then(() => console.log("Applied successfully"))
-			// Post request to API using formData object
 		}
 	}, [formData])
 
@@ -152,3 +170,5 @@ export default function Home() {
 		</>
 	);
 }
+
+// https://sheet2api.com/v1/eS8TBq7Q1Czp/fy-registrations-jan-2023
