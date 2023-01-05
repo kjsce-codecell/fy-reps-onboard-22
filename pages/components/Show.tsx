@@ -45,7 +45,7 @@ const Show = (props: Props) => {
 		}
 
 		if (!error) {
-			updateForm({github, cp, linkedin})
+			updateForm({github, cp, linkedin, resume})
 			setCurrentSlide(currentSlide + 1);
 		}
 	};
