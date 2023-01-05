@@ -26,20 +26,6 @@ const Show = (props: Props) => {
 	const [resume, setResume] = useState(defaultValues.resume);
 
 	useEffect(() => {
-		setTimeout(() => {
-			localStorage.setItem(
-				"ShowUs",
-				JSON.stringify({
-					github,
-					linkedin,
-					cp,
-					resume,
-				})
-			);
-		}, 2000);
-	}, [github, linkedin, cp, resume]);
-
-	useEffect(() => {
 		defaultValues = JSON.parse(
 			localStorage.getItem("ShowUs") || JSON.stringify(fallbackValues)
 		);
@@ -58,6 +44,17 @@ const Show = (props: Props) => {
 		setGithubError(false);
 		setLinkedinError(false);
 		setResumeError(false);
+
+		localStorage.setItem(
+			"ShowUs",
+			JSON.stringify({
+				github,
+				linkedin,
+				cp,
+				resume,
+			})
+		);
+
 		if (!github.includes("github.com/")) {
 			setGithubError(true);
 			error = true;
@@ -68,10 +65,10 @@ const Show = (props: Props) => {
 			setLinkedinError(true);
 		}
 
-		if (!resume.includes("drive.com/")) {
+		if (!resume.includes("drive.google.com/")) {
 			error = true;
 			setResumeError(true);
-		} 
+		}
 
 		if (!error) {
 			updateForm({ github, cp, linkedin, resume });
@@ -86,7 +83,7 @@ const Show = (props: Props) => {
 				<div className={detailsStyles.sectionHeader}>
 					<span>Step {currentSlide + 1}/4</span>
 					<h1>Showcase your Profiles</h1>
-					<p>Show us What you got</p>
+					<p>Show us What you got!!</p>
 				</div>
 				<div className={detailsStyles.sectionContent}>
 					<div className={detailsStyles.oneField}>
@@ -95,6 +92,8 @@ const Show = (props: Props) => {
 							type="text"
 							value={github}
 							onChange={(e) => setGithub(e.target.value)}
+							placeholder="https://github.com/"
+							onClick={() => setGithub("https://github.com/")}
 						/>
 						<div>{!githubError ? "" : "Enter Correct GitHub Profile Link"}</div>
 					</div>
@@ -112,6 +111,8 @@ const Show = (props: Props) => {
 							type="text"
 							value={linkedin}
 							onChange={(e) => setLinkedin(e.target.value)}
+							placeholder="https://linkedin.com/in/"
+							onClick={() => setLinkedin("https://linkedin.com/in/")}
 						/>
 						{!linkedinError ? "" : "Enter Correct Linkedin Profile Link"}
 					</div>
@@ -121,6 +122,8 @@ const Show = (props: Props) => {
 							type="text"
 							value={resume}
 							onChange={(e) => setResume(e.target.value)}
+							placeholder="https://drive.google.com/"
+							onClick={() => setResume("https://drive.google.com/")}
 						/>
 						{!resumeError ? "" : "Enter Correct Link to Resume"}
 					</div>

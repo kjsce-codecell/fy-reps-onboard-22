@@ -12,6 +12,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 // import { spreadsheetAPI } from "../config/next.config";
 import LegalDocuments from "./components/LegalDocuments";
+import SubmitModal from "./components/SubmitModal";
 
 const registerStudent = async (formData: object) => {
 	try {
@@ -21,14 +22,14 @@ const registerStudent = async (formData: object) => {
 		const registrationID = Date.now() + Math.round(Math.random() * 10e4);
 		const timestamp = new Date(Date.now()).toString();
 		const finalData = { registrationID, ...formData, timestamp };
-		console.log(finalData);
+
+		// console.log(finalData);
 
 		// Storing finalData in Firestore
 		const docRef = await setDoc(regRef, finalData, { merge: true });
 
 		// Passing data to spreadsheet
 		const url = spreadsheetAPI;
-		console.log(url);
 
 		fetch(url, {
 			method: "POST",
@@ -40,12 +41,10 @@ const registerStudent = async (formData: object) => {
 			.then((response) => response.json())
 			.then((data) => {
 				console.log("Registration ID: " + registrationID);
-				console.log(data);
 			})
 			.catch((error) => {
 				console.error("Registration Failed: Error - ", error);
 			});
-		console.log("Registration ID: " + registrationID);
 	} catch (e) {
 		console.error("Registration Failed: Error adding document - ", e);
 	}
@@ -63,6 +62,12 @@ export default function Home() {
 		defaultSlide = parseInt(localStorage.getItem("slide") || "0");
 		setCurrentSlide(defaultSlide || 0);
 	}, []);
+	const [submitModalVisible, setSubmitModalVisible] = useState<boolean>(false);
+	const [entryModalVisible,setEntryModalVisible]=useState<boolean>(false)
+	useEffect(() => {
+		setSubmitModalVisible(localStorage.getItem("submitted") === "true");
+		setEntryModalVisible(localStorage.getItem('visited')!=='true');
+	}, []);
 
 	// Main Data
 	const [formData, setFormData] = useState<object>({});
@@ -73,17 +78,17 @@ export default function Home() {
 	>({});
 	const [showUsData, setShowUsData] = useState<object | undefined>({});
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
-	const [legalDocumentsData, setLegalDocumentsData] = useState<object | undefined>({});
+	const [legalDocumentsData, setLegalDocumentsData] = useState<
+		object | undefined
+	>({});
 
 	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
 		useState<boolean>(false);
 	const [showUsDataFilled, setShowUsDataFilled] = useState<boolean>(false);
-	const [legalDocumentsDataFilled, setLegalDocumentsDataFilled] = useState<boolean>(false);
-	const [motivationDataFilled, setmotivationDataFilled] = useState<boolean>(false);
-
-	// useEffect(() => {
-	// 	console.log(personalDetailsData);
-	// }, [personalDetailsData])
+	const [legalDocumentsDataFilled, setLegalDocumentsDataFilled] =
+		useState<boolean>(false);
+	const [motivationDataFilled, setmotivationDataFilled] =
+		useState<boolean>(false);
 
 	const updatePersonalDetailsData = (newData: any) => {
 		setPersonalDetailsData(newData);
@@ -102,9 +107,13 @@ export default function Home() {
 	};
 
 	useEffect(() => {
-		setFormData({ ...personalDetailsData, ...showUsData, ...legalDocumentsData, ...motivationData });
+		setFormData({
+			...personalDetailsData,
+			...showUsData,
+			...legalDocumentsData,
+			...motivationData,
+		});
 	}, [personalDetailsData, showUsData, legalDocumentsData, motivationData]);
-
 
 	const finalSubmit = () => {
 		if (!personalDetailsDataFilled) {
@@ -113,11 +122,11 @@ export default function Home() {
 			setCurrentSlide(1);
 		} else if (!legalDocumentsDataFilled) {
 			setCurrentSlide(2);
-		} 
-		else {
+		} else {
 			// registerStudent(formData).then(() => console.log("Applied successfully"));
-			console.log(formData);
-			console.log("hello");
+			// console.log(formData);
+			localStorage.setItem("submitted", "true");
+			setSubmitModalVisible(true);
 		}
 	};
 
@@ -130,11 +139,14 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.main}>
-				<Modal />
+				{entryModalVisible && <Modal setVisible={setEntryModalVisible} />}
+				{submitModalVisible && <SubmitModal />}
 				<div className={styles.mainContainer}>
 					<div className={styles.heading}>
 						{/* <h1>KJSCE CodeCell</h1> */}
-						<img src={CodecellLogo.src} alt="Codecell Logo" />
+						<a href="https://www.kjscecodecell.com/">
+							<img src={CodecellLogo.src} alt="Codecell Logo" />
+						</a>
 					</div>
 					<div className={styles.container}>
 						<div className={styles.leftcontainer}>

@@ -6,7 +6,7 @@ type Props = {
 	setCurrentSlide(c: number): void;
 	updateForm(c: object): void;
 	finalSubmit(): void;
-	formState(c:boolean):void;
+	formState(c: boolean): void;
 };
 
 const fallbackValues = {
@@ -14,7 +14,7 @@ const fallbackValues = {
 	plan: "",
 };
 
-function getWordCount(str:string) {
+function getWordCount(str: string) {
 	return str.split(" ").filter(function (n) {
 		return n != "";
 	}).length;
@@ -26,24 +26,22 @@ const Motivation = (props: Props) => {
 	const [plan, setPlan] = useState(defaultValues.plan);
 
 	useEffect(() => {
-		setTimeout(() => {
-			localStorage.setItem(
-				"Motivation",
-				JSON.stringify({
-					oneLine,
-					plan,
-				})
-			);
-		}, 2000);
-	}, [oneLine, plan]);
-
-	useEffect(() => {
 		defaultValues = JSON.parse(
 			localStorage.getItem("Motivation") || JSON.stringify(fallbackValues)
 		);
 		setOneLine(defaultValues.oneLine || "");
 		setPlan(defaultValues.plan || "");
 	}, []);
+
+	const handleSave = () => {
+		localStorage.setItem(
+			"Motivation",
+			JSON.stringify({
+				oneLine,
+				plan,
+			})
+		);
+	};
 
 	const [oneLineErr, setOneLineErr] = useState<boolean>(false);
 	const [planErr, setPlanErr] = useState<boolean>(false);
@@ -64,18 +62,15 @@ const Motivation = (props: Props) => {
 			setOneLineErr(true);
 			error = true;
 		}
-		if (
-			getWordCount(plan) < 50 ||
-			getWordCount(plan) > 120
-		) {
-			console.log(getWordCount(plan))
+		if (getWordCount(plan) < 50 || getWordCount(plan) > 120) {
+			console.log("Word Count is "+getWordCount(plan));
 			setPlanErr(true);
 			error = true;
 		}
 
 		if (!error) {
 			props.updateForm({ oneLine, plan });
-			props.formState(true)
+			props.formState(true);
 			props.finalSubmit();
 		}
 	};
@@ -84,8 +79,8 @@ const Motivation = (props: Props) => {
 		<div className={detailsStyles.oneSection}>
 			<div className={detailsStyles.sectionHeader}>
 				<span>Step {props.currentSlide + 1}/4</span>
-				<h1>Showcase your Attitude</h1>
-				<p>What motivated you here</p>
+				<h1>Present your Goals</h1>
+				<p>What motivates you ??</p>
 			</div>
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>
@@ -101,6 +96,9 @@ const Motivation = (props: Props) => {
 					{planErr ? `Enter Proper Answer` : ``}
 				</div>
 				<div>
+					<button type="button" onClick={handleSave}>
+						Save
+					</button>
 					<button type="button" onClick={submitForm}>
 						Submit
 					</button>

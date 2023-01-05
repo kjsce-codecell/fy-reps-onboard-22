@@ -9,8 +9,8 @@ type Props = {
 };
 
 const fallbackValues = {
-    cover: "",
-    position: ""
+	cover: "",
+	position: "",
 };
 
 const LegalDocuments = (props: Props) => {
@@ -21,17 +21,6 @@ const LegalDocuments = (props: Props) => {
 	const [cover, setCover] = useState(defaultValues.cover);
 	const [position, setPosition] = useState(defaultValues.position);
 
-	useEffect(() => {
-		setTimeout(() => {
-			localStorage.setItem(
-				"LegalDocuments",
-				JSON.stringify({
-                    cover,
-                    position
-				})
-			);
-		}, 1000);
-	}, [cover, position]);
 
 	useEffect(() => {
 		defaultValues = JSON.parse(
@@ -42,14 +31,21 @@ const LegalDocuments = (props: Props) => {
 	}, []);
 
 	const [coverError, setCoverError] = useState<boolean>(false);
-	// const [positionError, setLinkedinError] = useState<boolean>(false);
+	// const [positionError, setPositionError] = useState<boolean>(false);
 
 	const handleSubmit = () => {
 		let error = false;
 		setCoverError(false);
-		// setLinkedinError(false);
-		if (!cover.includes("drive.com/")) {
-            setCoverError(true);
+		localStorage.setItem(
+			"LegalDocuments",
+			JSON.stringify({
+				cover,
+				position,
+			})
+		);
+		// setPositionError(false);
+		if (!cover.includes("drive.google.com/")) {
+			setCoverError(true);
 			error = true;
 		}
 
@@ -66,7 +62,6 @@ const LegalDocuments = (props: Props) => {
 				<div className={detailsStyles.sectionHeader}>
 					<span>Step {currentSlide + 1}/4</span>
 					<h1>Lets Practice Legality</h1>
-					{/* <p>Show us What you got</p> */}
 				</div>
 				<div className={detailsStyles.sectionContent}>
 					<div className={detailsStyles.oneField}>
@@ -75,9 +70,11 @@ const LegalDocuments = (props: Props) => {
 							type="text"
 							value={cover}
 							onChange={(e) => setCover(e.target.value)}
+                            placeholder="https://drive.google.com/"
+							onClick={() => setCover("https://drive.google.com/")}
 						/>
 						<div>{!coverError ? "" : "Enter Correct Cover Letter Link"}</div>
-                        <a href="" >Download Cover Letter Format</a>
+						<a href="">Download Cover Letter Format</a>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>Position Preference</label>
