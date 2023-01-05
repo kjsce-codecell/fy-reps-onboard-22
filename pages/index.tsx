@@ -61,7 +61,7 @@ export default function Home() {
 		}, 800);
 	}, [currentSlide]);
 	useEffect(()=>{
-		defaultSlide=parseInt(localStorage.getItem('slide'));
+		defaultSlide=parseInt(localStorage.getItem('slide') || "0");
 		setCurrentSlide(defaultSlide || 0)
 	},[])
 

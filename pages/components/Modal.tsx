@@ -25,7 +25,7 @@ const Modal = (props: Props) => {
 						<img src={CodecellLogo.src}  alt="Codecell logo"/>
 						<h3>Hello There 👋</h3>
 						<p>Welcome to KJSCE CodeCell FY Rep Application form </p>
-						<div onClick={handleClose}>Let's Go</div>
+						<div onClick={handleClose}>Let&apos;s Go</div>
 					</div>
 				</div>
 			)}
