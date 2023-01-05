@@ -4,19 +4,17 @@ import React, { useEffect, useState } from "react";
 import { CodecellLogo } from "../../assets";
 import styles from "../../styles/Modal.module.css";
 
-type Props = {};
+type Props = {
+	setVisible(c: boolean): void;
+};
 
 const Modal = (props: Props) => {
-    const [visible,setVisible]=useState(false);
-    useEffect(()=>{
-        setVisible(localStorage.getItem('visited')!=='true');
-    },[])
+	const { setVisible } = props;
 
-    const handleClose=()=>{
-        setVisible(false);
-        localStorage.setItem('visited','true');
-    }
-
+	const handleClose = () => {
+		setVisible(false);
+		localStorage.setItem("visited", "true");
+	};
 
 	return (
 		<>
