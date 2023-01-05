@@ -22,7 +22,6 @@ function getWordCount(str:string) {
 
 const Motivation = (props: Props) => {
 	let defaultValues = fallbackValues;
-	let error = false;
 	const [oneLine, setOneLine] = useState(defaultValues.oneLine);
 	const [plan, setPlan] = useState(defaultValues.plan);
 
@@ -57,6 +56,7 @@ const Motivation = (props: Props) => {
 	};
 
 	const submitForm = () => {
+		let error = false;
 		setOneLineErr(false);
 		setPlanErr(false);
 
@@ -73,7 +73,7 @@ const Motivation = (props: Props) => {
 			error = true;
 		}
 
-		if (!oneLineErr && !planErr) {
+		if (!error) {
 			props.updateForm({ oneLine, plan });
 			props.formState(true)
 			props.finalSubmit();
@@ -90,14 +90,14 @@ const Motivation = (props: Props) => {
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>
 					<label>Describe yourself in 1 line (1 - 6 Words)</label>
-					<input type="text" onChange={handleOneLineChange} />
+					<input type="text" value={oneLine} onChange={handleOneLineChange} />
 					{oneLineErr ? `Enter Proper Answer` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>
 						What are you planning to make into CodeCell (50 - 120 Words)
 					</label>
-					<textarea onChange={handlePlanChange} />
+					<textarea value={plan} onChange={handlePlanChange} />
 					{planErr ? `Enter Proper Answer` : ``}
 				</div>
 				<div>

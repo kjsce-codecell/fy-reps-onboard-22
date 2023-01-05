@@ -55,29 +55,23 @@ const Show = (props: Props) => {
 
 	const handleSubmit = () => {
 		let error = false;
+		setGithubError(false);
+		setLinkedinError(false);
+		setResumeError(false);
 		if (!github.includes("github.com/")) {
 			setGithubError(true);
 			error = true;
-		} else {
-			error = false;
-			setGithubError(false);
 		}
 
 		if (!linkedin.includes("linkedin.com/in/")) {
 			error = true;
 			setLinkedinError(true);
-		} else {
-			error = false;
-			setLinkedinError(false);
 		}
 
 		if (!resume.includes("drive.com/")) {
 			error = true;
 			setResumeError(true);
-		} else {
-			error = false;
-			setResumeError(false);
-		}
+		} 
 
 		if (!error) {
 			updateForm({ github, cp, linkedin, resume });

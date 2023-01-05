@@ -107,6 +107,7 @@ export default function Home() {
 			setCurrentSlide(1);
 		} else {
 			// registerStudent(formData).then(() => console.log("Applied successfully"));
+			console.log(formData);
 			console.log("hello");
 		}
 	};
