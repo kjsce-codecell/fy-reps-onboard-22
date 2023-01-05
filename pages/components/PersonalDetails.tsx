@@ -78,6 +78,7 @@ const PersonalDetails = (props: Props) => {
 	};
 
 	const handleNext = async () => {
+		let error = false;
 		setEmailErr("");
 		setPhoneErr(false);
 		setNameErr(false);
@@ -91,23 +92,22 @@ const PersonalDetails = (props: Props) => {
 			email.indexOf(".") === email.length - 1 ||
 			email.includes(" ")
 		) {
-			if ((await checkRegistered(email)) === true) {
-				setEmailErr("Email ID already registered!!");
-			} else {
-				console.log("Wrong Email ID!!");
-				setEmailErr("Wrong Email ID!!");
-			}
+			error=true;
+			console.log("Wrong Email ID!!");
+			setEmailErr("Wrong Email ID!!");
 		}
 		if (phone.length != 10) {
+			error=true;
 			console.log("Wrong Phone Number!!");
 			setPhoneErr(true);
 		}
 		if (name.length < 2) {
+			error=true;
 			console.log("Wrong Name!!");
 			setNameErr(true);
 		}
 
-    if (emailErr.length===0 && !phoneErr && !nameErr)  {
+    if (emailErr.length===0 && !error && !phoneErr && !nameErr)  {
       if (await checkRegistered(email)===true) {
         setEmailErr("Email ID already registered!!");
       }
@@ -139,7 +139,7 @@ const PersonalDetails = (props: Props) => {
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter Your Phone Number</label>
-					<input type="phone" value={phone} onChange={handlePhoneChange} />
+					<input type="text" value={phone} onChange={handlePhoneChange} />
 					{phoneErr ? `Enter Correct Phone Number` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
