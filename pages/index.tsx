@@ -11,62 +11,67 @@ import Modal from "./components/Modal";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-const registerStudent = async(formData: object) => {
+const registerStudent = async (formData: object) => {
 	try {
-		console.log(formData)
+		console.log(formData);
 		let email = localStorage.getItem("email") || "no-email";
-		// console.log(email)
-		const regRef = doc(db, 'FY_2022-23', email);
-		const registrationID = Date.now()+Math.round(Math.random()*10e4);
+		const regRef = doc(db, "FY_2022-23", email);
+		const registrationID = Date.now() + Math.round(Math.random() * 10e4);
 		const timestamp = new Date(Date.now());
-		console.log(timestamp);
-		const finalData = {registrationID, ...formData, timestamp}
+		const finalData = { registrationID, ...formData, timestamp };
 		console.log(finalData);
 
 		// Storing finalData in Firestore
 		const docRef = await setDoc(regRef, finalData, { merge: true });
 
 		// Passing data to spreadsheet
-		var url = 'https://sheet2api.com/v1/eS8TBq7Q1Czp/fy-registrations-jan-2023/Sheet1';
+		var url =
+			"https://sheet2api.com/v1/eS8TBq7Q1Czp/fy-registrations-jan-2023/Sheet1";
 
 		fetch(url, {
-		  method: 'POST',
-		  headers: {
-			'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify(finalData),
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(finalData),
 		})
-		.then(response => response.json())
-		.then(data => {
-			console.log("Registration ID: "+registrationID);
-			console.log(data)
-		})
-		.catch((error) => {
-		  console.error('Registration Failed: Error - ', error);
-		});
-		console.log("Registration ID: "+registrationID);
+			.then((response) => response.json())
+			.then((data) => {
+				console.log("Registration ID: " + registrationID);
+				console.log(data);
+			})
+			.catch((error) => {
+				console.error("Registration Failed: Error - ", error);
+			});
+		console.log("Registration ID: " + registrationID);
 	} catch (e) {
 		console.error("Registration Failed: Error adding document - ", e);
 	}
-}
+};
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
+	let defaultSlide=0;
 	useEffect(() => {
-		const defaultSlide=localStorage.getItem("slide") || '0';
-
-		setCurrentSlide(parseInt(defaultSlide));
-	}, []);
-
+		setTimeout(() => {
+			localStorage.setItem(
+				"slide",
+				JSON.stringify(currentSlide)
+			);
+		}, 800);
+	}, [currentSlide]);
 	useEffect(()=>{
-		localStorage.setItem('slide', currentSlide.toString())
-	},[currentSlide])
-	
+		defaultSlide=parseInt(localStorage.getItem('slide'));
+		setCurrentSlide(defaultSlide || 0)
+	},[])
+
 	// Main Data
 	const [formData, setFormData] = useState<object>({});
 
 	// 3 Sections Data
-	const [personalDetailsData, setPersonalDetailsData] = useState<object | undefined>({});
+	const [personalDetailsData, setPersonalDetailsData] = useState<
+		object | undefined
+	>({});
 	const [showUsData, setShowUsData] = useState<object | undefined>({});
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
 
@@ -94,16 +99,15 @@ export default function Home() {
 
 	useEffect(() => {
 		setRequestAPI(requestAPI);
-	}, [requestAPI])
+	}, [requestAPI]);
 
 	useEffect(() => {
 		setFormData(formData);
 		if (requestAPI === true) {
 			// console.log(formData);
-			registerStudent(formData)
-			.then(() => console.log("Applied successfully"))
+			registerStudent(formData).then(() => console.log("Applied successfully"));
 		}
-	}, [formData])
+	}, [formData]);
 
 	return (
 		<>

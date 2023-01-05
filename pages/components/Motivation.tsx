@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import detailsStyles from "../../styles/Details.module.css";
 
 type Props = {
@@ -8,10 +8,35 @@ type Props = {
 	finalSubmit(c: boolean): void
 };
 
-const Motivation = (props: Props) => {
+const fallbackValues = {
+	oneLine: "",
+	plan: ""
+};
 
-	const [oneLine, setOneLine] = useState("");
-	const [plan, setPlan] = useState("");
+const Motivation = (props: Props) => {
+	let defaultValues = fallbackValues;
+	const [oneLine, setOneLine] = useState(defaultValues.oneLine);
+	const [plan, setPlan] = useState(defaultValues.plan);
+
+
+	useEffect(() => {
+		setTimeout(() => {
+			localStorage.setItem(
+				"Motivation",
+				JSON.stringify({
+					oneLine, plan
+				})
+			);
+		}, 2000);
+	}, [oneLine, plan]);
+
+	useEffect(() => {
+		defaultValues = JSON.parse(
+			localStorage.getItem("Motivation") || JSON.stringify(fallbackValues)); 
+	setOneLine(defaultValues.oneLine || "")
+	setPlan(defaultValues.plan || "")
+	}, []);
+
 
 	const [oneLineErr, setOneLineErr] = useState<boolean>(false);
 	const [planErr, setPlanErr] = useState<boolean>(false);

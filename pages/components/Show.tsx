@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import detailsStyles from "../../styles/Details.module.css";
 
 type Props = {
@@ -6,13 +6,47 @@ type Props = {
 	setCurrentSlide(c: number): void;
 	updateForm(c: object): void;
 };
+
+const fallbackValues = {
+	github: "",
+	linkedin: "",
+	cp: "",
+	resume: ""
+};
+
 const Show = (props: Props) => {
 	const { currentSlide, setCurrentSlide, updateForm } = props;
 
-	const [github, setGithub] = useState("");
-	const [cp, setCP] = useState("");
-	const [linkedin, setLinkedin] = useState("");
-	const [resume, setResume] = useState("");
+	let defaultValues = fallbackValues;
+
+	const [github, setGithub] = useState(defaultValues.github);
+	const [cp, setCP] = useState(defaultValues.cp);
+	const [linkedin, setLinkedin] = useState(defaultValues.linkedin);
+	const [resume, setResume] = useState(defaultValues.resume);
+
+	useEffect(() => {
+		setTimeout(() => {
+			localStorage.setItem(
+				"ShowUs",
+				JSON.stringify({
+					github,
+					linkedin,
+					cp,
+					resume
+				})
+			);
+		}, 2000);
+	}, [github, linkedin, cp, resume]);
+
+	useEffect(() => {
+		defaultValues = JSON.parse(
+			localStorage.getItem("ShowUs") || JSON.stringify(fallbackValues)
+		); 
+		setGithub(defaultValues.github || "")
+		setCP(defaultValues.cp || "")
+		setLinkedin(defaultValues.linkedin || "")
+		setResume(defaultValues.resume || "")
+	}, []);
 
 	const [githubError, setGithubError] = useState<boolean>(false);
 	const [linkedinError, setLinkedinError] = useState<boolean>(false);
