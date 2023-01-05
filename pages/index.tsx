@@ -25,8 +25,7 @@ const registerStudent = async (formData: object) => {
 		const docRef = await setDoc(regRef, finalData, { merge: true });
 
 		// Passing data to spreadsheet
-		var url =
-			"https://sheet2api.com/v1/eS8TBq7Q1Czp/fy-registrations-jan-2023/Sheet1";
+		var url = process.env.spreadsheetAPI || "";
 
 		fetch(url, {
 			method: "POST",

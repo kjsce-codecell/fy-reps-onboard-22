@@ -18,6 +18,8 @@ const Motivation = (props: Props) => {
 	const [oneLine, setOneLine] = useState(defaultValues.oneLine);
 	const [plan, setPlan] = useState(defaultValues.plan);
 
+	const [onceSubmit, setOnceSubmit] = useState<boolean>(false);
+
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -59,11 +61,12 @@ const Motivation = (props: Props) => {
 			setPlanErr(true);
 		}
 
-		if (!oneLineErr && !planErr) {
+		if (!oneLineErr && !planErr && !onceSubmit) {
 			console.log(!oneLineErr, !planErr)
 		  props.updateForm({oneLine, plan});
 		  console.log("hurrayyyy");
 		  props.finalSubmit(true);
+		  setOnceSubmit(true);
 		//   props.setCurrentSlide(props.currentSlide+1);
 		}
 	}
