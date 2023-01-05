@@ -39,6 +39,17 @@
   align-items: center;
   padding: 10px;
 }
+.previcon{
+  border-radius: 50%;
+  background-color: blue;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
 
 @media only screen and (max-width: 1120px) {
   .container {
@@ -54,7 +65,7 @@
   .title {
     font-size: 1rem;
   }
-  .icon,.activeicon{
+  .icon,.activeicon,.previcon{
     height: 60px;
     width: 60px;
   }

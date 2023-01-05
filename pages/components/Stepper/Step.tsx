@@ -15,11 +15,12 @@ type Props = {
 
 	current: number;
 	Change(n: number): void;
-    active:boolean
+    active:boolean;
+	prev:boolean;
 };
 
 const Step = (props: Props) => {
-	const { title, description, icon, id, current, Change,active } = props;
+	const { title, description, icon, id, current, Change,active,prev } = props;
 
 	const handleOnClick = () => {
 		Change(id);
@@ -31,7 +32,7 @@ const Step = (props: Props) => {
 				<div className={styles.title}>{title}</div>
 				{description && <div className={styles.description}>{description}</div>}
 			</div>
-			<div className={active?(styles.icon):(styles.activeicon)}>
+			<div className={active?(styles.activeicon):prev?(styles.previcon):(styles.icon)}>
 				<img src={icon.src} alt={title} style={{ height: "2rem"}} />
 			</div>
 		</div>

@@ -29,7 +29,8 @@ const Stepper = (props: Props) => {
 					key={item.title}
 					icon={item.icon}
 					id={index}
-                    active={current>=index}
+                    active={current==index}
+					prev={current>index}
 				/>
 			))}
 		</div>

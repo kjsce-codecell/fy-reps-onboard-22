@@ -99,27 +99,6 @@ export default function Home() {
 		setFormData({ ...personalDetailsData, ...showUsData, ...motivationData });
 	}, [personalDetailsData, showUsData, motivationData]);
 
-	// useEffect(() => {
-	// 	setFormData(formData);
-	// 	if (requestAPI === true) {
-	// 		// console.log(formData);
-	// 		if (!personalDetailsDataFilled) {
-	// 			// registerStudent(formData).then(() =>
-	// 			// 	console.log("Applied successfully")
-	// 			// );
-	// 			setCurrentSlide(0);
-	// 		} else if (!showUsDataFilled) {
-	// 			setCurrentSlide(1);
-	// 		} else if (!motivationDataFilled) {
-	// 			setCurrentSlide(2);
-	// 		} else {
-	// 			// registerStudent(formData).then(() =>
-	// 			// 	console.log("Applied successfully")
-	// 			// );
-	// 			console.log("done");
-	// 		}
-	// 	}
-	// }, [formData]);
 
 	const finalSubmit = () => {
 		if (!personalDetailsDataFilled) {
