@@ -18,10 +18,17 @@ const registerStudent = async(formData: object) => {
 		// console.log(email)
 		const regRef = doc(db, 'FY_2022-23', email);
 		const registrationID = Date.now()+Math.round(Math.random()*10e4);
-		const timestamp = serverTimestamp();
+		const timestamp = new Date(Date.now());
+		console.log(timestamp);
 		const finalData = {registrationID, ...formData, timestamp}
-		const docRef = await setDoc(regRef, finalData, { merge: true });
+		console.log(finalData);
+
+		// Storing finalData in Firestore
+		// const docRef = await setDoc(regRef, finalData, { merge: true });
+
+		// Passing data to spreadsheet
 		var url = 'https://sheet2api.com/v1/eS8TBq7Q1Czp/fy-registrations-jan-2023/Sheet1';
+
 		fetch(url, {
 		  method: 'POST',
 		  headers: {
@@ -170,5 +177,3 @@ export default function Home() {
 		</>
 	);
 }
-
-// https://sheet2api.com/v1/eS8TBq7Q1Czp/fy-registrations-jan-2023
