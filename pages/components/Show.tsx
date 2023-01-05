@@ -67,7 +67,6 @@ const Show = (props: Props) => {
 			error = true;
 			setLinkedinError(true);
 		} else {
-			error = false;
 			setLinkedinError(false);
 		}
 
@@ -75,7 +74,6 @@ const Show = (props: Props) => {
 			error = true;
 			setResumeError(true);
 		} else {
-			error = false;
 			setResumeError(false);
 		}
 
