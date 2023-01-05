@@ -24,7 +24,7 @@ const registerStudent = async(formData: object) => {
 		console.log(finalData);
 
 		// Storing finalData in Firestore
-		// const docRef = await setDoc(regRef, finalData, { merge: true });
+		const docRef = await setDoc(regRef, finalData, { merge: true });
 
 		// Passing data to spreadsheet
 		var url = 'https://sheet2api.com/v1/eS8TBq7Q1Czp/fy-registrations-jan-2023/Sheet1';
