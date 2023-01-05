@@ -9,8 +9,8 @@ type Props = {
 };
 
 const fallbackValues = {
-    cover: "",
-    position: ""
+	cover: "",
+	position: "",
 };
 
 const LegalDocuments = (props: Props) => {
@@ -21,17 +21,6 @@ const LegalDocuments = (props: Props) => {
 	const [cover, setCover] = useState(defaultValues.cover);
 	const [position, setPosition] = useState(defaultValues.position);
 
-	useEffect(() => {
-		setTimeout(() => {
-			localStorage.setItem(
-				"LegalDocuments",
-				JSON.stringify({
-                    cover,
-                    position
-				})
-			);
-		}, 1000);
-	}, [cover, position]);
 
 	useEffect(() => {
 		defaultValues = JSON.parse(
@@ -47,9 +36,16 @@ const LegalDocuments = (props: Props) => {
 	const handleSubmit = () => {
 		let error = false;
 		setCoverError(false);
-		// setPositionError(false);
-		if (!cover.includes("drive.google.com/")) {
-            setCoverError(true);
+		localStorage.setItem(
+			"LegalDocuments",
+			JSON.stringify({
+				cover,
+				position,
+			})
+		);
+		// setLinkedinError(false);
+		if (!cover.includes("drive.com/")) {
+			setCoverError(true);
 			error = true;
 		}
 
@@ -79,7 +75,7 @@ const LegalDocuments = (props: Props) => {
 							onClick={() => setCover("https://drive.google.com/")}
 						/>
 						<div>{!coverError ? "" : "Enter Correct Cover Letter Link"}</div>
-                        <a href="" >Download Cover Letter Format</a>
+						<a href="">Download Cover Letter Format</a>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>Position Preference</label>

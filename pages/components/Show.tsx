@@ -26,20 +26,6 @@ const Show = (props: Props) => {
 	const [resume, setResume] = useState(defaultValues.resume);
 
 	useEffect(() => {
-		setTimeout(() => {
-			localStorage.setItem(
-				"ShowUs",
-				JSON.stringify({
-					github,
-					linkedin,
-					cp,
-					resume,
-				})
-			);
-		}, 2000);
-	}, [github, linkedin, cp, resume]);
-
-	useEffect(() => {
 		defaultValues = JSON.parse(
 			localStorage.getItem("ShowUs") || JSON.stringify(fallbackValues)
 		);
@@ -58,6 +44,17 @@ const Show = (props: Props) => {
 		setGithubError(false);
 		setLinkedinError(false);
 		setResumeError(false);
+
+		localStorage.setItem(
+			"ShowUs",
+			JSON.stringify({
+				github,
+				linkedin,
+				cp,
+				resume,
+			})
+		);
+
 		if (!github.includes("github.com/")) {
 			setGithubError(true);
 			error = true;
@@ -71,7 +68,7 @@ const Show = (props: Props) => {
 		if (!resume.includes("drive.google.com/")) {
 			error = true;
 			setResumeError(true);
-		} 
+		}
 
 		if (!error) {
 			updateForm({ github, cp, linkedin, resume });
