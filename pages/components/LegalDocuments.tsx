@@ -44,7 +44,7 @@ const LegalDocuments = (props: Props) => {
 			})
 		);
 		// setPositionError(false);
-		if (!cover.includes("drive.com/")) {
+		if (!cover.includes("drive.google.com/")) {
 			setCoverError(true);
 			error = true;
 		}

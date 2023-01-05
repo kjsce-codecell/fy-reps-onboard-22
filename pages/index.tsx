@@ -62,9 +62,11 @@ export default function Home() {
 		defaultSlide = parseInt(localStorage.getItem("slide") || "0");
 		setCurrentSlide(defaultSlide || 0);
 	}, []);
-	const [submitModalVisible, setSubmitModalVisible] = useState<boolean>(true);
+	const [submitModalVisible, setSubmitModalVisible] = useState<boolean>(false);
+	const [entryModalVisible,setEntryModalVisible]=useState<boolean>(false)
 	useEffect(() => {
 		setSubmitModalVisible(localStorage.getItem("submitted") === "true");
+		setEntryModalVisible(localStorage.getItem('visited')!=='true');
 	}, []);
 
 	// Main Data
@@ -137,7 +139,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className={styles.main}>
-				<Modal />
+				{entryModalVisible && <Modal setVisible={setEntryModalVisible} />}
 				{submitModalVisible && <SubmitModal />}
 				<div className={styles.mainContainer}>
 					<div className={styles.heading}>
