@@ -1,6 +1,9 @@
 .container {
-	background-color: #252525;
-	left: 50%;
+	font-family: sans-serif;
+	backdrop-filter: blur(4px) saturate(180%);
+    background-color: #111928af;
+    border: 1px solid #ffffff30;
+	margin: auto auto;
 	top: 50%;
 	text-align: center;
 	display: flex;
@@ -12,11 +15,11 @@
 	color: white;
 	z-index: 100;
 	margin: 10%;
+	padding: 80px 50px 50px 50px;
 }
 .container > img {
 	/* height: 50%; */
-	width: 80%;
-	margin: 10%;
+	width: 40%;
 }
 .overlay {
 	position: absolute;
@@ -29,13 +32,13 @@
 	z-index: 99;
 }
 .container > h3 {
-	margin: 5% 0 5% 0;
-	font-size: 2rem;
+	font-size: 3.5vw;
+	margin: 40px 0;
 }
 
 .container > div {
 	cursor: pointer;
-	margin: 10%;
+	margin: 30px;
 }
 
 .container > div,
@@ -49,7 +52,8 @@
 	border: 0;
 	color: #fff;
 	letter-spacing: 3px;
-	box-shadow: 6px 0px 0px #00e6f6;
+	box-shadow: 6px 0px 0px #fafafa;
+	border-top: 1px solid #fff;
 	outline: transparent;
 	position: relative;
 	user-select: none;
@@ -136,10 +140,55 @@
 }
 
 @media (max-width: 768px) {
+	.container > img {
+		width: 180px;
+	}
+
+	.container > h3 {
+		font-size: 6vw;
+		margin: 20px 0;
+	}
+
+	.container > p {
+		font-size: 14px;
+	}
+
+	.container > div,
+	.container > div:after {
+		width: fit-content;
+		height: fit-content;
+		line-height: 40px;
+		padding: 0 10%;
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 400px) {
+	.container {
+		padding-top: 50px;
+		padding-bottom: 20px;
+	}
+	.container > h3 {
+		font-size: 16px;
+	}
+
+	.container > p {
+		font-size: 11px;
+	}
+
 	.container > div,
 	.container > div:after {
 		width: fit-content;
 		height: fit-content;
 		padding: 0 10%;
+		font-size: 12px;
+		letter-spacing: 0px;
+	}
+}
+
+@media (max-width: 290px) {
+	.container > div,
+	.container > div:after {
+		padding: 0 5px;
 	}
 }
