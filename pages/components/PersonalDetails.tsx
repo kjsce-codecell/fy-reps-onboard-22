@@ -17,26 +17,14 @@ const fallbackValues = {
 	branch: "",
 };
 
+let flag = 1;
+
 const PersonalDetails = (props: Props) => {
 	let defaultValues = fallbackValues;
 	const [name, setName] = useState(defaultValues.name);
 	const [email, setEmail] = useState(defaultValues.email);
 	const [phone, setPhone] = useState(defaultValues.phone);
 	const [branch, setBranch] = useState(defaultValues.branch);
-
-	useEffect(() => {
-		setTimeout(() => {
-			localStorage.setItem(
-				"PersonalDetails",
-				JSON.stringify({
-					name,
-					email,
-					phone,
-					branch,
-				})
-			);
-		}, 2000);
-	}, [name, email, phone, branch]);
 
 	useEffect(() => {
 		defaultValues = JSON.parse(
@@ -46,7 +34,9 @@ const PersonalDetails = (props: Props) => {
 		setEmail(defaultValues.email || "");
 		setPhone(defaultValues.phone || "");
 		setBranch(defaultValues.branch || "");
+		flag = 0;
 	}, []);
+
 
 	const [nameErr, setNameErr] = useState<boolean>(false);
 	const [emailErr, setEmailErr] = useState("");
@@ -83,6 +73,15 @@ const PersonalDetails = (props: Props) => {
 		setEmailErr("");
 		setPhoneErr(false);
 		setNameErr(false);
+		localStorage.setItem(
+			"PersonalDetails",
+			JSON.stringify({
+				name,
+				email,
+				phone,
+				branch,
+			})
+		);
 
 		if (
 			!email.includes("@") ||
@@ -116,8 +115,6 @@ const PersonalDetails = (props: Props) => {
 				localStorage.setItem("email", email);
 				props.setCurrentSlide(props.currentSlide + 1);
 			}
-		}
-		if (!error) {
 			props.formState(true);
 		}
 	};
