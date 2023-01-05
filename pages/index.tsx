@@ -11,6 +11,7 @@ import Modal from "./components/Modal";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { spreadsheetAPI } from "../config/next.config";
+import LegalDocuments from "./components/LegalDocuments";
 
 const registerStudent = async (formData: object) => {
 	try {
@@ -72,12 +73,13 @@ export default function Home() {
 	>({});
 	const [showUsData, setShowUsData] = useState<object | undefined>({});
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
+	const [legalDocumentsData, setLegalDocumentsData] = useState<object | undefined>({});
 
 	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
 		useState<boolean>(false);
 	const [showUsDataFilled, setShowUsDataFilled] = useState<boolean>(false);
-	const [motivationDataFilled, setmotivationDataFilled] =
-		useState<boolean>(false);
+	const [legalDocumentsDataFilled, setLegalDocumentsDataFilled] = useState<boolean>(false);
+	const [motivationDataFilled, setmotivationDataFilled] = useState<boolean>(false);
 
 	// useEffect(() => {
 	// 	console.log(personalDetailsData);
@@ -95,9 +97,13 @@ export default function Home() {
 		setMotivationData(newData);
 	};
 
+	const updateLegalDocumentsData = (newData: any) => {
+		setLegalDocumentsData(newData);
+	};
+
 	useEffect(() => {
-		setFormData({ ...personalDetailsData, ...showUsData, ...motivationData });
-	}, [personalDetailsData, showUsData, motivationData]);
+		setFormData({ ...personalDetailsData, ...showUsData, ...legalDocumentsData, ...motivationData });
+	}, [personalDetailsData, showUsData, legalDocumentsData, motivationData]);
 
 
 	const finalSubmit = () => {
@@ -105,7 +111,10 @@ export default function Home() {
 			setCurrentSlide(0);
 		} else if (!showUsDataFilled) {
 			setCurrentSlide(1);
-		} else {
+		} else if (!legalDocumentsDataFilled) {
+			setCurrentSlide(2);
+		} 
+		else {
 			// registerStudent(formData).then(() => console.log("Applied successfully"));
 			console.log(formData);
 			console.log("hello");
@@ -177,12 +186,11 @@ export default function Home() {
 							)}
 
 							{currentSlide === 2 && (
-								<Motivation
+								<LegalDocuments
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
-									updateForm={updateMotivationData}
-									formState={setmotivationDataFilled}
-									finalSubmit={finalSubmit}
+									updateForm={updateLegalDocumentsData}
+									formState={setLegalDocumentsDataFilled}
 								/>
 							)}
 

@@ -108,7 +108,7 @@ const PersonalDetails = (props: Props) => {
 			setNameErr(true);
 		}
 
-		if (emailErr.length === 0 && !error && !phoneErr && !nameErr) {
+		if (!error) {
 			if ((await checkRegistered(email)) === true) {
 				setEmailErr("Email ID already registered!!");
 			} else {
@@ -125,7 +125,7 @@ const PersonalDetails = (props: Props) => {
 	return (
 		<div className={detailsStyles.oneSection}>
 			<div className={detailsStyles.sectionHeader}>
-				<span>Step {props.currentSlide + 1}/3</span>
+				<span>Step {props.currentSlide + 1}/4</span>
 				<h1>Lets start with your Personal Details</h1>
 				<p>Please fill in your Name, Email ID, Phone & Branch</p>
 			</div>
@@ -141,7 +141,7 @@ const PersonalDetails = (props: Props) => {
 					{nameErr ? `Enter Correct Name` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
-					<label>Enter Your Phone Number</label>
+					<label>Enter Your Phone Number (10 Digits)</label>
 					<input type="text" value={phone} onChange={handlePhoneChange} />
 					{phoneErr ? `Enter Correct Phone Number` : ``}
 				</div>

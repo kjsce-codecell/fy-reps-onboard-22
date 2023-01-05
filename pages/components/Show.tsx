@@ -84,13 +84,13 @@ const Show = (props: Props) => {
 		<div>
 			<div className={detailsStyles.oneSection}>
 				<div className={detailsStyles.sectionHeader}>
-					<span>Step {currentSlide + 1}/3</span>
+					<span>Step {currentSlide + 1}/4</span>
 					<h1>Showcase your Profiles</h1>
 					<p>Show us What you got</p>
 				</div>
 				<div className={detailsStyles.sectionContent}>
 					<div className={detailsStyles.oneField}>
-						<label>GitHub Profile</label>
+						<label>GitHub Profile Link</label>
 						<input
 							type="text"
 							value={github}
@@ -107,7 +107,7 @@ const Show = (props: Props) => {
 						/>
 					</div>
 					<div className={detailsStyles.oneField}>
-						<label>LinkedIn Profile</label>
+						<label>LinkedIn Profile Link</label>
 						<input
 							type="text"
 							value={linkedin}

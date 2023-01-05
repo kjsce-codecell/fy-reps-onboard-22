@@ -83,7 +83,7 @@ const Motivation = (props: Props) => {
 	return (
 		<div className={detailsStyles.oneSection}>
 			<div className={detailsStyles.sectionHeader}>
-				<span>Step {props.currentSlide + 1}/3</span>
+				<span>Step {props.currentSlide + 1}/4</span>
 				<h1>Showcase your Attitude</h1>
 				<p>What motivated you here</p>
 			</div>
