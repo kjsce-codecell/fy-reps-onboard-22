@@ -13,3 +13,10 @@
     flex-direction: row;
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .container {
+    flex-direction: column;
+    height: 20vh;
+  }
+}

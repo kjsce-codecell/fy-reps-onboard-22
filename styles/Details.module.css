@@ -2,7 +2,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100%;  
   cursor: default;
 }
 
@@ -34,17 +34,25 @@
   border-radius: 20px;
 }
 
-.oneField input, .oneField textarea, 
+.oneField input,
+.oneField textarea,
 .oneField select {
-  max-width: 400px;
+  max-width: 100%;
   padding: 10px;
   font-size: 17px;
   font-weight: bold;
   color: whitesmoke;
   border: 2px solid var(--codecell-red-morph);
-  border-radius: 2px;
+  border-radius: 8px;
+  height: 50px;
   background-color: transparent;
   outline: none;
+}
+
+.oneField input:hover,
+.oneField select,
+.oneField textarea {
+  border: 2px solid var(--codecell-red);
 }
 
 .oneField textarea {
@@ -60,13 +68,18 @@
 .oneSection button {
   background-color: var(--codecell-red-morph);
   padding: 10px 20px;
-  border: 0px solid;
-  border-radius: 4px;
+  border: 2px solid var(--codecell-red-morph);
+  border-radius: 50px;
   font-size: 18px;
   color: white;
   text-align: center;
   cursor: pointer;
   font-weight: 500;
+  transition: all 100ms ease-in-out;
+}
+
+.oneSection button:hover {
+  background-color: var(--codecell-red);
 }
 
 .multiple_buttons {

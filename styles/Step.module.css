@@ -21,7 +21,6 @@
 
 .leftcontainer {
   text-align: right;
-  /* width: 50%; */
   height: 3.5rem;
   color: var(--white);
   display: flex;
@@ -88,5 +87,28 @@
   .previcon {
     height: 60px;
     width: 60px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+    gap: 20px;
+    width: 60vw;
+    padding: 0;
+    margin: auto auto;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .leftcontainer {
+    /* height: 20vh; */
+  }
+
+  .icon, .activeicon, .previcon {
+    width: 40px;
+    height: 40px;
   }
 }

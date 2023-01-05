@@ -86,8 +86,9 @@
   }
 }
 
-@media only screen and (max-width: 300px) {
-  .heading {
-    padding: 10px;
+@media only screen and (max-width: 450px) {
+  .heading img {
+    display: block;
+    margin: auto auto;
   }
 }
