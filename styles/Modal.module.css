@@ -2,7 +2,7 @@
 	font-family: sans-serif;
 	backdrop-filter: blur(4px) saturate(180%);
     background-color: #111928af;
-    border: 1px solid #ffffff30;
+    border: 1px solid var(--border);
 	margin: auto auto;
 	top: 50%;
 	text-align: center;

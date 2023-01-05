@@ -1,78 +1,93 @@
 .main {
-  background-color: var(--bg-black);
-  height: fit-content;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.5s ease-in-out;
+  backdrop-filter: blur(4px) saturate(180%);
+  background-color: #111928af;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  position: relative;
+  height: 90vh;
+  width: 90vw;
+  margin: auto auto;
+  top: 5vh;
+  overflow-y: scroll;
+  padding: 50px 0;
 }
 
 .container {
   width: 70vw;
   display: flex;
   flex-direction: row;
-  height:60vh;
-  /* padding: 7%; */
-  
 }
 
 .leftcontainer {
   width: 30%;
-  height: 100%;
   color: aliceblue;
   padding-right: 3%;
 }
 
 .rightcontainer {
-  /* margin-top: -8%; */
-  height: 100%;
   width: 70%;
-  padding: 0 5%;
-  color: gray;
-  border-left: 2px solid white;
-  padding: 7%;
+  height: 100%;
+  padding: 40px;
+  color: var(--off-white);
+  backdrop-filter: blur(4px) saturate(180%);
+  background-color: #161d2caf;
+  border: 2px solid var(--border);
+  border-radius: 24px;
 }
+
 .maincontainer {
   display: flex;
-  flex-direction: column;
-  /* padding: 7%; */
+  /* flex-direction: column; */
 }
 
 .heading {
   height: 30%;
-  border-bottom: 2px solid white;
-  padding: 2rem 2rem;
-}
-.heading > img {
-  width: 30%;
+  padding: 2rem 0;
+  margin: 2rem 0;
+  border-bottom: 1px solid var(--border);
 }
 
-@media only screen and (max-width: 1120px) {
+.heading > img {
+  width: 300px;
+}
+
+@media only screen and (max-width: 900px) {
   .main {
-    justify-content: flex-start;
     align-items: flex-start;
+    margin: auto auto;
   }
+
   .container {
     flex-direction: column;
     width: 100%;
-    height:auto;
+    height: auto;
     justify-content: flex-start;
   }
+
   .leftcontainer {
-    width: 100vw;
+    width: 100%;
     height: 20vh;
     padding-right: 0;
   }
+
   .rightcontainer {
-    width: 100%;
     border-left: none;
-    border-top: 2px solid white;
+    border-top: 2px solid var(--border);
+    margin: 10px;
+    width: auto;
+    height: auto;
   }
-  .heading {
-    text-align: center;
-  }
+
   .heading > img {
-    width: 80%;
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .heading {
+    padding: 10px;
   }
 }

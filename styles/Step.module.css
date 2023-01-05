@@ -9,46 +9,61 @@
   align-items: center;
   padding: 10px;
 }
+
 .container {
   display: flex;
-  justify-content: space-evenly;
+  margin: 0 20px;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
+
 .leftcontainer {
   text-align: right;
-  width: 50%;
-  height: 5rem;
-  color: white;
+  /* width: 50%; */
+  height: 3.5rem;
+  color: var(--white);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
+
 .title {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1rem;
+}
+
+.icon, .activeicon, .previcon {
+  background-color: var(--white);
+  backdrop-filter: blur(4px) saturate(180%);
+  background-color: #fa4254a4;
+  border: 1px solid var(--off-white);
+  border-radius: 4px;
+  height: 60px;
+  width: 60px;
+  transition: all ease-in-out;
+  transition-duration: 50ms;
+}
+
+.icon:hover, .activeicon:hover {
+  transform: scale(1.1);
 }
 
 .activeicon {
-  border-radius: 50%;
-  background-color: white;
-  height: 80px;
-  width: 80px;
+  background-color: #fa4254;
+  box-shadow: 0px 0px 100px var(--off-white);
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
 }
-.previcon{
-  border-radius: 50%;
-  background-color: blue;
-  height: 80px;
-  width: 80px;
+
+.previcon {
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
 }
 
 @media only screen and (max-width: 1120px) {
@@ -58,14 +73,19 @@
     justify-content: center;
     align-items: center;
   }
+
   .leftcontainer {
     width: fit-content;
     text-align: center;
   }
+
   .title {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
-  .icon,.activeicon,.previcon{
+
+  .icon,
+  .activeicon,
+  .previcon {
     height: 60px;
     width: 60px;
   }
