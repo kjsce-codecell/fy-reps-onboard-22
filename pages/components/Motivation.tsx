@@ -63,7 +63,7 @@ const Motivation = (props: Props) => {
 			error = true;
 		}
 		if (getWordCount(plan) < 50 || getWordCount(plan) > 120) {
-			console.log(getWordCount(plan));
+			console.log("Word Count is "+getWordCount(plan));
 			setPlanErr(true);
 			error = true;
 		}
@@ -79,8 +79,8 @@ const Motivation = (props: Props) => {
 		<div className={detailsStyles.oneSection}>
 			<div className={detailsStyles.sectionHeader}>
 				<span>Step {props.currentSlide + 1}/4</span>
-				<h1>Showcase your Attitude</h1>
-				<p>What motivated you here</p>
+				<h1>Present your Goals</h1>
+				<p>What motivates you ??</p>
 			</div>
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>

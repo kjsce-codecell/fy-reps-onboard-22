@@ -43,7 +43,7 @@ const LegalDocuments = (props: Props) => {
 				position,
 			})
 		);
-		// setLinkedinError(false);
+		// setPositionError(false);
 		if (!cover.includes("drive.com/")) {
 			setCoverError(true);
 			error = true;
@@ -62,7 +62,6 @@ const LegalDocuments = (props: Props) => {
 				<div className={detailsStyles.sectionHeader}>
 					<span>Step {currentSlide + 1}/4</span>
 					<h1>Lets Practice Legality</h1>
-					{/* <p>Show us What you got</p> */}
 				</div>
 				<div className={detailsStyles.sectionContent}>
 					<div className={detailsStyles.oneField}>

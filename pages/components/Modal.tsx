@@ -23,9 +23,9 @@ const Modal = (props: Props) => {
 			{visible && (
 				<div className={styles.overlay} onClick={handleClose}>
 					<div className={styles.container}>
-						<img src={CodecellLogo.src}  alt="Codecell logo"/>
+						<img src={CodecellLogo.src}  alt="CodeCell Logo"/>
 						<h3>Hello There 👋</h3>
-						<p>Welcome to KJSCE CodeCell FY Rep Application form </p>
+						<p>Welcome to KJSCE CodeCell FY Representative Application Form Januray 2023 </p>
 						<div onClick={handleClose}>Let&apos;s Go</div>
 					</div>
 				</div>
