@@ -15,6 +15,7 @@ const fallbackValues = {
 
 const Motivation = (props: Props) => {
 	let defaultValues = fallbackValues;
+	let error = false;
 	const [oneLine, setOneLine] = useState(defaultValues.oneLine);
 	const [plan, setPlan] = useState(defaultValues.plan);
 
@@ -56,12 +57,14 @@ const Motivation = (props: Props) => {
 	
 		if (oneLine.trim().length === 0 || oneLine.trim().split(" ").length > 6) {
 			setOneLineErr(true);
+			error = true;
 		}
 		if (plan.trim().split(" ").length < 50 || plan.trim().split(" ").length > 120) {
 			setPlanErr(true);
+			error = true;
 		}
 
-		if (!oneLineErr && !planErr && !onceSubmit) {
+		if (!error && !onceSubmit) {
 			console.log(!oneLineErr, !planErr)
 		  props.updateForm({oneLine, plan});
 		  console.log("hurrayyyy");

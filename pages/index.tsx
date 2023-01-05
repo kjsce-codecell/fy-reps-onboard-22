@@ -8,16 +8,17 @@ import Motivation from "./components/Motivation";
 import Stepper from "./components/Stepper";
 import { code, CodecellLogo, fire, user } from "../assets";
 import Modal from "./components/Modal";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { spreadsheetAPI } from "../config/next.config";
 
 const registerStudent = async (formData: object) => {
 	try {
-		console.log(formData);
+		// console.log(formData);
 		let email = localStorage.getItem("email") || "no-email";
 		const regRef = doc(db, "FY_2022-23", email);
 		const registrationID = Date.now() + Math.round(Math.random() * 10e4);
-		const timestamp = new Date(Date.now());
+		const timestamp = (new Date(Date.now())).toString();
 		const finalData = { registrationID, ...formData, timestamp };
 		console.log(finalData);
 
@@ -25,7 +26,8 @@ const registerStudent = async (formData: object) => {
 		const docRef = await setDoc(regRef, finalData, { merge: true });
 
 		// Passing data to spreadsheet
-		var url = process.env.spreadsheetAPI || "";
+		const url = spreadsheetAPI
+		console.log(url);
 
 		fetch(url, {
 			method: "POST",
