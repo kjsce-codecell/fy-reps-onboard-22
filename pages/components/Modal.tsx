@@ -18,16 +18,14 @@ const Modal = (props: Props) => {
 
 	return (
 		<>
-			{visible && (
-				<div className={styles.overlay} onClick={handleClose}>
-					<div className={styles.container}>
-						<img src={CodecellLogo.src}  alt="CodeCell Logo"/>
-						<h3>Hello there 👋</h3>
-						<p><big><b>Welcome to KJSCE CodeCell FY Representative Applications Januray 2023</b></big></p>
-						<div onClick={handleClose}>Let&apos;s Go</div>
-					</div>
+			<div className={styles.overlay} onClick={handleClose}>
+				<div className={styles.container}>
+					<img src={CodecellLogo.src}  alt="CodeCell Logo"/>
+					<h3>Hello there 👋</h3>
+					<p><big><b>Welcome to KJSCE CodeCell FY Representative Applications Januray 2023</b></big></p>
+					<div onClick={handleClose}>Let&apos;s Go</div>
 				</div>
-			)}
+			</div>
 		</>
 	);
 };
