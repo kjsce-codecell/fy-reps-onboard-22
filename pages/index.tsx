@@ -144,6 +144,11 @@ export default function Home() {
 										icon: code,
 									},
 									{
+										title: "Legal Documents",
+										description: "",
+										icon: code,
+									},
+									{
 										title: "Motivation",
 										description: "",
 										icon: fire,
@@ -172,6 +177,16 @@ export default function Home() {
 							)}
 
 							{currentSlide === 2 && (
+								<Motivation
+									currentSlide={currentSlide}
+									setCurrentSlide={setCurrentSlide}
+									updateForm={updateMotivationData}
+									formState={setmotivationDataFilled}
+									finalSubmit={finalSubmit}
+								/>
+							)}
+
+							{currentSlide === 3 && (
 								<Motivation
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
