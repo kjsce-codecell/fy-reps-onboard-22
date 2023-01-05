@@ -12,6 +12,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { spreadsheetAPI } from "../config/next.config";
 import LegalDocuments from "./components/LegalDocuments";
+import SubmitModal from "./components/SubmitModal";
 
 const registerStudent = async (formData: object) => {
 	try {
@@ -21,6 +22,7 @@ const registerStudent = async (formData: object) => {
 		const registrationID = Date.now() + Math.round(Math.random() * 10e4);
 		const timestamp = new Date(Date.now()).toString();
 		const finalData = { registrationID, ...formData, timestamp };
+
 		// console.log(finalData);
 
 		// Storing finalData in Firestore
@@ -60,20 +62,31 @@ export default function Home() {
 		defaultSlide = parseInt(localStorage.getItem("slide") || "0");
 		setCurrentSlide(defaultSlide || 0);
 	}, []);
+	const [submitModalVisible, setSubmitModalVisible] = useState<boolean>(true);
+	useEffect(() => {
+		setSubmitModalVisible(localStorage.getItem("submitted") === "true");
+	}, []);
 
 	// Main Data
 	const [formData, setFormData] = useState<object>({});
 
 	// 3 Sections Data
-	const [personalDetailsData, setPersonalDetailsData] = useState<object | undefined>({});
+	const [personalDetailsData, setPersonalDetailsData] = useState<
+		object | undefined
+	>({});
 	const [showUsData, setShowUsData] = useState<object | undefined>({});
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
-	const [legalDocumentsData, setLegalDocumentsData] = useState<object | undefined>({});
+	const [legalDocumentsData, setLegalDocumentsData] = useState<
+		object | undefined
+	>({});
 
-	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] = useState<boolean>(false);
+	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
+		useState<boolean>(false);
 	const [showUsDataFilled, setShowUsDataFilled] = useState<boolean>(false);
-	const [legalDocumentsDataFilled, setLegalDocumentsDataFilled] = useState<boolean>(false);
-	const [motivationDataFilled, setmotivationDataFilled] = useState<boolean>(false);
+	const [legalDocumentsDataFilled, setLegalDocumentsDataFilled] =
+		useState<boolean>(false);
+	const [motivationDataFilled, setmotivationDataFilled] =
+		useState<boolean>(false);
 
 	const updatePersonalDetailsData = (newData: any) => {
 		setPersonalDetailsData(newData);
@@ -92,9 +105,13 @@ export default function Home() {
 	};
 
 	useEffect(() => {
-		setFormData({ ...personalDetailsData, ...showUsData, ...legalDocumentsData, ...motivationData });
+		setFormData({
+			...personalDetailsData,
+			...showUsData,
+			...legalDocumentsData,
+			...motivationData,
+		});
 	}, [personalDetailsData, showUsData, legalDocumentsData, motivationData]);
-
 
 	const finalSubmit = () => {
 		if (!personalDetailsDataFilled) {
@@ -103,10 +120,11 @@ export default function Home() {
 			setCurrentSlide(1);
 		} else if (!legalDocumentsDataFilled) {
 			setCurrentSlide(2);
-		} 
-		else {
-			registerStudent(formData).then(() => console.log("Applied successfully"));
+		} else {
+			// registerStudent(formData).then(() => console.log("Applied successfully"));
 			// console.log(formData);
+			localStorage.setItem("submitted", "true");
+			setSubmitModalVisible(true);
 		}
 	};
 
@@ -120,10 +138,11 @@ export default function Home() {
 			</Head>
 			<main className={styles.main}>
 				<Modal />
+				{submitModalVisible && <SubmitModal />}
 				<div className={styles.mainContainer}>
 					<div className={styles.heading}>
 						{/* <h1>KJSCE CodeCell</h1> */}
-						<a href="https://www.kjscecodecell.com/" >
+						<a href="https://www.kjscecodecell.com/">
 							<img src={CodecellLogo.src} alt="Codecell Logo" />
 						</a>
 					</div>
