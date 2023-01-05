@@ -55,12 +55,12 @@ const Show = (props: Props) => {
 			})
 		);
 
-		if (!github.includes("github.com/")) {
+		if (!github.includes("github.com/") || github === "https://github.com/") {
 			setGithubError(true);
 			error = true;
 		}
 
-		if (!linkedin.includes("linkedin.com/in/")) {
+		if (!linkedin.includes("linkedin.com/in/") || linkedin === "https://linkedin.com/in/") {
 			error = true;
 			setLinkedinError(true);
 		}
@@ -122,8 +122,6 @@ const Show = (props: Props) => {
 							type="text"
 							value={resume}
 							onChange={(e) => setResume(e.target.value)}
-							placeholder="https://drive.google.com/"
-							onClick={() => setResume("https://drive.google.com/")}
 						/>
 						{!resumeError ? "" : "Enter Correct Link to Resume"}
 					</div>

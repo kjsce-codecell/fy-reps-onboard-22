@@ -70,8 +70,6 @@ const LegalDocuments = (props: Props) => {
 							type="text"
 							value={cover}
 							onChange={(e) => setCover(e.target.value)}
-                            placeholder="https://drive.google.com/"
-							onClick={() => setCover("https://drive.google.com/")}
 						/>
 						<div>{!coverError ? "" : "Enter Correct Cover Letter Link"}</div>
 						<a href="">Download Cover Letter Format</a>
