@@ -129,22 +129,45 @@ const PersonalDetails = (props: Props) => {
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>
 					<label>Enter Your Email ID</label>
-					<input type="email" value={email} onChange={handleEmailChange} />
+					<input 
+						type="email" 
+						value={email} 
+						onChange={handleEmailChange}
+						placeholder="abc@gmail.com" 
+					/>
 					{emailErr}
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter Your Name</label>
-					<input type="text" value={name} onChange={handleNameChange} />
+					<input 
+						type="text" 
+						value={name} 
+						onChange={handleNameChange}
+						placeholder="FName LName"
+					/>
 					{nameErr ? `Enter Correct Name` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter Your Phone Number (10 Digits)</label>
-					<input type="text" value={phone} onChange={handlePhoneChange} />
+					<input 
+						type="text" 
+						value={phone} 
+						onChange={handlePhoneChange} 
+						placeholder="93XXXXXX06"
+					/>
 					{phoneErr ? `Enter Correct Phone Number` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter Your Branch</label>
-					<input type="text" value={branch} onChange={handleBranchChange} />
+					<select id="branch" name="branch" value={branch} onChange={handleBranchChange}>
+						<option value="NA">Select Branch</option>
+						<option value="CS">CS</option>
+						<option value="IT">IT</option>
+						<option value="ETRX">ETRX</option>
+						<option value="EXTC">EXTC</option>
+						<option value="MECH">MECH</option>
+					</select>
+					{/* <input type="text" value={branch} onChange={handleBranchChange} /> */}
 					{/* {branchErr ? `Enter Correct Branch` : ``} */}
 				</div>
 				<div>

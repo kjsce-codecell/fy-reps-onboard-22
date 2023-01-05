@@ -95,7 +95,7 @@ const Motivation = (props: Props) => {
 					<textarea value={plan} onChange={handlePlanChange} />
 					{planErr ? `Enter Proper Answer` : ``}
 				</div>
-				<div>
+				<div className={detailsStyles.multiple_buttons}>
 					<button type="button" onClick={handleSave}>
 						Save
 					</button>
