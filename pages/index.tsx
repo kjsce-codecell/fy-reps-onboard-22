@@ -10,7 +10,7 @@ import { code, CodecellLogo, fire, user } from "../assets";
 import Modal from "./components/Modal";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { spreadsheetAPI } from "../config/next.config";
+// import { spreadsheetAPI } from "../config/next.config";
 import LegalDocuments from "./components/LegalDocuments";
 
 const registerStudent = async (formData: object) => {

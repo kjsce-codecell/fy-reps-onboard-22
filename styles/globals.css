@@ -1,15 +1,34 @@
-*{
+:root {
+  --white: #ffffff;
+  --bg-black: #121212;
+  --border: #ffffff20;
+  --off-white: #cccccc;
+  --codecell-red: #fa4253;
+  --codecell-red-morph: #fa4253a0;
+  --matt-black: #171717;
+  --medium-blue: #1e3348;
+  --dark-blue: #1c252e;
+  --deep-blue: #081723;
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
-}
-:root{
-  --bg-black:#121212
+  font-family: sans-serif;
 }
 
-.ant-steps-icon{
+.ant-steps-icon {
   background-color: transparent !important;
+}
+
+body {
+  background-color: var(--bg-black);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
 }
 
 /* .ant-steps-item-wait .ant-steps-item-icon{
