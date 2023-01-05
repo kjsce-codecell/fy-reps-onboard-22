@@ -66,7 +66,7 @@
   align-items: center;
 }
 
-@media only screen and (max-width: 1120px) {
+@media only screen and (max-width: 900px) {
   .container {
     margin: 0 20px;
     flex-direction: column-reverse;
