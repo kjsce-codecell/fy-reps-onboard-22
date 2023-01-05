@@ -21,14 +21,13 @@ const registerStudent = async (formData: object) => {
 		const registrationID = Date.now() + Math.round(Math.random() * 10e4);
 		const timestamp = new Date(Date.now()).toString();
 		const finalData = { registrationID, ...formData, timestamp };
-		console.log(finalData);
+		// console.log(finalData);
 
 		// Storing finalData in Firestore
 		const docRef = await setDoc(regRef, finalData, { merge: true });
 
 		// Passing data to spreadsheet
 		const url = spreadsheetAPI;
-		console.log(url);
 
 		fetch(url, {
 			method: "POST",
@@ -40,12 +39,10 @@ const registerStudent = async (formData: object) => {
 			.then((response) => response.json())
 			.then((data) => {
 				console.log("Registration ID: " + registrationID);
-				console.log(data);
 			})
 			.catch((error) => {
 				console.error("Registration Failed: Error - ", error);
 			});
-		console.log("Registration ID: " + registrationID);
 	} catch (e) {
 		console.error("Registration Failed: Error adding document - ", e);
 	}
@@ -68,22 +65,15 @@ export default function Home() {
 	const [formData, setFormData] = useState<object>({});
 
 	// 3 Sections Data
-	const [personalDetailsData, setPersonalDetailsData] = useState<
-		object | undefined
-	>({});
+	const [personalDetailsData, setPersonalDetailsData] = useState<object | undefined>({});
 	const [showUsData, setShowUsData] = useState<object | undefined>({});
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
 	const [legalDocumentsData, setLegalDocumentsData] = useState<object | undefined>({});
 
-	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
-		useState<boolean>(false);
+	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] = useState<boolean>(false);
 	const [showUsDataFilled, setShowUsDataFilled] = useState<boolean>(false);
 	const [legalDocumentsDataFilled, setLegalDocumentsDataFilled] = useState<boolean>(false);
 	const [motivationDataFilled, setmotivationDataFilled] = useState<boolean>(false);
-
-	// useEffect(() => {
-	// 	console.log(personalDetailsData);
-	// }, [personalDetailsData])
 
 	const updatePersonalDetailsData = (newData: any) => {
 		setPersonalDetailsData(newData);
@@ -115,9 +105,8 @@ export default function Home() {
 			setCurrentSlide(2);
 		} 
 		else {
-			// registerStudent(formData).then(() => console.log("Applied successfully"));
-			console.log(formData);
-			console.log("hello");
+			registerStudent(formData).then(() => console.log("Applied successfully"));
+			// console.log(formData);
 		}
 	};
 
@@ -134,7 +123,9 @@ export default function Home() {
 				<div className={styles.mainContainer}>
 					<div className={styles.heading}>
 						{/* <h1>KJSCE CodeCell</h1> */}
-						<img src={CodecellLogo.src} alt="Codecell Logo" />
+						<a href="https://www.kjscecodecell.com/" >
+							<img src={CodecellLogo.src} alt="Codecell Logo" />
+						</a>
 					</div>
 					<div className={styles.container}>
 						<div className={styles.leftcontainer}>

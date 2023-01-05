@@ -42,13 +42,13 @@ const LegalDocuments = (props: Props) => {
 	}, []);
 
 	const [coverError, setCoverError] = useState<boolean>(false);
-	// const [positionError, setLinkedinError] = useState<boolean>(false);
+	// const [positionError, setPositionError] = useState<boolean>(false);
 
 	const handleSubmit = () => {
 		let error = false;
 		setCoverError(false);
-		// setLinkedinError(false);
-		if (!cover.includes("drive.com/")) {
+		// setPositionError(false);
+		if (!cover.includes("drive.google.com/")) {
             setCoverError(true);
 			error = true;
 		}
@@ -75,6 +75,8 @@ const LegalDocuments = (props: Props) => {
 							type="text"
 							value={cover}
 							onChange={(e) => setCover(e.target.value)}
+                            placeholder="https://drive.google.com/"
+							onClick={() => setCover("https://drive.google.com/")}
 						/>
 						<div>{!coverError ? "" : "Enter Correct Cover Letter Link"}</div>
                         <a href="" >Download Cover Letter Format</a>
