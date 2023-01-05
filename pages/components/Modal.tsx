@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import { CodecellLogo } from "../../assets";

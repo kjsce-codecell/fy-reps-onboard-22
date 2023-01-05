@@ -7,6 +7,7 @@ type Props = {
 	currentSlide: number;
 	setCurrentSlide(c: number): void;
 	updateForm(c: object): void;
+	formState(c: boolean): void;
 };
 
 const fallbackValues = {
@@ -40,11 +41,11 @@ const PersonalDetails = (props: Props) => {
 	useEffect(() => {
 		defaultValues = JSON.parse(
 			localStorage.getItem("PersonalDetails") || JSON.stringify(fallbackValues)
-		); 
-    setName(defaultValues.name || "")
-    setEmail(defaultValues.email || "")
-    setPhone(defaultValues.phone || "")
-    setBranch(defaultValues.branch || "")
+		);
+		setName(defaultValues.name || "");
+		setEmail(defaultValues.email || "");
+		setPhone(defaultValues.phone || "");
+		setBranch(defaultValues.branch || "");
 	}, []);
 
 	const [nameErr, setNameErr] = useState<boolean>(false);
@@ -92,32 +93,34 @@ const PersonalDetails = (props: Props) => {
 			email.indexOf(".") === email.length - 1 ||
 			email.includes(" ")
 		) {
-			error=true;
+			error = true;
 			console.log("Wrong Email ID!!");
 			setEmailErr("Wrong Email ID!!");
 		}
 		if (phone.length != 10) {
-			error=true;
+			error = true;
 			console.log("Wrong Phone Number!!");
 			setPhoneErr(true);
 		}
 		if (name.length < 2) {
-			error=true;
+			error = true;
 			console.log("Wrong Name!!");
 			setNameErr(true);
 		}
 
-    if (emailErr.length===0 && !error && !phoneErr && !nameErr)  {
-      if (await checkRegistered(email)===true) {
-        setEmailErr("Email ID already registered!!");
-      }
-      else {
-        props.updateForm({name, email, phone, branch});
-        localStorage.setItem("email", email);
-        props.setCurrentSlide(props.currentSlide+1);
-      }
-    }
-  }
+		if (emailErr.length === 0 && !error && !phoneErr && !nameErr) {
+			if ((await checkRegistered(email)) === true) {
+				setEmailErr("Email ID already registered!!");
+			} else {
+				props.updateForm({ name, email, phone, branch });
+				localStorage.setItem("email", email);
+				props.setCurrentSlide(props.currentSlide + 1);
+			}
+		}
+		if (!error) {
+			props.formState(true);
+		}
+	};
 
 	return (
 		<div className={detailsStyles.oneSection}>
@@ -149,7 +152,7 @@ const PersonalDetails = (props: Props) => {
 				</div>
 				<div>
 					<button type="submit" onClick={handleNext}>
-						Next
+						Save and Next
 					</button>
 				</div>
 			</div>

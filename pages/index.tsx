@@ -18,7 +18,7 @@ const registerStudent = async (formData: object) => {
 		let email = localStorage.getItem("email") || "no-email";
 		const regRef = doc(db, "FY_2022-23", email);
 		const registrationID = Date.now() + Math.round(Math.random() * 10e4);
-		const timestamp = (new Date(Date.now())).toString();
+		const timestamp = new Date(Date.now()).toString();
 		const finalData = { registrationID, ...formData, timestamp };
 		console.log(finalData);
 
@@ -26,7 +26,7 @@ const registerStudent = async (formData: object) => {
 		const docRef = await setDoc(regRef, finalData, { merge: true });
 
 		// Passing data to spreadsheet
-		const url = spreadsheetAPI
+		const url = spreadsheetAPI;
 		console.log(url);
 
 		fetch(url, {
@@ -52,19 +52,16 @@ const registerStudent = async (formData: object) => {
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
-	let defaultSlide=0;
+	let defaultSlide = 0;
 	useEffect(() => {
 		setTimeout(() => {
-			localStorage.setItem(
-				"slide",
-				JSON.stringify(currentSlide)
-			);
+			localStorage.setItem("slide", JSON.stringify(currentSlide));
 		}, 800);
 	}, [currentSlide]);
-	useEffect(()=>{
-		defaultSlide=parseInt(localStorage.getItem('slide') || "0");
-		setCurrentSlide(defaultSlide || 0)
-	},[])
+	useEffect(() => {
+		defaultSlide = parseInt(localStorage.getItem("slide") || "0");
+		setCurrentSlide(defaultSlide || 0);
+	}, []);
 
 	// Main Data
 	const [formData, setFormData] = useState<object>({});
@@ -75,6 +72,12 @@ export default function Home() {
 	>({});
 	const [showUsData, setShowUsData] = useState<object | undefined>({});
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
+
+	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
+		useState<boolean>(false);
+	const [showUsDataFilled, setShowUsDataFilled] = useState<boolean>(false);
+	const [motivationDataFilled, setmotivationDataFilled] =
+		useState<boolean>(false);
 
 	// useEffect(() => {
 	// 	console.log(personalDetailsData);
@@ -96,19 +99,38 @@ export default function Home() {
 		setFormData({ ...personalDetailsData, ...showUsData, ...motivationData });
 	}, [personalDetailsData, showUsData, motivationData]);
 
-	const [requestAPI, setRequestAPI] = useState<boolean>(false);
+	// useEffect(() => {
+	// 	setFormData(formData);
+	// 	if (requestAPI === true) {
+	// 		// console.log(formData);
+	// 		if (!personalDetailsDataFilled) {
+	// 			// registerStudent(formData).then(() =>
+	// 			// 	console.log("Applied successfully")
+	// 			// );
+	// 			setCurrentSlide(0);
+	// 		} else if (!showUsDataFilled) {
+	// 			setCurrentSlide(1);
+	// 		} else if (!motivationDataFilled) {
+	// 			setCurrentSlide(2);
+	// 		} else {
+	// 			// registerStudent(formData).then(() =>
+	// 			// 	console.log("Applied successfully")
+	// 			// );
+	// 			console.log("done");
+	// 		}
+	// 	}
+	// }, [formData]);
 
-	useEffect(() => {
-		setRequestAPI(requestAPI);
-	}, [requestAPI]);
-
-	useEffect(() => {
-		setFormData(formData);
-		if (requestAPI === true) {
-			// console.log(formData);
-			registerStudent(formData).then(() => console.log("Applied successfully"));
+	const finalSubmit = () => {
+		if (!personalDetailsDataFilled) {
+			setCurrentSlide(0);
+		} else if (!showUsDataFilled) {
+			setCurrentSlide(1);
+		} else {
+			// registerStudent(formData).then(() => console.log("Applied successfully"));
+			console.log("hello");
 		}
-	}, [formData]);
+	};
 
 	return (
 		<>
@@ -156,6 +178,7 @@ export default function Home() {
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
 									updateForm={updatePersonalDetailsData}
+									formState={setPersonalDetailsDataFilled}
 								/>
 							)}
 
@@ -164,6 +187,7 @@ export default function Home() {
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
 									updateForm={updateShowUsData}
+									formState={setShowUsDataFilled}
 								/>
 							)}
 
@@ -172,7 +196,8 @@ export default function Home() {
 									currentSlide={currentSlide}
 									setCurrentSlide={setCurrentSlide}
 									updateForm={updateMotivationData}
-									finalSubmit={setRequestAPI}
+									formState={setmotivationDataFilled}
+									finalSubmit={finalSubmit}
 								/>
 							)}
 						</div>

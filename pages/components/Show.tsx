@@ -5,13 +5,14 @@ type Props = {
 	currentSlide: number;
 	setCurrentSlide(c: number): void;
 	updateForm(c: object): void;
+	formState(c: boolean): void;
 };
 
 const fallbackValues = {
 	github: "",
 	linkedin: "",
 	cp: "",
-	resume: ""
+	resume: "",
 };
 
 const Show = (props: Props) => {
@@ -32,7 +33,7 @@ const Show = (props: Props) => {
 					github,
 					linkedin,
 					cp,
-					resume
+					resume,
 				})
 			);
 		}, 2000);
@@ -41,11 +42,11 @@ const Show = (props: Props) => {
 	useEffect(() => {
 		defaultValues = JSON.parse(
 			localStorage.getItem("ShowUs") || JSON.stringify(fallbackValues)
-		); 
-		setGithub(defaultValues.github || "")
-		setCP(defaultValues.cp || "")
-		setLinkedin(defaultValues.linkedin || "")
-		setResume(defaultValues.resume || "")
+		);
+		setGithub(defaultValues.github || "");
+		setCP(defaultValues.cp || "");
+		setLinkedin(defaultValues.linkedin || "");
+		setResume(defaultValues.resume || "");
 	}, []);
 
 	const [githubError, setGithubError] = useState<boolean>(false);
@@ -69,7 +70,7 @@ const Show = (props: Props) => {
 			error = false;
 			setLinkedinError(false);
 		}
-		
+
 		if (!resume.includes("drive.com/")) {
 			error = true;
 			setResumeError(true);
@@ -79,8 +80,9 @@ const Show = (props: Props) => {
 		}
 
 		if (!error) {
-			updateForm({github, cp, linkedin, resume})
+			updateForm({ github, cp, linkedin, resume });
 			setCurrentSlide(currentSlide + 1);
+			props.formState(true);
 		}
 	};
 
@@ -130,7 +132,7 @@ const Show = (props: Props) => {
 					</div>
 					<div>
 						<button type="submit" onClick={handleSubmit}>
-							Next
+							Save and Next
 						</button>
 					</div>
 				</div>
