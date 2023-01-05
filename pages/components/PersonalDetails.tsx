@@ -53,13 +53,8 @@ const PersonalDetails = (props: Props) => {
     setNameErr(false);
 
     if (!email.includes("@") || !email.includes(".") || (email.indexOf("@")+1)>=email.indexOf(".") || email.indexOf("@") === 0 || email.length < 5 || email.indexOf(".") === (email.length-1) || email.includes(" ")) {
-      if (await checkRegistered(email)===true) {
-        setEmailErr("Email ID already registered!!");
-      }
-      else {
-        console.log("Wrong Email ID!!");
-        setEmailErr("Wrong Email ID!!");
-      }
+      console.log("Wrong Email ID!!");
+      setEmailErr("Wrong Email ID!!");
     }
     if (phone.length!=10) {
       console.log("Wrong Phone Number!!");
@@ -70,10 +65,15 @@ const PersonalDetails = (props: Props) => {
       setNameErr(true);
     }
 
-    if ( !emailErr && !phoneErr && !nameErr)  {
-      props.updateForm({name, email, phone, branch});
-      localStorage.setItem("email", email);
-      props.setCurrentSlide(props.currentSlide+1);
+    if (emailErr.length===0 && !phoneErr && !nameErr)  {
+      if (await checkRegistered(email)===true) {
+        setEmailErr("Email ID already registered!!");
+      }
+      else {
+        props.updateForm({name, email, phone, branch});
+        localStorage.setItem("email", email);
+        props.setCurrentSlide(props.currentSlide+1);
+      }
     }
   }
 
