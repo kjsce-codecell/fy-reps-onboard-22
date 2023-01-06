@@ -14,31 +14,36 @@ import { submitAPI } from "../config/next.config";
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
+
+	const changeSlide = (slide: number) => {
+		setCurrentSlide(slide);
+		localStorage.setItem("slide", JSON.stringify(slide));
+	};
 	let defaultSlide = 0;
 	useEffect(() => {
-		setTimeout(() => {
-			localStorage.setItem("slide", JSON.stringify(currentSlide));
-		}, 800);
-	}, [currentSlide]);
-	useEffect(() => {
 		defaultSlide = parseInt(localStorage.getItem("slide") || "0");
-		setCurrentSlide(defaultSlide || 0);
+		changeSlide(defaultSlide || 0);
 	}, []);
+
 	const [submitModalVisible, setSubmitModalVisible] = useState<boolean>(false);
-	const [entryModalVisible,setEntryModalVisible]=useState<boolean>(false)
+	const [entryModalVisible, setEntryModalVisible] = useState<boolean>(false);
 	useEffect(() => {
 		setSubmitModalVisible(localStorage.getItem("submitted") === "true");
-		setEntryModalVisible(localStorage.getItem('visited')!=='true');
+		setEntryModalVisible(localStorage.getItem("visited") !== "true");
 	}, []);
 
 	// Main Data
 	const [formData, setFormData] = useState<object>({});
 
 	// 3 Sections Data
-	const [personalDetailsData, setPersonalDetailsData] = useState<object | undefined>({});
+	const [personalDetailsData, setPersonalDetailsData] = useState<
+		object | undefined
+	>({});
 	const [showUsData, setShowUsData] = useState<object | undefined>({});
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
-	const [legalDocumentsData, setLegalDocumentsData] = useState<object | undefined>({});
+	const [legalDocumentsData, setLegalDocumentsData] = useState<
+		object | undefined
+	>({});
 
 	const [registrationID, setregistrationID] = useState<number>(0);
 
@@ -77,13 +82,13 @@ export default function Home() {
 
 	const finalSubmit = async () => {
 		if (!personalDetailsDataFilled) {
-			setCurrentSlide(0);
+			changeSlide(0);
 		} else if (!showUsDataFilled) {
-			setCurrentSlide(1);
+			changeSlide(1);
 		} else if (!legalDocumentsDataFilled) {
-			setCurrentSlide(2);
+			changeSlide(2);
 		} else if (!motivationDataFilled) {
-			setCurrentSlide(3);
+			changeSlide(3);
 		} else {
 			fetch(submitAPI, {
 				method: "POST",
@@ -92,17 +97,17 @@ export default function Home() {
 				},
 				body: JSON.stringify(formData),
 			})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log("Registration ID: " + data.registrationID);
-				console.log("Hurrayy!! Applied Successfully");
-				setregistrationID(data.registrationID);
-				localStorage.setItem("submitted", "true");
-				setSubmitModalVisible(true);
-			})
-			.catch((e) => {
-				console.error("API Call for Registration Failed - Error: ", e);
-			});
+				.then((response) => response.json())
+				.then((data) => {
+					console.log("Registration ID: " + data.registrationID);
+					console.log("Hurrayy!! Applied Successfully");
+					setregistrationID(data.registrationID);
+					localStorage.setItem("submitted", "true");
+					setSubmitModalVisible(true);
+				})
+				.catch((e) => {
+					console.error("API Call for Registration Failed - Error: ", e);
+				});
 		}
 	};
 
@@ -116,7 +121,7 @@ export default function Home() {
 			</Head>
 			<main className={styles.main}>
 				{entryModalVisible && <Modal setVisible={setEntryModalVisible} />}
-				{submitModalVisible && <SubmitModal registrationID={registrationID}/>}
+				{submitModalVisible && <SubmitModal registrationID={registrationID} />}
 				<div className={styles.mainContainer}>
 					<div className={styles.heading}>
 						<a href="https://www.kjscecodecell.com/">
@@ -127,7 +132,7 @@ export default function Home() {
 						<div className={styles.leftcontainer}>
 							<Stepper
 								current={currentSlide}
-								Change={(n: number) => setCurrentSlide(n)}
+								Change={(n: number) => changeSlide(n)}
 								items={[
 									{
 										title: "Personal Details",
@@ -157,7 +162,7 @@ export default function Home() {
 							{currentSlide === 0 && (
 								<PersonalDetails
 									currentSlide={currentSlide}
-									setCurrentSlide={setCurrentSlide}
+									setCurrentSlide={changeSlide}
 									updateForm={updatePersonalDetailsData}
 									formState={setPersonalDetailsDataFilled}
 								/>
@@ -166,7 +171,7 @@ export default function Home() {
 							{currentSlide === 1 && (
 								<Show
 									currentSlide={currentSlide}
-									setCurrentSlide={setCurrentSlide}
+									setCurrentSlide={changeSlide}
 									updateForm={updateShowUsData}
 									formState={setShowUsDataFilled}
 								/>
@@ -175,7 +180,7 @@ export default function Home() {
 							{currentSlide === 2 && (
 								<LegalDocuments
 									currentSlide={currentSlide}
-									setCurrentSlide={setCurrentSlide}
+									setCurrentSlide={changeSlide}
 									updateForm={updateLegalDocumentsData}
 									formState={setLegalDocumentsDataFilled}
 								/>
@@ -184,7 +189,7 @@ export default function Home() {
 							{currentSlide === 3 && (
 								<Motivation
 									currentSlide={currentSlide}
-									setCurrentSlide={setCurrentSlide}
+									setCurrentSlide={changeSlide}
 									updateForm={updateMotivationData}
 									formState={setmotivationDataFilled}
 									finalSubmit={finalSubmit}
