@@ -119,7 +119,6 @@ export default function Home() {
 				{submitModalVisible && <SubmitModal registrationID={registrationID}/>}
 				<div className={styles.mainContainer}>
 					<div className={styles.heading}>
-						{/* <h1>KJSCE CodeCell</h1> */}
 						<a href="https://www.kjscecodecell.com/">
 							<img src={CodecellLogo.src} alt="Codecell Logo" />
 						</a>

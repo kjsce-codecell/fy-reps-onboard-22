@@ -14,7 +14,7 @@ const fallbackValues = {
 	name: "",
 	email: "",
 	phone: "",
-	branch: "",
+	branch: "NA",
 };
 
 let flag = 1;

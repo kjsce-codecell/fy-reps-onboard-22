@@ -54,8 +54,6 @@ const LegalDocuments = (props: Props) => {
 			error = true;
 		}
 		if (position1==="NA" || position2==="NA") {
-			console.log(position1);
-			console.log(position2);
 			error = true;
 			console.log("Select Position Preference/s !!");
 			if (position1==="NA") setPositionError1(true);
@@ -93,8 +91,8 @@ const LegalDocuments = (props: Props) => {
 						<label>Position Preference 1</label>
 						<select id="position1" name="position" value={position1} onChange={(e) => setPosition1(e.target.value)}>
 							<option value="NA">Select Position</option>
-							{position2!="Technical Team" && <option value="Technical Team">Technical Team</option>}
-							{position2!="Creative Team" && <option value="Creative Team">Creative Team</option>}
+							{position2!="TechnicalTeam" && <option value="TechnicalTeam">Technical Team</option>}
+							{position2!="CreativeTeam" && <option value="CreativeTeam">Creative Team</option>}
 							{position2!="Co-ordinator/Marketing" && <option value="Co-ordinator/Marketing">Co-ordinator/Marketing</option>}
 						</select>
 						{positionError1 ? `Select Position Preference` : ``}
@@ -103,8 +101,8 @@ const LegalDocuments = (props: Props) => {
 						<label>Position Preference 2</label>
 						<select id="position2" name="position" value={position2} onChange={(e) => setPosition2(e.target.value)}>
 						<option value="NA">Select Position</option>
-							{position1!="Technical Team" && <option value="Technical Team">Technical Team</option>}
-							{position1!="Creative Team" && <option value="Creative Team">Creative Team</option>}
+							{position1!="TechnicalTeam" && <option value="TechnicalTeam">Technical Team</option>}
+							{position1!="CreativeTeam" && <option value="CreativeTeam">Creative Team</option>}
 							{position1!="Co-ordinator/Marketing" && <option value="Co-ordinator/Marketing">Co-ordinator/Marketing</option> }
 						</select>
 						{positionError2 ? `Select Position Preference` : ``}
