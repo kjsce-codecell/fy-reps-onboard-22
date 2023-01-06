@@ -95,7 +95,7 @@ const PersonalDetails = (props: Props) => {
 			console.log("Wrong Email ID!!");
 			setEmailErr("Wrong Email ID!!");
 		}
-		if (phone.length != 10) {
+		if (phone.length != 10 || isNaN(parseInt(phone))) {
 			error = true;
 			console.log("Wrong Phone Number!!");
 			setPhoneErr(true);
@@ -154,7 +154,7 @@ const PersonalDetails = (props: Props) => {
 				<div className={detailsStyles.oneField}>
 					<label>Enter your Phone Number (10 Digits Only)</label>
 					<input 
-						type="text" 
+						type="number" 
 						value={phone} 
 						onChange={handlePhoneChange} 
 						placeholder="93XXXXXX06"
