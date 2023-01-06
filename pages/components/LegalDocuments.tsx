@@ -27,14 +27,14 @@ const LegalDocuments = (props: Props) => {
 
 
 	useEffect(() => {
+		defaultValues = JSON.parse(
+			localStorage.getItem("LegalDocuments") || JSON.stringify(fallbackValues)
+		);
 		setTimeout(() => {
-			defaultValues = JSON.parse(
-				localStorage.getItem("LegalDocuments") || JSON.stringify(fallbackValues)
-			);
 			setCover(defaultValues.cover || "");
 			setPosition1(defaultValues.position1 || "NA");
 			setPosition2(defaultValues.position2 || "NA");
-		}, 1500)
+		}, 150)
 	}, []);
 
 	const [coverError, setCoverError] = useState<boolean>(false);

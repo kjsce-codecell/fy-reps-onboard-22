@@ -25,16 +25,14 @@ export default function Home() {
 		changeSlide(defaultSlide || 0);
 	}, []);
 
+	console.log("Do not paste any code or script here")
+
 	const [submitModalVisible, setSubmitModalVisible] = useState<boolean>(false);
 	const [entryModalVisible, setEntryModalVisible] = useState<boolean>(false);
 	useEffect(() => {
 		setSubmitModalVisible(localStorage.getItem("submitted") === "true");
 		setEntryModalVisible(localStorage.getItem("visited") !== "true");
 	}, []);
-
-
-	
-
 
 	// Main Data
 	const [formData, setFormData] = useState<object>({});
@@ -210,6 +208,8 @@ export default function Home() {
 									updateForm={updateMotivationData}
 									formState={setmotivationDataFilled}
 									finalSubmit={finalSubmit}
+									page={page}
+									setPage={SetPage}
 								/>
 							)}
 						</div>
