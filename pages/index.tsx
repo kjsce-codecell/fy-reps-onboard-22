@@ -10,7 +10,7 @@ import { code, CodecellLogo, fire, user, legal } from "../assets";
 import Modal from "./components/Modal";
 import LegalDocuments from "./components/LegalDocuments";
 import SubmitModal from "./components/SubmitModal";
-// import { submitAPI } from "../config/next.config";
+import { submitAPI } from "../config/next.config";
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -31,6 +31,10 @@ export default function Home() {
 		setSubmitModalVisible(localStorage.getItem("submitted") === "true");
 		setEntryModalVisible(localStorage.getItem("visited") !== "true");
 	}, []);
+
+
+	
+
 
 	// Main Data
 	const [formData, setFormData] = useState<object>({});
@@ -80,16 +84,22 @@ export default function Home() {
 		});
 	}, [personalDetailsData, showUsData, legalDocumentsData, motivationData]);
 
+	const [page,SetPage]=useState(-1);
 	const finalSubmit = async () => {
 		if (!personalDetailsDataFilled) {
+			SetPage(0)
 			changeSlide(0);
 		} else if (!showUsDataFilled) {
+			SetPage(1)
 			changeSlide(1);
 		} else if (!legalDocumentsDataFilled) {
+			SetPage(2)
 			changeSlide(2);
 		} else if (!motivationDataFilled) {
+			SetPage(3)
 			changeSlide(3);
 		} else {
+			SetPage(-1)
 			fetch(submitAPI, {
 				method: "POST",
 				headers: {
@@ -165,6 +175,8 @@ export default function Home() {
 									setCurrentSlide={changeSlide}
 									updateForm={updatePersonalDetailsData}
 									formState={setPersonalDetailsDataFilled}
+									page={page}
+									setPage={SetPage}
 								/>
 							)}
 
@@ -174,6 +186,9 @@ export default function Home() {
 									setCurrentSlide={changeSlide}
 									updateForm={updateShowUsData}
 									formState={setShowUsDataFilled}
+									page={page}
+									setPage={SetPage}
+
 								/>
 							)}
 
@@ -183,6 +198,8 @@ export default function Home() {
 									setCurrentSlide={changeSlide}
 									updateForm={updateLegalDocumentsData}
 									formState={setLegalDocumentsDataFilled}
+									page={page}
+									setPage={SetPage}
 								/>
 							)}
 

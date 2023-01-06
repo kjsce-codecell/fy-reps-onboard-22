@@ -6,6 +6,8 @@ type Props = {
 	setCurrentSlide(c: number): void;
 	updateForm(c: object): void;
 	formState(c: boolean): void;
+	page: number;
+	setPage(c: number): void;
 };
 
 const fallbackValues = {
@@ -37,17 +39,9 @@ const LegalDocuments = (props: Props) => {
 	const [positionError1, setPositionError1] = useState<boolean>(false);
 	const [positionError2, setPositionError2] = useState<boolean>(false);
 
-	const handleSubmit = () => {
+	const validate=()=>{
 		let error = false;
 		setCoverError(false);
-		localStorage.setItem(
-			"LegalDocuments",
-			JSON.stringify({
-				cover,
-				position1,
-				position2
-			})
-		);
 
 		if (!cover.includes("drive.google.com/")) {
 			setCoverError(true);
@@ -59,6 +53,20 @@ const LegalDocuments = (props: Props) => {
 			if (position1==="NA") setPositionError1(true);
 			else setPositionError2(true);
 		}
+		return error;
+	}
+
+	const handleSubmit = () => {
+		localStorage.setItem(
+			"LegalDocuments",
+			JSON.stringify({
+				cover,
+				position1,
+				position2
+			})
+		);
+		
+		let error=validate();
 
 		if (!error) {
 			console.log(position1)
@@ -68,6 +76,13 @@ const LegalDocuments = (props: Props) => {
 			props.formState(true);
 		}
 	};
+
+	useEffect(() => {
+		if (props.page == 2) {
+			validate();
+			props.setPage(-1);
+		}
+	}, [props.page]);
 
 	return (
 		<div>

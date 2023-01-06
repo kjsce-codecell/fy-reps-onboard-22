@@ -1,13 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import {
+	forwardRef,
+	useEffect,
+	useImperativeHandle,
+	useRef,
+	useState,
+} from "react";
 import detailsStyles from "../../styles/Details.module.css";
 import { doc, getDoc } from "firebase/firestore";
-// import { db } from "../../config/firebase";
+import { db } from "../../config/firebase";
 
 type Props = {
 	currentSlide: number;
 	setCurrentSlide(c: number): void;
 	updateForm(c: object): void;
 	formState(c: boolean): void;
+	page: number;
+	setPage(c: number): void;
 };
 
 const fallbackValues = {
@@ -36,7 +44,6 @@ const PersonalDetails = (props: Props) => {
 		setBranch(defaultValues.branch || "");
 		flag = 0;
 	}, []);
-
 
 	const [nameErr, setNameErr] = useState<boolean>(false);
 	const [emailErr, setEmailErr] = useState("");
@@ -67,20 +74,11 @@ const PersonalDetails = (props: Props) => {
 		setBranch(e.target.value);
 	};
 
-	const handleNext = async () => {
+	const validate = () => {
 		let error = false;
 		setEmailErr("");
 		setPhoneErr(false);
 		setNameErr(false);
-		localStorage.setItem(
-			"PersonalDetails",
-			JSON.stringify({
-				name,
-				email,
-				phone,
-				branch,
-			})
-		);
 
 		if (
 			!email.includes("@") ||
@@ -105,11 +103,25 @@ const PersonalDetails = (props: Props) => {
 			console.log("Wrong Name!!");
 			setNameErr(true);
 		}
-		if (branch==="NA") {
+		if (branch === "NA") {
 			error = true;
 			console.log("Select Appropriate Branch");
 			setBranchErr(true);
 		}
+		return error;
+	};
+
+	const handleNext = async () => {
+		localStorage.setItem(
+			"PersonalDetails",
+			JSON.stringify({
+				name,
+				email,
+				phone,
+				branch,
+			})
+		);
+		let error = validate();
 
 		if (!error) {
 			if ((await checkRegistered(email)) === true) {
@@ -123,6 +135,13 @@ const PersonalDetails = (props: Props) => {
 		}
 	};
 
+	useEffect(() => {
+		if (props.page == 0) {
+			validate();
+			props.setPage(-1)
+		}
+	}, [props.page]);
+
 	return (
 		<div className={detailsStyles.oneSection}>
 			<div className={detailsStyles.sectionHeader}>
@@ -133,19 +152,19 @@ const PersonalDetails = (props: Props) => {
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>
 					<label>Enter your Email ID</label>
-					<input 
-						type="email" 
-						value={email} 
+					<input
+						type="email"
+						value={email}
 						onChange={handleEmailChange}
-						placeholder="abc@gmail.com" 
+						placeholder="abc@gmail.com"
 					/>
 					{emailErr}
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter your Name</label>
-					<input 
-						type="text" 
-						value={name} 
+					<input
+						type="text"
+						value={name}
 						onChange={handleNameChange}
 						placeholder="FName LName"
 					/>
@@ -153,17 +172,22 @@ const PersonalDetails = (props: Props) => {
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter your Phone Number (10 Digits Only)</label>
-					<input 
-						type="number" 
-						value={phone} 
-						onChange={handlePhoneChange} 
+					<input
+						type="number"
+						value={phone}
+						onChange={handlePhoneChange}
 						placeholder="93XXXXXX06"
 					/>
 					{phoneErr ? `Enter Correct Phone Number` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter your Branch</label>
-					<select id="branch" name="branch" value={branch} onChange={handleBranchChange}>
+					<select
+						id="branch"
+						name="branch"
+						value={branch}
+						onChange={handleBranchChange}
+					>
 						<option value="NA">Select Branch</option>
 						<option value="Computers">COMPUTERS</option>
 						<option value="IT">IT</option>

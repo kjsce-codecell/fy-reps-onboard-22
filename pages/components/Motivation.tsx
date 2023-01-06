@@ -7,6 +7,8 @@ type Props = {
 	updateForm(c: object): void;
 	finalSubmit(): void;
 	formState(c: boolean): void;
+	page: number;
+	setPage(c: number): void;
 };
 
 const fallbackValues = {
@@ -53,11 +55,10 @@ const Motivation = (props: Props) => {
 		setPlan(e.target.value);
 	};
 
-	const submitForm = () => {
+	const validate=()=>{
 		let error = false;
 		setOneLineErr(false);
 		setPlanErr(false);
-
 		if (getWordCount(oneLine) === 0 || getWordCount(oneLine) > 6) {
 			console.log("1st Input Word Count is "+getWordCount(plan));
 			setOneLineErr(true);
@@ -68,13 +69,25 @@ const Motivation = (props: Props) => {
 			setPlanErr(true);
 			error = true;
 		}
+		return error
+	}
 
+	const submitForm = () => {
+		handleSave()
+		
+		let error=validate()
 		if (!error) {
 			props.updateForm({ oneLine, plan });
 			props.formState(true);
 			props.finalSubmit();
 		}
 	};
+	useEffect(() => {
+		if (props.page == 3) {
+			validate();
+			props.setPage(-1);
+		}
+	}, [props.page]);
 
 	return (
 		<div className={detailsStyles.oneSection}>
