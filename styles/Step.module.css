@@ -79,36 +79,26 @@
   }
 
   .title {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 
   .icon,
   .activeicon,
   .previcon {
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
+  }
+
+  .activeicon img, .icon img, .previcon img {
+    width: 80%;
   }
 }
 
 @media only screen and (max-width: 500px) {
-  .container {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: left;
-    gap: 20px;
-    width: 60vw;
-    padding: 0;
-    margin: auto auto;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .leftcontainer {
-    /* height: 20vh; */
-  }
-
-  .icon, .activeicon, .previcon {
-    width: 40px;
+  .icon,
+  .activeicon,
+  .previcon {
     height: 40px;
+    width: 40px;
   }
 }

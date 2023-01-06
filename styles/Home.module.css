@@ -16,19 +16,19 @@
 }
 
 .container {
-  width: 70vw;
+  width: 80vw;
   display: flex;
   flex-direction: row;
 }
 
 .leftcontainer {
-  width: 30%;
+  width: 35%;
   color: aliceblue;
   padding-right: 3%;
 }
 
 .rightcontainer {
-  width: 70%;
+  width: 60%;
   height: 100%;
   padding: 40px;
   color: var(--off-white);
@@ -81,6 +81,10 @@
     height: auto;
   }
 
+  .heading {
+    margin: 0rem 0;
+  }
+
   .heading img {
     width: 200px;
   }
@@ -89,6 +93,11 @@
 @media only screen and (max-width: 450px) {
   .heading img {
     display: block;
-    margin: auto auto;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .heading {
+    margin: 0px;
   }
 }
