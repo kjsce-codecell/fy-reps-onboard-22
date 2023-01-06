@@ -6,6 +6,8 @@ type Props = {
 	setCurrentSlide(c: number): void;
 	updateForm(c: object): void;
 	formState(c: boolean): void;
+	page: number;
+	setPage(c: number): void;
 };
 
 const fallbackValues = {
@@ -45,12 +47,33 @@ const Show = (props: Props) => {
 	const [linkedinError, setLinkedinError] = useState<boolean>(false);
 	const [resumeError, setResumeError] = useState<boolean>(false);
 
-	const handleSubmit = () => {
+	const validate = () => {
 		let error = false;
 		setGithubError(false);
 		setLinkedinError(false);
 		setResumeError(false);
 
+		if (!github.includes("github.com/") || github === "https://github.com/") {
+			setGithubError(true);
+			error = true;
+		}
+
+		if (
+			!linkedin.includes("linkedin.com/in/") ||
+			linkedin === "https://linkedin.com/in/"
+		) {
+			error = true;
+			setLinkedinError(true);
+		}
+
+		if (!resume.includes("drive.google.com/")) {
+			error = true;
+			setResumeError(true);
+		}
+		return error;
+	};
+
+	const handleSubmit = () => {
 		localStorage.setItem(
 			"ShowUs",
 			JSON.stringify({
@@ -60,21 +83,7 @@ const Show = (props: Props) => {
 				resume,
 			})
 		);
-
-		if (!github.includes("github.com/") || github === "https://github.com/") {
-			setGithubError(true);
-			error = true;
-		}
-
-		if (!linkedin.includes("linkedin.com/in/") || linkedin === "https://linkedin.com/in/") {
-			error = true;
-			setLinkedinError(true);
-		}
-
-		if (!resume.includes("drive.google.com/")) {
-			error = true;
-			setResumeError(true);
-		}
+		let error = validate();
 
 		if (!error) {
 			updateForm({ github, cp, linkedin, resume });
@@ -82,6 +91,13 @@ const Show = (props: Props) => {
 			props.formState(true);
 		}
 	};
+
+	useEffect(() => {
+		if (props.page == 1) {
+			validate();
+			props.setPage(-1);
+		}
+	}, [props.page]);
 
 	return (
 		<div>

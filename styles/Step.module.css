@@ -41,7 +41,7 @@
   height: 80px;
   width: 80px;
   transition: all ease-in-out;
-  transition-duration: 50ms;
+  transition-duration: 1000ms;
   text-align: center;
   display: flex;
   justify-content: center;
