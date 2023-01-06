@@ -20,7 +20,7 @@ const Stepper = (props: Props) => {
 	const { items,Change,current } = props;
 	return (
 		<div className={styles.container}>
-			{items.map((item, index) => (
+			{items && items.map((item, index) => (
 				<Step
                     Change={Change}
                     current={current}

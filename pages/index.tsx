@@ -10,7 +10,7 @@ import { code, CodecellLogo, fire, user } from "../assets";
 import Modal from "./components/Modal";
 import LegalDocuments from "./components/LegalDocuments";
 import SubmitModal from "./components/SubmitModal";
-// import { submitAPI } from "../config/next.config";
+import { submitAPI } from "../config/next.config";
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
