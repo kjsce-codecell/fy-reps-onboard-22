@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import detailsStyles from "../../styles/Details.module.css";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
+// import { db } from "../../config/firebase";
 
 type Props = {
 	currentSlide: number;
