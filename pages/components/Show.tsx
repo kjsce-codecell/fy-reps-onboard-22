@@ -35,6 +35,12 @@ const Show = (props: Props) => {
 		setResume(defaultValues.resume || "");
 	}, []);
 
+	const handleKeypress = (e: any) => {
+		if (e.keyCode === 13) {
+			handleSubmit();
+		}
+	};
+
 	const [githubError, setGithubError] = useState<boolean>(false);
 	const [linkedinError, setLinkedinError] = useState<boolean>(false);
 	const [resumeError, setResumeError] = useState<boolean>(false);
@@ -122,6 +128,7 @@ const Show = (props: Props) => {
 							type="text"
 							value={resume}
 							onChange={(e) => setResume(e.target.value)}
+							onKeyDown={handleKeypress}
 						/>
 						{!resumeError ? "" : "Enter Correct Link to Resume"}
 					</div>
