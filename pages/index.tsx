@@ -40,6 +40,8 @@ export default function Home() {
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
 	const [legalDocumentsData, setLegalDocumentsData] = useState<object | undefined>({});
 
+	const [registrationID, setregistrationID] = useState<number>(0);
+
 	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
 		useState<boolean>(false);
 	const [showUsDataFilled, setShowUsDataFilled] = useState<boolean>(false);
@@ -94,12 +96,13 @@ export default function Home() {
 			.then((data) => {
 				console.log("Registration ID: " + data.registrationID);
 				console.log("Hurrayy!! Applied Successfully");
+				setregistrationID(registrationID);
+				localStorage.setItem("submitted", "true");
+				setSubmitModalVisible(true);
 			})
 			.catch((e) => {
 				console.error("API Call for Registration Failed - Error: ", e);
 			});
-			localStorage.setItem("submitted", "true");
-			setSubmitModalVisible(true);
 		}
 	};
 
@@ -113,7 +116,7 @@ export default function Home() {
 			</Head>
 			<main className={styles.main}>
 				{entryModalVisible && <Modal setVisible={setEntryModalVisible} />}
-				{submitModalVisible && <SubmitModal />}
+				{submitModalVisible && <SubmitModal registrationID={registrationID}/>}
 				<div className={styles.mainContainer}>
 					<div className={styles.heading}>
 						{/* <h1>KJSCE CodeCell</h1> */}
