@@ -53,6 +53,16 @@
 .heading img {
   width: 300px;
 }
+.footer{
+  position: absolute;
+  bottom: 0;
+  padding:2rem;
+  width: 100%;
+  text-align: center;
+  color:white;
+  font-size: 1.2rem;
+
+}
 
 @media only screen and (max-width: 900px) {
   .main {
