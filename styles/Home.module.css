@@ -7,7 +7,7 @@
   border: 1px solid var(--border);
   border-radius: 24px;
   position: relative;
-  height: 92vh;
+  height:auto;
   width: 90vw;
   overflow-y: scroll;
   padding: 2vw 0;
@@ -54,6 +54,7 @@
 }
 
 .footer{
+  margin-top: 1vw;
   text-align: center;
   color: var(--white);
   font-size: 16px;
@@ -130,14 +131,5 @@
 
   .rightcontainer {
     margin: 0;
-  }
-
-  .footer {
-    font-size: 16px;
-    position: absolute;
-    text-align: center;
-    left: 50%;
-    /* transform: translateX(-50%); */
-    transform: translate(-50%, -50px);
   }
 }
