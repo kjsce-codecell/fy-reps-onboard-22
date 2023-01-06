@@ -199,6 +199,9 @@ export default function Home() {
 					</div>
 				</div>
 			</main>
+				<div className={styles.footer}>
+				{"Made with ❤️ by CodeCell"}
+				</div>
 		</>
 	);
 }
