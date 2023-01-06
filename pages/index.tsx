@@ -96,7 +96,7 @@ export default function Home() {
 			.then((data) => {
 				console.log("Registration ID: " + data.registrationID);
 				console.log("Hurrayy!! Applied Successfully");
-				setregistrationID(registrationID);
+				setregistrationID(data.registrationID);
 				localStorage.setItem("submitted", "true");
 				setSubmitModalVisible(true);
 			})

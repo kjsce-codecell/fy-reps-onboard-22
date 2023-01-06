@@ -41,16 +41,15 @@ const PersonalDetails = (props: Props) => {
 	const [nameErr, setNameErr] = useState<boolean>(false);
 	const [emailErr, setEmailErr] = useState("");
 	const [phoneErr, setPhoneErr] = useState<boolean>(false);
-	// const [branchErr, setBranchErr] = useState<boolean>(false);
+	const [branchErr, setBranchErr] = useState<boolean>(false);
 
 	const checkRegistered = async (emailID: string) => {
 		const docRef = doc(db, "FY_2022-23", emailID);
 		const docSnap = await getDoc(docRef);
 
 		if (docSnap.exists()) {
+			console.log("Email ID already registered!!");
 			return true;
-		} else {
-			// console.log("No such document!");
 		}
 		return false;
 	};
@@ -101,10 +100,15 @@ const PersonalDetails = (props: Props) => {
 			console.log("Wrong Phone Number!!");
 			setPhoneErr(true);
 		}
-		if (name.length < 2) {
+		if (name.trim().split(" ").length < 2 || name.length < 4) {
 			error = true;
 			console.log("Wrong Name!!");
 			setNameErr(true);
+		}
+		if (branch==="NA") {
+			error = true;
+			console.log("Select Appropriate Branch");
+			setBranchErr(true);
 		}
 
 		if (!error) {
@@ -128,7 +132,7 @@ const PersonalDetails = (props: Props) => {
 			</div>
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>
-					<label>Enter Your Email ID</label>
+					<label>Enter your Email ID</label>
 					<input 
 						type="email" 
 						value={email} 
@@ -138,7 +142,7 @@ const PersonalDetails = (props: Props) => {
 					{emailErr}
 				</div>
 				<div className={detailsStyles.oneField}>
-					<label>Enter Your Name</label>
+					<label>Enter your Name</label>
 					<input 
 						type="text" 
 						value={name} 
@@ -148,7 +152,7 @@ const PersonalDetails = (props: Props) => {
 					{nameErr ? `Enter Correct Name` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
-					<label>Enter Your Phone Number (10 Digits)</label>
+					<label>Enter your Phone Number (10 Digits Only)</label>
 					<input 
 						type="text" 
 						value={phone} 
@@ -158,17 +162,18 @@ const PersonalDetails = (props: Props) => {
 					{phoneErr ? `Enter Correct Phone Number` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
-					<label>Enter Your Branch</label>
+					<label>Enter your Branch</label>
 					<select id="branch" name="branch" value={branch} onChange={handleBranchChange}>
 						<option value="NA">Select Branch</option>
-						<option value="CS">CS</option>
+						<option value="Computers">COMPUTERS</option>
 						<option value="IT">IT</option>
 						<option value="ETRX">ETRX</option>
 						<option value="EXTC">EXTC</option>
-						<option value="MECH">MECH</option>
+						<option value="EXCP">EXCP</option>
+						<option value="MECH">MECHANICAL</option>
 					</select>
 					{/* <input type="text" value={branch} onChange={handleBranchChange} /> */}
-					{/* {branchErr ? `Enter Correct Branch` : ``} */}
+					{branchErr ? `Select Correct Branch` : ``}
 				</div>
 				<div>
 					<button type="submit" onClick={handleNext}>
