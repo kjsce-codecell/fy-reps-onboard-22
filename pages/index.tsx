@@ -200,7 +200,8 @@ export default function Home() {
 				</div>
 			</main>
 				<div className={styles.footer}>
-				{"Made with ❤️ by CodeCell"}
+				{/* {"Made with ❤️ by CodeCell"} */}
+				Made with ❤️ by <a className={styles.footerlink} href="https://kjscecodecell.com">CodeCell</a>
 				</div>
 		</>
 	);

@@ -38,8 +38,8 @@
   backdrop-filter: blur(4px) saturate(180%);
   border: 1px solid var(--off-white);
   border-radius: 50%;
-  height: 70px;
-  width: 70px;
+  height: 80px;
+  width: 80px;
   transition: all ease-in-out;
   transition-duration: 50ms;
   text-align: center;

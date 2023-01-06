@@ -67,10 +67,11 @@
 
 .oneSection button {
   background-color: var(--codecell-red-morph);
-  padding: 10px 20px;
+  padding: 8px 18px;
+  margin-top: 5px;
   border: 2px solid var(--codecell-red-morph);
   border-radius: 50px;
-  font-size: 18px;
+  font-size: 15px;
   color: white;
   text-align: center;
   cursor: pointer;
@@ -127,5 +128,10 @@
   .oneField textarea::placeholder, 
   .oneField select::placeholder {
     font-size: 12px;
+  }
+
+  .oneSection button {
+    padding: 8px 12px;
+    font-size: 14px;
   }
 }
