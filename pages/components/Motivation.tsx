@@ -58,12 +58,13 @@ const Motivation = (props: Props) => {
 		setOneLineErr(false);
 		setPlanErr(false);
 
-		if (oneLine.trim().length === 0 || oneLine.trim().split(" ").length > 6) {
+		if (getWordCount(oneLine) === 0 || getWordCount(oneLine) > 6) {
+			console.log("1st Input Word Count is "+getWordCount(plan));
 			setOneLineErr(true);
 			error = true;
 		}
 		if (getWordCount(plan) < 50 || getWordCount(plan) > 120) {
-			console.log("Word Count is "+getWordCount(plan));
+			console.log("2nd Input Word Count is "+getWordCount(plan));
 			setPlanErr(true);
 			error = true;
 		}

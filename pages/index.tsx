@@ -8,47 +8,9 @@ import Motivation from "./components/Motivation";
 import Stepper from "./components/Stepper";
 import { code, CodecellLogo, fire, user } from "../assets";
 import Modal from "./components/Modal";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../config/firebase";
-// import { spreadsheetAPI } from "../config/next.config";
 import LegalDocuments from "./components/LegalDocuments";
 import SubmitModal from "./components/SubmitModal";
-
-const registerStudent = async (formData: object) => {
-	try {
-		// console.log(formData);
-		let email = localStorage.getItem("email") || "no-email";
-		const regRef = doc(db, "FY_2022-23", email);
-		const registrationID = Date.now() + Math.round(Math.random() * 10e4);
-		const timestamp = new Date(Date.now()).toString();
-		const finalData = { registrationID, ...formData, timestamp };
-
-		// console.log(finalData);
-
-		// Storing finalData in Firestore
-		const docRef = await setDoc(regRef, finalData, { merge: true });
-
-		// Passing data to spreadsheet
-		const url = spreadsheetAPI;
-
-		fetch(url, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(finalData),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log("Registration ID: " + registrationID);
-			})
-			.catch((error) => {
-				console.error("Registration Failed: Error - ", error);
-			});
-	} catch (e) {
-		console.error("Registration Failed: Error adding document - ", e);
-	}
-};
+import { submitAPI } from "../config/next.config";
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -73,14 +35,10 @@ export default function Home() {
 	const [formData, setFormData] = useState<object>({});
 
 	// 3 Sections Data
-	const [personalDetailsData, setPersonalDetailsData] = useState<
-		object | undefined
-	>({});
+	const [personalDetailsData, setPersonalDetailsData] = useState<object | undefined>({});
 	const [showUsData, setShowUsData] = useState<object | undefined>({});
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
-	const [legalDocumentsData, setLegalDocumentsData] = useState<
-		object | undefined
-	>({});
+	const [legalDocumentsData, setLegalDocumentsData] = useState<object | undefined>({});
 
 	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
 		useState<boolean>(false);
@@ -115,16 +73,31 @@ export default function Home() {
 		});
 	}, [personalDetailsData, showUsData, legalDocumentsData, motivationData]);
 
-	const finalSubmit = () => {
+	const finalSubmit = async () => {
 		if (!personalDetailsDataFilled) {
 			setCurrentSlide(0);
 		} else if (!showUsDataFilled) {
 			setCurrentSlide(1);
 		} else if (!legalDocumentsDataFilled) {
 			setCurrentSlide(2);
+		} else if (!motivationDataFilled) {
+			setCurrentSlide(3);
 		} else {
-			// registerStudent(formData).then(() => console.log("Applied successfully"));
-			// console.log(formData);
+			fetch(submitAPI, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log("Registration ID: " + data.registrationID);
+				console.log("Hurrayy!! Applied Successfully");
+			})
+			.catch((e) => {
+				console.error("API Call for Registration Failed - Error: ", e);
+			});
 			localStorage.setItem("submitted", "true");
 			setSubmitModalVisible(true);
 		}
