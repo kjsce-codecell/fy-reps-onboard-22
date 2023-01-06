@@ -7,12 +7,12 @@
   border: 1px solid var(--border);
   border-radius: 24px;
   position: relative;
-  height: 90vh;
+  height: auto;
   width: 90vw;
   margin: auto auto;
-  top: 5vh;
   overflow-y: scroll;
-  padding: 50px 0;
+  padding: 2vw 0;
+  margin: 2vw 5vw;
 }
 
 .container {
@@ -46,7 +46,7 @@
 .heading {
   height: 30%;
   padding: 2rem 0;
-  margin: 2rem 0;
+  margin: 0 0 2rem 0;
   border-bottom: 1px solid var(--border);
 }
 
