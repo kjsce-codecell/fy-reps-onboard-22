@@ -2,7 +2,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 60vw;  
+  max-width: 60vw; 
   cursor: default;
 }
 
@@ -95,8 +95,37 @@
   color: var(--white);
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 500px) {
   .sectionHeader h1{
     font-size: 1.8rem;
+  }
+
+  .oneSection {
+    max-width: 75vw;
+  }
+
+  .sectionHeader h1 {
+    font-size: 24px;
+  }
+
+  .sectionContent label {
+    font-size: 0.8rem;
+  }
+
+  .oneField input,
+  .oneField textarea,
+  .oneField select {
+    height: 35px;
+  }
+
+  .oneField select {
+    font-size: 14px;
+    padding: 2px;
+  }
+  
+  .oneField input::placeholder, 
+  .oneField textarea::placeholder, 
+  .oneField select::placeholder {
+    font-size: 12px;
   }
 }

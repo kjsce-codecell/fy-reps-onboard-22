@@ -6,11 +6,11 @@ import PersonalDetails from "./components/PersonalDetails";
 import Show from "./components/Show";
 import Motivation from "./components/Motivation";
 import Stepper from "./components/Stepper";
-import { code, CodecellLogo, fire, user } from "../assets";
+import { code, CodecellLogo, fire, user, legal } from "../assets";
 import Modal from "./components/Modal";
 import LegalDocuments from "./components/LegalDocuments";
 import SubmitModal from "./components/SubmitModal";
-import { submitAPI } from "../config/next.config";
+// import { submitAPI } from "../config/next.config";
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -147,7 +147,7 @@ export default function Home() {
 									{
 										title: "Legal Documents",
 										description: "",
-										icon: code,
+										icon: legal,
 									},
 									{
 										title: "Motivation",

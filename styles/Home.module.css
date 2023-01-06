@@ -7,12 +7,11 @@
   border: 1px solid var(--border);
   border-radius: 24px;
   position: relative;
-  height: auto;
+  height: 92vh;
   width: 90vw;
-  margin: auto auto;
   overflow-y: scroll;
   padding: 2vw 0;
-  margin: 2vw 5vw;
+  margin: 1vw 5vw;
 }
 
 .container {
@@ -53,21 +52,18 @@
 .heading img {
   width: 300px;
 }
-.footer{
-  position: absolute;
-  bottom: 0;
-  padding:2rem;
-  width: 100%;
-  text-align: center;
-  color:white;
-  font-size: 1.2rem;
 
+.footer{
+  text-align: center;
+  color: var(--white);
+  font-size: 16px;
 }
 
 @media only screen and (max-width: 900px) {
   .main {
     align-items: flex-start;
-    margin: auto auto;
+    width: 96vw;
+    margin: 4vw auto;
   }
 
   .container {
@@ -109,5 +105,18 @@
 
   .heading {
     margin: 0px;
+  }
+
+  .footer {
+    font-size: 12px;
+  }
+
+  .rightcontainer {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .rightcontainer {
+    margin: 0;
   }
 }

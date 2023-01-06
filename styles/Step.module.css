@@ -36,17 +36,16 @@
 .icon, .activeicon, .previcon {
   background-color: var(--white);
   backdrop-filter: blur(4px) saturate(180%);
-  background-color: #fa4254a4;
   border: 1px solid var(--off-white);
-  border-radius: 4px;
-  height: 60px;
-  width: 60px;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
   transition: all ease-in-out;
   transition-duration: 50ms;
-}
-
-.icon:hover, .activeicon:hover {
-  transform: scale(1.1);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .activeicon {
@@ -67,7 +66,7 @@
 
 @media only screen and (max-width: 900px) {
   .container {
-    margin: 0 20px;
+    margin: 0 10px;
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
@@ -89,16 +88,34 @@
     width: 50px;
   }
 
-  .activeicon img, .icon img, .previcon img {
-    width: 80%;
+  .icon img, 
+  .activeicon img, 
+  .previcon img {
+    width: 1.5rem;
+    transform: scale(0.9);
   }
 }
 
 @media only screen and (max-width: 500px) {
+  .container {
+    margin: 0 5px;
+  }
+
+  .icon img, 
+  .activeicon img, 
+  .previcon img {
+    width: 1rem;
+    transform: scale(0.9);
+  }
+
+  .title {
+    width: 40px;
+  }
+
   .icon,
   .activeicon,
   .previcon {
-    height: 40px;
-    width: 40px;
+    height: 3rem;
+    width: 3rem;
   }
 }

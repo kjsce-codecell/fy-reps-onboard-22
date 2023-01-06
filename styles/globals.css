@@ -35,6 +35,8 @@ input[type=number] {
 
 body {
   background-color: var(--bg-black);
+  background: url(../assets/space.jpg);
+  background-size: cover;
 }
 
 /* width */
