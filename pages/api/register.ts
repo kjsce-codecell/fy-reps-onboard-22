@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { spreadsheetAPI } from "../../config/next.config";
+import { spreadsheetAPI, emailAPI } from "../../config/next.config";
 
 interface PartialResponse {
     code: string,
@@ -43,7 +43,8 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
     const formData = req.body;
     // console.log(formData);
     try {
-		let email = req.body.email;
+		const email = req.body.email;
+        const name = req.body.name;
         if (await checkRegistered(email) === true) {
             res.status(409).json({code: "failed", registrationID: 0, status: "submitted", flag: 0, message: "Document Conflict"});
             return;
@@ -58,6 +59,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 
 		// Passing finalData to Spreadsheet
 		const url = spreadsheetAPI;
+        const emailURI = emailAPI;
 
 		fetch(url, {
 			method: "POST",
@@ -68,7 +70,18 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 		})
         .then((response) => response.json())
         .then((data) => {
+            
             console.log("Registration ID: " + registrationID);
+
+            fetch(emailURI, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({email, name, registrationID}),
+            })
+            .catch((e) => console.error("Email Not Sent - Error: ", e));
+
             res.status(200).json({code: "success", registrationID, status: "submitted", flag: 1, message: "celebrate"})
             return;
         })

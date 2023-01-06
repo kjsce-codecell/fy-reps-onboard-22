@@ -27,7 +27,7 @@
 }
 
 .rightcontainer {
-  width: 60%;
+  width: 80%;
   height: 100%;
   padding: 40px;
   color: var(--off-white);
@@ -44,7 +44,7 @@
 
 .heading {
   height: 30%;
-  padding: 2rem 0;
+  padding: 0.8rem 0 2rem 0;
   margin: 0 0 2rem 0;
   border-bottom: 1px solid var(--border);
 }
@@ -96,10 +96,16 @@
 
   .heading {
     margin: 0rem 0;
+    padding: 1.5rem 0 1.4rem 0;
   }
 
   .heading img {
     width: 200px;
+  }
+
+  .footer{
+    margin-top: 5vw;
+    font-size: 17px;
   }
 }
 

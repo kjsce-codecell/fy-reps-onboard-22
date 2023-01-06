@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import detailsStyles from "../../styles/Details.module.css";
 
 type Props = {
@@ -25,12 +25,14 @@ const LegalDocuments = (props: Props) => {
 
 
 	useEffect(() => {
-		defaultValues = JSON.parse(
-			localStorage.getItem("LegalDocuments") || JSON.stringify(fallbackValues)
-		);
-		setCover(defaultValues.cover || "");
-		setPosition1(defaultValues.position1 || "");
-		setPosition2(defaultValues.position2 || "");
+		setTimeout(() => {
+			defaultValues = JSON.parse(
+				localStorage.getItem("LegalDocuments") || JSON.stringify(fallbackValues)
+			);
+			setCover(defaultValues.cover || "");
+			setPosition1(defaultValues.position1 || "NA");
+			setPosition2(defaultValues.position2 || "NA");
+		}, 1500)
 	}, []);
 
 	const [coverError, setCoverError] = useState<boolean>(false);
@@ -61,8 +63,6 @@ const LegalDocuments = (props: Props) => {
 		}
 
 		if (!error) {
-			console.log(position1)
-			console.log(position2)
 			updateForm({ cover, position1, position2 });
 			setCurrentSlide(currentSlide + 1);
 			props.formState(true);
@@ -93,7 +93,7 @@ const LegalDocuments = (props: Props) => {
 							<option value="NA">Select Position</option>
 							{position2!="TechnicalTeam" && <option value="TechnicalTeam">Technical Team</option>}
 							{position2!="CreativeTeam" && <option value="CreativeTeam">Creative Team</option>}
-							{position2!="Co-ordinator/Marketing" && <option value="Co-ordinator/Marketing">Co-ordinator/Marketing</option>}
+							{position2!="MarketingTeam" && <option value="MarketingTeam">Marketing Team</option>}
 						</select>
 						{positionError1 ? `Select Position Preference` : ``}
 					</div>
@@ -103,7 +103,7 @@ const LegalDocuments = (props: Props) => {
 						<option value="NA">Select Position</option>
 							{position1!="TechnicalTeam" && <option value="TechnicalTeam">Technical Team</option>}
 							{position1!="CreativeTeam" && <option value="CreativeTeam">Creative Team</option>}
-							{position1!="Co-ordinator/Marketing" && <option value="Co-ordinator/Marketing">Co-ordinator/Marketing</option> }
+							{position1!="MarketingTeam" && <option value="MarketingTeam">Marketing Team</option> }
 						</select>
 						{positionError2 ? `Select Position Preference` : ``}
 					</div>

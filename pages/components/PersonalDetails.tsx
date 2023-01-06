@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import detailsStyles from "../../styles/Details.module.css";
 import { doc, getDoc } from "firebase/firestore";
-// import { db } from "../../config/firebase";
+import { db } from "../../config/firebase";
 
 type Props = {
 	currentSlide: number;
@@ -83,12 +83,8 @@ const PersonalDetails = (props: Props) => {
 		);
 
 		if (
-			!email.includes("@") ||
-			!email.includes(".") ||
-			email.indexOf("@") + 1 >= email.indexOf(".") ||
+			!email.includes("@somaiya.edu") ||
 			email.indexOf("@") === 0 ||
-			email.length < 5 ||
-			email.indexOf(".") === email.length - 1 ||
 			email.includes(" ")
 		) {
 			error = true;
@@ -132,12 +128,12 @@ const PersonalDetails = (props: Props) => {
 			</div>
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>
-					<label>Enter your Email ID</label>
+					<label>Enter your Email ID (somaiya.edu)</label>
 					<input 
 						type="email" 
 						value={email} 
 						onChange={handleEmailChange}
-						placeholder="abc@gmail.com" 
+						placeholder="abc@somaiya.edu" 
 					/>
 					{emailErr}
 				</div>
@@ -147,7 +143,7 @@ const PersonalDetails = (props: Props) => {
 						type="text" 
 						value={name} 
 						onChange={handleNameChange}
-						placeholder="FName LName"
+						placeholder="First-Name Last-Name"
 					/>
 					{nameErr ? `Enter Correct Name` : ``}
 				</div>
@@ -172,7 +168,6 @@ const PersonalDetails = (props: Props) => {
 						<option value="EXCP">EXCP</option>
 						<option value="MECH">MECHANICAL</option>
 					</select>
-					{/* <input type="text" value={branch} onChange={handleBranchChange} /> */}
 					{branchErr ? `Select Correct Branch` : ``}
 				</div>
 				<div>

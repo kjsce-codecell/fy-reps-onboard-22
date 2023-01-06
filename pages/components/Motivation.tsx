@@ -58,12 +58,12 @@ const Motivation = (props: Props) => {
 		setOneLineErr(false);
 		setPlanErr(false);
 
-		if (getWordCount(oneLine) === 0 || getWordCount(oneLine) > 6) {
+		if (getWordCount(oneLine) < 2  || getWordCount(oneLine) > 6) {
 			console.log("1st Input Word Count is "+getWordCount(plan));
 			setOneLineErr(true);
 			error = true;
 		}
-		if (getWordCount(plan) < 50 || getWordCount(plan) > 120) {
+		if (getWordCount(plan) < 35 || getWordCount(plan) > 100) {
 			console.log("2nd Input Word Count is "+getWordCount(plan));
 			setPlanErr(true);
 			error = true;
@@ -85,13 +85,13 @@ const Motivation = (props: Props) => {
 			</div>
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>
-					<label>Describe yourself in 1 line (1 - 6 Words)</label>
+					<label>Describe yourself in 1 line (2 - 6 Words)</label>
 					<input type="text" value={oneLine} onChange={handleOneLineChange} />
 					{oneLineErr ? `Enter Proper Answer` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>
-						What are you planning to make into CodeCell (50 - 120 Words)
+						What are you planning to make into CodeCell (35 - 100 Words)
 					</label>
 					<textarea value={plan} onChange={handlePlanChange} />
 					{planErr ? `Enter Proper Answer` : ``}
