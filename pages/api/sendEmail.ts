@@ -22,12 +22,13 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
     // console.log(formData);
     try {
         sendEmail({
-            from: "codecell.engg@somaiya.edu",
+            from: "join@kjscecodecell.com",
             to: email,
             subject: 'Applied Successfully | KJSCE CodeCell | FY Representatives Applications January 2023',
             text: ``,
             html: format({email, name, registrationID})
         });
+        // console.log(eS);
         return res.json({code: "success", message: "Email Sent Successfully", flag: 1});
     } catch (e) {
         console.log(e);

@@ -16,6 +16,7 @@
     "@types/react-dom": "18.0.10",
     "aes-js": "^3.1.2",
     "antd": "^5.1.2",
+    "cors": "^2.8.5",
     "eslint": "8.30.0",
     "eslint-config-next": "13.1.1",
     "firebase": "^9.15.0",
