@@ -15,7 +15,7 @@ export default async function sendEmail (data: PartialResponse) {
     const transporter = nodemailer.createTransport({
         host: SMTP_SERVER,
         port: SMTP_PORT,
-        secure: true,
+        secure: false,
         auth: {
             user: SMTP_AUTH_LOGIN,
             pass: SMTP_AUTH_PASS

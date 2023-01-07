@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { spreadsheetAPI, emailAPI } from "../../config/next.config";
+import aesjs from 'aes-js';
+import { spreadsheetAPI, emailAPI, KEY, secretKEY } from "../../config/next.config";
 
 interface PartialResponse {
     code: string,
@@ -25,6 +26,7 @@ interface ExtendedNextApiRequest extends NextApiRequest {
     position2: string,
     oneLine: string,
     plan: string,
+    ciphertext: string
 }
 
 const checkRegistered = async (emailID: string) => {
@@ -42,13 +44,33 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 
     const formData = req.body;
     // console.log(formData);
+    const email = req.body.email;
+    const name = req.body.name;
+    const ciphertext = req.body.ciphertext;
+
     try {
-		const email = req.body.email;
-        const name = req.body.name;
+
         if (await checkRegistered(email) === true) {
             res.status(409).json({code: "failed", registrationID: 0, status: "submitted", flag: 0, message: "Document Conflict"});
             return;
         }
+
+        let superKey: Array<number> = []
+        for (let i=0; i<KEY.length; ++i) {
+            superKey.push(KEY.charCodeAt(i));
+        }
+        var encryptedBytes = aesjs.utils.hex.toBytes(ciphertext);
+
+        var aesCtr = new aesjs.ModeOfOperation.ctr(superKey, new aesjs.Counter(3));
+        var decryptedBytes = aesCtr.decrypt(encryptedBytes);
+        var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+        if (decryptedText != (secretKEY+email)) {
+            res.status(400).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: "Invalid Request"});
+            return;
+        }
+
+        delete formData.ciphertext;
+
 		const regRef = doc(db, "FY_2022-23", email);
 		const registrationID = Date.now() + Math.round(Math.random() * 10e4);
 		const timestamp = new Date(Date.now()).toString();

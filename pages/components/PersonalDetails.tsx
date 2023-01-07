@@ -10,6 +10,7 @@ type Props = {
 	formState(c: boolean): void;
 	page: number;
 	setPage(c: number): void;
+	updateEmail(c: string): void;
 };
 
 const fallbackValues = {
@@ -111,6 +112,7 @@ const PersonalDetails = (props: Props) => {
 				branch,
 			})
 		);
+		props.updateEmail(email);
 		let error = validate();
 
 		if (!error) {

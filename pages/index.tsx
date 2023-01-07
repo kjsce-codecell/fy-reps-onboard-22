@@ -11,6 +11,8 @@ import Modal from "./components/Modal";
 import LegalDocuments from "./components/LegalDocuments";
 import SubmitModal from "./components/SubmitModal";
 import { submitAPI } from "../config/next.config";
+import aesjs from 'aes-js';
+import { KEY, secretKEY } from "../config/next.config";
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -84,6 +86,7 @@ export default function Home() {
 		});
 	}, [personalDetailsData, showUsData, legalDocumentsData, motivationData]);
 
+	const [currEmail, setCurrEmail] = useState<string>("noreply");
 	const [page,SetPage]=useState(-1);
 	const finalSubmit = async () => {
 		if (!personalDetailsDataFilled) {
@@ -95,17 +98,23 @@ export default function Home() {
 		} else if (!legalDocumentsDataFilled) {
 			SetPage(2)
 			changeSlide(2);
-		} else if (!motivationDataFilled) {
-			SetPage(3)
-			changeSlide(3);
 		} else {
+
+			let superKey: Array<number> = []
+			for (let i=0; i<KEY.length; ++i) {
+				superKey.push(KEY.charCodeAt(i));
+			}
+			var textBytes = aesjs.utils.utf8.toBytes(secretKEY+currEmail)
+			var aesCtr = new aesjs.ModeOfOperation.ctr(superKey, new aesjs.Counter(3));
+			var encryptedBytes = aesCtr.encrypt(textBytes);
+			const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
 			SetPage(-1)
 			fetch(submitAPI, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(formData),
+				body: JSON.stringify({...formData, ciphertext: encryptedHex}),
 			})
 				.then((response) => response.json())
 				.then((data) => {
@@ -176,6 +185,7 @@ export default function Home() {
 									setCurrentSlide={changeSlide}
 									updateForm={updatePersonalDetailsData}
 									formState={setPersonalDetailsDataFilled}
+									updateEmail={setCurrEmail}
 									page={page}
 									setPage={SetPage}
 								/>

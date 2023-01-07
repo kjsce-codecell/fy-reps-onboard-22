@@ -87,7 +87,7 @@ const Motivation = (props: Props) => {
 			props.finalSubmit();
 			setTimeout(() => {
 				setsubmissionStatus(0);
-			}, 4000)
+			}, 8000)
 		}
 	};
 
