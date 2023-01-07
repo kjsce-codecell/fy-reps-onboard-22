@@ -1,5 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from "react";
 import detailsStyles from "../../styles/Details.module.css";
+import { loader } from "../../assets";
 
 type Props = {
 	currentSlide: number;
@@ -26,6 +29,7 @@ const Motivation = (props: Props) => {
 	let defaultValues = fallbackValues;
 	const [oneLine, setOneLine] = useState(defaultValues.oneLine);
 	const [plan, setPlan] = useState(defaultValues.plan);
+	const [submissionStatus, setsubmissionStatus] = useState<number>(0);
 
 	useEffect(() => {
 		defaultValues = JSON.parse(
@@ -75,14 +79,18 @@ const Motivation = (props: Props) => {
 
 	const submitForm = () => {
 		handleSave()
-		
 		let error=validate()
 		if (!error) {
+			setsubmissionStatus(1);
 			props.updateForm({ oneLine, plan });
 			props.formState(true);
 			props.finalSubmit();
+			setTimeout(() => {
+				setsubmissionStatus(0);
+			}, 4000)
 		}
 	};
+
 	useEffect(() => {
 		if (props.page == 3) {
 			validate();
@@ -115,7 +123,8 @@ const Motivation = (props: Props) => {
 						Save
 					</button>
 					<button type="button" onClick={submitForm}>
-						Submit
+						{submissionStatus===0 && `Submit`}
+						<img src={submissionStatus===1 ? loader.src : `` } style={{width: "13.5px", transform: "scale(1.8)", marginTop: "4px"}}/>
 					</button>
 				</div>
 			</div>

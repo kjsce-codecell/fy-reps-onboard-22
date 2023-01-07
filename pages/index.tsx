@@ -14,6 +14,7 @@ import { submitAPI } from "../config/next.config";
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
+	const [registrationID, setregistrationID] = useState<number>(0);
 
 	const changeSlide = (slide: number) => {
 		setCurrentSlide(slide);
@@ -25,13 +26,16 @@ export default function Home() {
 		changeSlide(defaultSlide || 0);
 	}, []);
 
-	console.log("Do not paste any code or script here")
-
 	const [submitModalVisible, setSubmitModalVisible] = useState<boolean>(false);
 	const [entryModalVisible, setEntryModalVisible] = useState<boolean>(false);
 	useEffect(() => {
-		setSubmitModalVisible(localStorage.getItem("submitted") === "true");
-		setEntryModalVisible(localStorage.getItem("visited") !== "true");
+		console.log("Do not paste any code or script here.")
+		console.log("Hacker can use this to hack the connection!!")
+		if (localStorage.getItem("submitted") === "true") {
+			setregistrationID(parseInt(localStorage.getItem("registrationID") || "0"))
+			setSubmitModalVisible(true);
+		}
+		else setEntryModalVisible(localStorage.getItem("visited") !== "true");
 	}, []);
 
 	// Main Data
@@ -46,8 +50,6 @@ export default function Home() {
 	const [legalDocumentsData, setLegalDocumentsData] = useState<
 		object | undefined
 	>({});
-
-	const [registrationID, setregistrationID] = useState<number>(0);
 
 	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
 		useState<boolean>(false);
@@ -111,6 +113,7 @@ export default function Home() {
 					console.log("Hurrayy!! Applied Successfully");
 					setregistrationID(data.registrationID);
 					localStorage.setItem("submitted", "true");
+					localStorage.setItem("registrationID", data.registrationID);
 					setSubmitModalVisible(true);
 				})
 				.catch((e) => {
