@@ -181,12 +181,12 @@ const PersonalDetails = (props: Props) => {
 						onChange={handleBranchChange}
 					>
 						<option value="NA">Select Branch</option>
-						<option value="Computers">COMPUTERS</option>
-						<option value="IT">IT</option>
-						<option value="ETRX">ETRX</option>
-						<option value="EXTC">EXTC</option>
-						<option value="EXCP">EXCP</option>
-						<option value="MECH">MECHANICAL</option>
+						<option value="ComputerEngg">Computer Engineering</option>
+						<option value="IT">Information Technology</option>
+						<option value="EXCP">Electronics & Computer Engineering</option>
+						<option value="EXTC">Electronics & Telecommunication Engineering</option>
+						<option value="ETRX">Electronics Engineering</option>
+						<option value="MECH">Mechanical Engineering</option>
 					</select>
 					{branchErr ? `Select Correct Branch` : ``}
 				</div>

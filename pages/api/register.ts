@@ -48,11 +48,17 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
     const name = req.body.name;
     const ciphertext = req.body.ciphertext;
 
-    try {
+    let code="failed";
+    let status="not-submitted";
+    let flag=0;
+    let message="Internal Server Error";
+    let statusCode=500;
+    let registrationID=0;
 
+    const timestamp = new Date(Date.now()).toString();
+    try {
         if (await checkRegistered(email) === true) {
-            res.status(409).json({code: "failed", registrationID: 0, status: "submitted", flag: 0, message: "Document Conflict"});
-            return;
+            return res.status(409).json({code: "failed", registrationID: 0, status: "submitted", flag: 0, message: "Document Conflict"});
         }
 
         let superKey: Array<number> = []
@@ -65,15 +71,13 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
         var decryptedBytes = aesCtr.decrypt(encryptedBytes);
         var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
         if (decryptedText != (secretKEY+email)) {
-            res.status(400).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: "Invalid Request"});
-            return;
+            return res.status(400).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: "Invalid Request"});
         }
 
         delete formData.ciphertext;
 
 		const regRef = doc(db, "FY_2022-23", email);
-		const registrationID = Date.now() + Math.round(Math.random() * 10e4);
-		const timestamp = new Date(Date.now()).toString();
+        registrationID=Math.round((Date.now())/10e5) + Math.round(Math.random() * 10e3);
 		const finalData = { registrationID, ...formData, timestamp };
 
 		// Storing finalData in Firestore
@@ -83,7 +87,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 		const url = spreadsheetAPI;
         const emailURI = emailAPI;
 
-		fetch(url, {
+		await fetch(url, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -91,30 +95,49 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 			body: JSON.stringify(finalData),
 		})
         .then((response) => response.json())
-        .then((data) => {
-            
+        .then(async (data) => {
             console.log("Registration ID: " + registrationID);
 
-            fetch(emailURI, {
+            await fetch(emailURI, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({email, name, registrationID}),
             })
-            .catch((e) => console.error("Email Not Sent - Error: ", e));
+            
+            .catch((e) => console.error("Email Not Sent (From Server) - Error: ", e));
 
-            res.status(200).json({code: "success", registrationID, status: "submitted", flag: 1, message: "celebrate"})
-            return;
+            code="success";
+            status="submitted";
+            flag= 1;
+            message="celebrate";
+            statusCode=200;
+
+            // res.status(200).json({code: "success", registrationID, status: "submitted", flag: 1, message: "celebrate"})
         })
         .catch((e) => {
             console.error("Registration Failed: Error - ", e);
-            res.status(400).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: (e+"")});
-            return;
+
+            code="failed";
+            status="not-submitted";
+            flag= 0;
+            message=e+"";
+            statusCode=400;
+            registrationID=0;
+
+            // res.status(400).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: (e+"")});
         });
 	} catch (e) {
 		console.error("Registration Failed: Error adding document - ", e);
-        res.status(400).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: (e+"")})
-        return;
+        code="failed";
+        status="not-submitted";
+        flag= 0;
+        message=e+"";
+        statusCode=400;
+        registrationID=0;
+
+        // res.status(400).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: (e+"")});
 	}
+    return res.status(statusCode).json({code, registrationID, status, flag, message})
 }
