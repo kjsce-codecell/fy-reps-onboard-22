@@ -23,8 +23,8 @@ export default async function sendEmail (data: PartialResponse) {
     });
 
     const emailStatus = await transporter.sendMail({
-            from: `KJSCE CodeCell <${from}>`, to, subject, text, html 
         from: `KJSCE CodeCell <${from}>`, to, subject, text, html 
-            from: `KJSCE CodeCell <${from}>`, to, subject, text, html 
+    }, (err, data) => {
+        if (err) console.log(err)
     });
 }
