@@ -142,8 +142,10 @@
   }
 
   .footer {
-    font-size: 13px;
+    font-size: 14px;
+    margin-bottom: 5px;
     margin-bottom: 20px;
+    font-weight: 800;
   }
 
   .rightcontainer {

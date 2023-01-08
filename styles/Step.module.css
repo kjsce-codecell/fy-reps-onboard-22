@@ -109,6 +109,11 @@
     align-items: center;
   }
 
+  .activeicon {
+    box-shadow: none;
+  }
+
+
   .icon img, 
   .activeicon img, 
   .previcon img {

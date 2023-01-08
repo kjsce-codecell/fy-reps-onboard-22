@@ -69,7 +69,7 @@ const Motivation = (props: Props) => {
 			setOneLineErr(true);
 			error = true;
 		}
-		if (getWordCount(plan) < 35 || getWordCount(plan) > 100) {
+		if (getWordCount(plan) < 40 || getWordCount(plan) > 100) {
 			console.log("2nd Input Word Count is "+getWordCount(plan));
 			setPlanErr(true);
 			error = true;
@@ -113,7 +113,7 @@ const Motivation = (props: Props) => {
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>
-						What motivates you to join CodeCell ?? (35 - 100 Words)
+						What motivates you to join CodeCell ?? (40 - 100 Words)
 					</label>
 					<textarea value={plan} onChange={handlePlanChange} />
 					{planErr ? `Enter Proper Answer` : ``}

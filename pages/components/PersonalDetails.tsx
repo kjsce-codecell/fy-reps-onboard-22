@@ -153,14 +153,14 @@ const PersonalDetails = (props: Props) => {
 					{emailErr}
 				</div>
 				<div className={detailsStyles.oneField}>
-					<label>Enter your Name</label>
+					<label>Enter your Full Name</label>
 					<input
 						type="text"
 						value={name}
 						onChange={handleNameChange}
 						placeholder="First-Name Last-Name"
 					/>
-					{nameErr ? `Enter Correct Name` : ``}
+					{nameErr ? `Enter Correct Full Name` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter your Phone Number (10 Digits Only)</label>

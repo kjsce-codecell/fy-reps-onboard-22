@@ -28,12 +28,13 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
+  font-family: 'Bakbak One', cursive;
+  font-size: 13.5px;
 }
 
 .oneField a {
   user-select: none;
 }
-
 
 .oneField label {
   margin-bottom: 5px;
@@ -150,7 +151,7 @@
   .oneField input::placeholder, 
   .oneField textarea::placeholder, 
   .oneField select::placeholder {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .oneSection button {
@@ -185,5 +186,11 @@
   }
   .oneField textarea {
     height: 176px;
+  }
+  .oneField input::placeholder {
+    font-size: 14px;
+  }
+  .oneField label {
+    font-size: 14px;
   }
 }
