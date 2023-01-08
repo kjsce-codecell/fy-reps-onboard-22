@@ -67,7 +67,7 @@ const Show = (props: Props) => {
 			setLinkedinError(true);
 		}
 
-		if (!cp.includes("https://codechef.com/users/") && !cp.includes("https://codeforces.com/profile/") && !cp.includes("https://leetcode.com/")) {
+		if (!cp.includes("codechef.com/users/") && !cp.includes("codeforces.com/profile/") && !cp.includes("leetcode.com/")) {
 			error = true;
 			setCPError(true);
 		}

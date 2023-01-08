@@ -82,7 +82,7 @@ const PersonalDetails = (props: Props) => {
 		) {
 			error = true;
 			console.log("Wrong Email ID!!");
-			setEmailErr("Enter Correct Email ID!!");
+			setEmailErr("Enter Correct Email ID");
 		}
 		if (phone.length != 10 || isNaN(parseInt(phone))) {
 			error = true;
@@ -96,7 +96,7 @@ const PersonalDetails = (props: Props) => {
 		}
 		if (branch === "NA") {
 			error = true;
-			console.log("Select Appropriate Branch");
+			console.log("Select Appropriate Branch!!");
 			setBranchErr(true);
 		}
 		return error;
@@ -117,7 +117,7 @@ const PersonalDetails = (props: Props) => {
 
 		if (!error) {
 			if ((await checkRegistered(email)) === true) {
-				setEmailErr("Email ID already registered!!");
+				setEmailErr("Email ID already registered");
 			} else {
 				props.updateForm({ name, email, phone, branch });
 				localStorage.setItem("email", email);
@@ -163,7 +163,7 @@ const PersonalDetails = (props: Props) => {
 					{nameErr ? `Enter Correct Full Name` : ``}
 				</div>
 				<div className={detailsStyles.oneField}>
-					<label>Enter your Phone Number (10 Digits Only)</label>
+					<label>Enter your Phone Number (10 Digits)</label>
 					<input
 						type="number"
 						value={phone}

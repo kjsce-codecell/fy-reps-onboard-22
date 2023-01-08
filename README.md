@@ -1,3 +1,3 @@
 ## KJSCE CodeCell Application Form
-### [CodeCell | Apply]()
-### [KJSCE CodeCell](https://www.kjscecodecell.com/)
+### [Apply at KJSCE CodeCell](https://join.kjscecodecell.com/)
+#### [KJSCE CodeCell](https://www.kjscecodecell.com/)
