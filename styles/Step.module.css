@@ -41,7 +41,8 @@
   height: 80px;
   width: 80px;
   transition: all ease-in-out;
-  transition-duration: 1000ms;
+  transition-duration: 40ms; 
+  /* Over excessive transition duration may generate a feeling of latency of app thus directly affecting UX */
   text-align: center;
   display: flex;
   justify-content: center;

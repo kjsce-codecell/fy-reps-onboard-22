@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db } from "../../config/firebase";
+import { db } from "../../services/connectFirestore";
 import aesjs from 'aes-js';
-import { spreadsheetAPI, emailAPI, KEY, secretKEY } from "../../config/next.config";
 
 interface PartialResponse {
     code: string,
@@ -61,7 +60,8 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
             return res.status(409).json({code: "failed", registrationID: 0, status: "submitted", flag: 0, message: "Document Conflict"});
         }
 
-        let superKey: Array<number> = []
+        let superKey: Array<number> = [];
+        let KEY = process.env.NEXT_PUBLIC_KEY || "";
         for (let i=0; i<KEY.length; ++i) {
             superKey.push(KEY.charCodeAt(i));
         }
@@ -70,7 +70,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
         var aesCtr = new aesjs.ModeOfOperation.ctr(superKey, new aesjs.Counter(3));
         var decryptedBytes = aesCtr.decrypt(encryptedBytes);
         var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
-        if (decryptedText != (secretKEY+email)) {
+        if (decryptedText != (process.env.NEXT_PUBLIC_secretKEY+email)) {
             return res.status(400).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: "Invalid Request"});
         }
 
@@ -84,10 +84,9 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 		const docRef = await setDoc(regRef, finalData, { merge: true });
 
 		// Passing finalData to Spreadsheet
-		const url = spreadsheetAPI;
-        const emailURI = emailAPI;
+		const sURI = process.env.NEXT_PUBLIC_spreadsheetAPI || "";
 
-		await fetch(url, {
+		await fetch(sURI, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -98,7 +97,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
         .then(async (data) => {
             console.log("Registration ID: " + registrationID);
 
-            await fetch(emailURI, {
+            await fetch(process.env.NEXT_PUBLIC_HOST+"/api/sendEmail", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

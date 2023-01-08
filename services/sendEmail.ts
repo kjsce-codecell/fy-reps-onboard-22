@@ -1,6 +1,5 @@
 // @ts-ignore
 import nodemailer from 'nodemailer';
-import { SMTP_SERVER, SMTP_PORT, SMTP_AUTH_LOGIN, SMTP_AUTH_PASS } from '../config/next.config';
 
 interface PartialResponse {
     from: string,
@@ -13,12 +12,12 @@ interface PartialResponse {
 export default async function sendEmail (data: PartialResponse) {
     const { from, to, subject, text, html } = data;
     const transporter = nodemailer.createTransport({
-        host: SMTP_SERVER,
-        port: SMTP_PORT,
+        host: process.env.NEXT_PUBLIC_SMTP_SERVER,
+        port: 587,
         secure: false,
         auth: {
-            user: SMTP_AUTH_LOGIN,
-            pass: SMTP_AUTH_PASS
+            user: process.env.NEXT_PUBLIC_SMTP_AUTH_LOGIN,
+            pass: process.env.NEXT_PUBLIC_SMTP_AUTH_PASS
         }
     });
 

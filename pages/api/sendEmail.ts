@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import sendEmail from "../../services/emailWorking";
+import sendEmail from "../../services/sendEmail";
 import format from '../../templates/appliedEmail';
 
 interface PartialResponse {
@@ -28,7 +28,6 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
             text: ``,
             html: format({email, name, registrationID})
         });
-        // console.log(eS);
         return res.json({code: "success", message: "Email Sent Successfully", flag: 1});
     } catch (e) {
         console.log(e);

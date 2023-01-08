@@ -115,7 +115,7 @@ const Show = (props: Props) => {
 							value={github}
 							onChange={(e) => setGithub(e.target.value)}
 							placeholder="https://github.com/"
-							onClick={() => setGithub("https://github.com/")}
+							onFocus={() => setGithub("https://github.com/")}
 						/>
 						<div>{!githubError ? "" : "Enter Correct GitHub Profile Link"}</div>
 					</div>
@@ -134,7 +134,7 @@ const Show = (props: Props) => {
 							value={linkedin}
 							onChange={(e) => setLinkedin(e.target.value)}
 							placeholder="https://linkedin.com/in/"
-							onClick={() => setLinkedin("https://linkedin.com/in/")}
+							onFocus={() => setLinkedin("https://linkedin.com/in/")}
 						/>
 						{!linkedinError ? "" : "Enter Correct Linkedin Profile Link"}
 					</div>
