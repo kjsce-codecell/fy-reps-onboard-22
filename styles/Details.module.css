@@ -41,6 +41,7 @@
   user-select: none;
   font-family: 'Bakbak One', cursive;
   font-weight: 100;
+  font-size: 16px;
 }
 
 .oneField option {
@@ -78,7 +79,7 @@
 }
 
 .oneField textarea {
-  height: 243px;
+  height: 239.5px;
   resize: none;
 }
 
@@ -89,11 +90,13 @@
 
 .oneSection button {
   background-color: var(--codecell-red-morph);
-  padding: 8.5px 18.5px;
+  /* padding: 8.5px 18.5px; */
+  width: 95px;
+  height: 42px;
   margin-top: 5px;
   border: 2px solid var(--codecell-red-morph);
   border-radius: 50px;
-  font-size: 17px;
+  font-size: 17.5px;
   color: white;
   text-align: center;
   cursor: pointer;
@@ -155,7 +158,9 @@
   }
 
   .oneSection button {
-    padding: 8px 12px;
+    width: 90px;
+    height: 30px;
+    /* padding: 8px 12px; */
     font-size: 14px;
   }
 }

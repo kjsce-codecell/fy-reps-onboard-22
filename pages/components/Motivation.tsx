@@ -78,17 +78,17 @@ const Motivation = (props: Props) => {
 	}
 
 	const submitForm = () => {
-		handleSave()
-		let error=validate()
-		if (!error) {
+		// handleSave()
+		// let error=validate()
+		// if (!error) {
 			setsubmissionStatus(1);
-			props.updateForm({ oneLine, plan });
-			props.formState(true);
-			props.finalSubmit();
+		// 	props.updateForm({ oneLine, plan });
+		// 	props.formState(true);
+		// 	props.finalSubmit();
 			setTimeout(() => {
 				setsubmissionStatus(0);
 			}, 8000)
-		}
+		// }
 	};
 
 	useEffect(() => {
@@ -103,7 +103,7 @@ const Motivation = (props: Props) => {
 			<div className={detailsStyles.sectionHeader}>
 				<span>Step {props.currentSlide + 1}/4</span>
 				<h1 style={{marginTop: "5px"}}>Present your Goals</h1>
-				<p>What motivates you ??</p>
+				<p>Lets stand out!!</p>
 			</div>
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>
@@ -124,7 +124,7 @@ const Motivation = (props: Props) => {
 					</button>
 					<button type="button" onClick={submitForm}>
 						{submissionStatus===0 && `Submit`}
-						<img src={submissionStatus===1 ? loader.src : `` } style={{width: "13.5px", transform: "scale(1.8)", marginTop: "4px"}}/>
+						<img src={submissionStatus===1 ? loader.src : `` } style={{width: "13px", transform: "scale(1.8)", marginTop: "4px"}}/>
 					</button>
 				</div>
 			</div>
