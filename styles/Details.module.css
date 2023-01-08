@@ -57,8 +57,8 @@
 }
 
 .oneField textarea {
+  height: 237px;
   resize: none;
-  height: 150px;
 }
 
 .sectionContent {
@@ -134,5 +134,33 @@
   .oneSection button {
     padding: 8px 12px;
     font-size: 14px;
+  }
+}
+
+.emptyField{
+  height: 85px;
+}
+
+@media only screen and (max-width: 900px){
+  .oneField input,
+  .oneField textarea,
+  .oneField select {
+    width: 60vw;
+  }
+  .oneField textarea {
+    height: 180px;
+  }
+  .emptyField{
+    height: 66px;
+  }
+}
+@media only screen and (max-width: 500px){
+  .oneField input,
+  .oneField textarea,
+  .oneField select {
+    width: 80vw;
+  }
+  .oneField textarea {
+    height: 168px;
   }
 }

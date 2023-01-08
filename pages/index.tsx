@@ -154,12 +154,12 @@ export default function Home() {
 								Change={(n: number) => changeSlide(n)}
 								items={[
 									{
-										title: "Personal Details",
+										title: "Selfhood",
 										description: "",
 										icon: user,
 									},
 									{
-										title: "Show us what you got",
+										title: "Unveil Talent",
 										description: "",
 										icon: code,
 									},

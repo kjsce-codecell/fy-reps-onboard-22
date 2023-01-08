@@ -104,8 +104,8 @@ const Show = (props: Props) => {
 			<div className={detailsStyles.oneSection}>
 				<div className={detailsStyles.sectionHeader}>
 					<span>Step {currentSlide + 1}/4</span>
-					<h1>Showcase your Profiles</h1>
-					<p>Show us What you got!!</p>
+					<h1>Show us what you got</h1>
+					<p>List your profiles!!</p>
 				</div>
 				<div className={detailsStyles.sectionContent}>
 					<div className={detailsStyles.oneField}>

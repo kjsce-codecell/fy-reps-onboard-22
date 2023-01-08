@@ -138,7 +138,7 @@ const PersonalDetails = (props: Props) => {
 		<div className={detailsStyles.oneSection}>
 			<div className={detailsStyles.sectionHeader}>
 				<span>Step {props.currentSlide + 1}/4</span>
-				<h1>Lets start with your Personal Details</h1>
+				<h1>Envice yourself</h1>
 				<p>Reveal your Identity!!</p>
 			</div>
 			<div className={detailsStyles.sectionContent}>

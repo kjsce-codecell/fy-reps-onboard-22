@@ -122,6 +122,8 @@ const LegalDocuments = (props: Props) => {
 						</select>
 						{positionError2 ? `Select Position Preference` : ``}
 					</div>
+					<div className={detailsStyles.emptyField}>
+					</div>
 					<div>
 						<button type="submit" onClick={handleSubmit}>
 							Save and Next
