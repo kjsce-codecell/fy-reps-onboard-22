@@ -147,10 +147,11 @@ const Show = (props: Props) => {
 						{!linkedinError ? "" : "Enter Correct Linkedin Profile Link"}
 					</div>
 					<div className={detailsStyles.oneField}>
-						<label>Link to Resume</label>
+						<label>Link to Resume (PDF)</label>
 						<input
 							type="text"
 							value={resume}
+							placeholder="Google Drive Link"
 							onChange={(e) => setResume(e.target.value)}
 							onKeyDown={handleKeypress}
 						/>

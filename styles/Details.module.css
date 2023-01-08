@@ -91,8 +91,8 @@
 .oneSection button {
   background-color: var(--codecell-red-morph);
   /* padding: 8.5px 18.5px; */
-  width: 95px;
-  height: 42px;
+  width: 150px;
+  height: 45px;
   margin-top: 5px;
   border: 2px solid var(--codecell-red-morph);
   border-radius: 50px;
@@ -123,7 +123,7 @@
 }
 
 @media only screen and (max-width: 500px) {
-  .sectionHeader h1{
+  .sectionHeader h1 {
     font-size: 1.8rem;
   }
 
@@ -158,8 +158,8 @@
   }
 
   .oneSection button {
-    width: 90px;
-    height: 30px;
+    width: 120px;
+    height: 34px;
     /* padding: 8px 12px; */
     font-size: 14px;
   }

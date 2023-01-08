@@ -93,10 +93,11 @@ const LegalDocuments = (props: Props) => {
 				</div>
 				<div className={detailsStyles.sectionContent}>
 					<div className={detailsStyles.oneField}>
-						<label>Link to Cover Letter</label>
+						<label>Link to Cover Letter (PDF)</label>
 						<input
 							type="text"
 							value={cover}
+							placeholder="Google Drive Link"
 							onChange={(e) => setCover(e.target.value)}
 						/>
 						<div>{!coverError ? "" : "Enter Correct Cover Letter Link"}</div>

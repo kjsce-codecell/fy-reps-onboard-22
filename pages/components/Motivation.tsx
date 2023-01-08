@@ -78,17 +78,17 @@ const Motivation = (props: Props) => {
 	}
 
 	const submitForm = () => {
-		// handleSave()
-		// let error=validate()
-		// if (!error) {
+		handleSave()
+		let error=validate()
+		if (!error) {
 			setsubmissionStatus(1);
-		// 	props.updateForm({ oneLine, plan });
-		// 	props.formState(true);
-		// 	props.finalSubmit();
+			props.updateForm({ oneLine, plan });
+			props.formState(true);
+			props.finalSubmit();
 			setTimeout(() => {
 				setsubmissionStatus(0);
 			}, 8000)
-		// }
+		}
 	};
 
 	useEffect(() => {
