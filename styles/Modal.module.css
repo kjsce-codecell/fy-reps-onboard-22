@@ -1,10 +1,12 @@
 .container {
 	font-family: sans-serif;
-	backdrop-filter: blur(4px) saturate(180%);
-    background-color: #111928af;
+	backdrop-filter: blur(200px) saturate(80%);
+    /* background-color: #111928af; */
+	background-color: #2E1F1F;
     border: 1px solid var(--border);
 	margin: auto auto;
 	top: 50%;
+	transform: translateY(-75px);
 	text-align: center;
 	display: flex;
 	flex-direction: column;
@@ -28,7 +30,7 @@
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.75);
+	background-color: rgba(0, 0, 0, 0.8);
 	z-index: 99;
 }
 .container > h3 {

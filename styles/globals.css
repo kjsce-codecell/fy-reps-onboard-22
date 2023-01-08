@@ -16,6 +16,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
+  scroll-behavior: smooth;
 }
 
 input::-webkit-outer-spin-button,
@@ -35,7 +36,7 @@ input[type=number] {
 
 body {
   background-color: var(--bg-black);
-  background: url(../assets/space.jpg);
+  background: url(../assets/tile_background.png);
   background-size: cover;
 }
 

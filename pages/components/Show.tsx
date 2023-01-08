@@ -46,6 +46,7 @@ const Show = (props: Props) => {
 	const [githubError, setGithubError] = useState<boolean>(false);
 	const [linkedinError, setLinkedinError] = useState<boolean>(false);
 	const [resumeError, setResumeError] = useState<boolean>(false);
+	const [cpError, setCPError] = useState<boolean>(false);
 
 	const validate = () => {
 		let error = false;
@@ -64,6 +65,11 @@ const Show = (props: Props) => {
 		) {
 			error = true;
 			setLinkedinError(true);
+		}
+
+		if (!cp.includes("https://codechef.com/users/") && !cp.includes("https://codeforces.com/profile/") && !cp.includes("https://leetcode.com/")) {
+			error = true;
+			setCPError(true);
 		}
 
 		if (!resume.includes("drive.google.com/")) {
@@ -104,7 +110,7 @@ const Show = (props: Props) => {
 			<div className={detailsStyles.oneSection}>
 				<div className={detailsStyles.sectionHeader}>
 					<span>Step {currentSlide + 1}/4</span>
-					<h1>Show us what you got</h1>
+					<h1 style={{marginTop: "5px"}}>Show us what you got</h1>
 					<p>List your profiles!!</p>
 				</div>
 				<div className={detailsStyles.sectionContent}>
@@ -115,17 +121,19 @@ const Show = (props: Props) => {
 							value={github}
 							onChange={(e) => setGithub(e.target.value)}
 							placeholder="https://github.com/"
-							onFocus={() => setGithub("https://github.com/")}
+							onFocus={() => github==="" ? setGithub("https://github.com/") : ''}
 						/>
 						<div>{!githubError ? "" : "Enter Correct GitHub Profile Link"}</div>
 					</div>
 					<div className={detailsStyles.oneField}>
-						<label>CP Platform Profile</label>
+						<label>CodeChef / Codeforces / Leetcode Profile Link</label>
 						<input
 							type="text"
 							value={cp}
 							onChange={(e) => setCP(e.target.value)}
 						/>
+						{!cpError ? "" : "Enter Correct Profile Link"}
+
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>LinkedIn Profile Link</label>
@@ -134,7 +142,7 @@ const Show = (props: Props) => {
 							value={linkedin}
 							onChange={(e) => setLinkedin(e.target.value)}
 							placeholder="https://linkedin.com/in/"
-							onFocus={() => setLinkedin("https://linkedin.com/in/")}
+							onFocus={() => linkedin==="" ? setLinkedin("https://linkedin.com/in/"): ''}
 						/>
 						{!linkedinError ? "" : "Enter Correct Linkedin Profile Link"}
 					</div>

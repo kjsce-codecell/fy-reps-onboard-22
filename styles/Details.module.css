@@ -8,7 +8,14 @@
 
 .sectionHeader {
   margin-bottom: 30px;
+  user-select: none;
 }
+
+.sectionHeader span, .sectionHeader h1, .sectionHeader p {
+  font-family: 'Bakbak One', cursive;
+}
+
+/*    font-family: 'Fira Sans', sans-serif; */
 
 .sectionContent {
   display: flex;
@@ -23,8 +30,16 @@
   margin-bottom: 15px;
 }
 
+.oneField a {
+  user-select: none;
+}
+
+
 .oneField label {
   margin-bottom: 5px;
+  user-select: none;
+  font-family: 'Bakbak One', cursive;
+  font-weight: 100;
 }
 
 .oneField option {
@@ -38,9 +53,9 @@
 .oneField textarea,
 .oneField select {
   max-width: 100%;
-  padding: 10px;
-  font-size: 17px;
-  font-weight: bold;
+  padding: 9px;
+  font-size: 18.5px;
+  font-weight: 400;
   color: whitesmoke;
   border: 2px solid var(--codecell-red-morph);
   border-radius: 8px;
@@ -48,6 +63,7 @@
   margin-bottom: 5px;
   background-color: transparent;
   outline: none;
+  font-family: 'Bakbak One', cursive;
 }
 
 .oneField input:hover,
@@ -56,8 +72,12 @@
   border: 2px solid var(--codecell-red);
 }
 
+.oneField select {
+  user-select: none;
+}
+
 .oneField textarea {
-  height: 237px;
+  height: 243px;
   resize: none;
 }
 
@@ -68,16 +88,17 @@
 
 .oneSection button {
   background-color: var(--codecell-red-morph);
-  padding: 9px 19px;
+  padding: 8.5px 18.5px;
   margin-top: 5px;
   border: 2px solid var(--codecell-red-morph);
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 17px;
   color: white;
   text-align: center;
   cursor: pointer;
-  font-weight: 600;
   transition: all 100ms ease-in-out;
+  user-select: none;
+  font-family: 'Bakbak One', cursive;
 }
 
 .oneSection button:hover {
@@ -115,9 +136,10 @@
   }
 
   .oneField input,
-  .oneField textarea,
   .oneField select {
-    height: 35px;
+    max-height: 38px;
+    padding: 10px;
+    font-size: 15px;
   }
 
   .oneField select {
@@ -159,8 +181,9 @@
   .oneField textarea,
   .oneField select {
     width: 80vw;
+    /* padding: 12px; */
   }
   .oneField textarea {
-    height: 168px;
+    height: 176px;
   }
 }

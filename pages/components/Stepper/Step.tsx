@@ -26,9 +26,9 @@ const Step = (props: Props) => {
 	};
 
 	return (
-		<div className={styles.container} onClick={handleOnClick}>
+		<div className={styles.container}>
 			<div className={styles.leftcontainer}>
-				<div className={styles.title}>{title}</div>
+				<div className={styles.title} onClick={handleOnClick} >{title}</div>
 				{description && <div className={styles.description}>{description}</div>}
 			</div>
 			<div
@@ -36,7 +36,7 @@ const Step = (props: Props) => {
 					active ? styles.activeicon : prev ? styles.previcon : styles.icon
 				}
 			>
-				{icon && <img src={icon.src} alt={title} style={{ height: "2rem" }} />}
+				{icon && <img src={icon.src} alt={title} style={{ height: "2rem" }} onClick={handleOnClick}/>}
 			</div>
 		</div>
 	);

@@ -89,7 +89,7 @@ const LegalDocuments = (props: Props) => {
 			<div className={detailsStyles.oneSection}>
 				<div className={detailsStyles.sectionHeader}>
 					<span>Step {currentSlide + 1}/4</span>
-					<h1>Lets Practice Legality</h1>
+					<h1 style={{marginTop: "5px"}}>Lets Practice Legality</h1>
 				</div>
 				<div className={detailsStyles.sectionContent}>
 					<div className={detailsStyles.oneField}>
@@ -100,7 +100,7 @@ const LegalDocuments = (props: Props) => {
 							onChange={(e) => setCover(e.target.value)}
 						/>
 						<div>{!coverError ? "" : "Enter Correct Cover Letter Link"}</div>
-						<a href="https://docs.google.com/document/u/1/export?format=docx&id=1e-YPRefmTm1yudBOWABCcOmeJQXUWaFQ&token=AC4w5Vg2bT7B2-A2nikZEZBNVhCskrDTdw:1673004153091&ouid=115299860843869653843">Download Cover Letter Format</a>
+						<a href="https://docs.google.com/document/u/1/export?format=docx&id=1e-YPRefmTm1yudBOWABCcOmeJQXUWaFQ&token=AC4w5Vg2bT7B2-A2nikZEZBNVhCskrDTdw:1673004153091&ouid=115299860843869653843"><big>Download Cover Letter Format</big></a>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>Position Preference 1</label>

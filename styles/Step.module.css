@@ -16,7 +16,7 @@
   flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  user-select: none;
 }
 
 .leftcontainer {
@@ -31,6 +31,8 @@
 .title {
   font-weight: bold;
   font-size: 1rem;
+  cursor: pointer;
+  font-weight: 800;
 }
 
 .icon, .activeicon, .previcon {
@@ -41,6 +43,7 @@
   height: 80px;
   width: 80px;
   transition: all ease-in-out;
+  cursor: pointer;
   transition-duration: 40ms; 
   /* Over excessive transition duration may generate a feeling of latency of app thus directly affecting UX */
   text-align: center;
@@ -51,7 +54,7 @@
 
 .activeicon {
   background-color: #fa4254;
-  box-shadow: 0px 0px 100px var(--off-white);
+  box-shadow: 0px 0px 100px 5px var(--off-white);
   text-align: center;
   display: flex;
   justify-content: center;
@@ -79,7 +82,7 @@
   }
 
   .title {
-    font-size: 0.83rem;
+    font-size: 0.89rem;
   }
 
   .icon,
@@ -109,7 +112,7 @@
   .icon img, 
   .activeicon img, 
   .previcon img {
-    width: 1rem;
+    width: 1.2rem;
     transform: scale(0.9);
   }
 
@@ -121,7 +124,7 @@
   .icon,
   .activeicon,
   .previcon {
-    height: 3.1rem;
-    width: 3.1rem;
+    height: 3.15rem;
+    width: 3.15rem;
   }
 }

@@ -16,11 +16,12 @@ const SubmitModal = (props: Props) => {
 				<div className={styles.container}>
 					<img src={CodecellLogo.src} alt="Codecell logo" />
 					<h3>Hurrayyyy 🚀</h3>
-					<p><big><b>Lets sail on this 🚢 to code as you have 🔥 your goal!!<br />Its your time to celebrate 🥂
+					<p><big><b>Lets sail on this 🚢 to code as you have 🔥ed the floor!!<br />Its your time to celebrate 🥂
 					</b></big></p>
 					<p><big><code><b>
-						<span>Applied Successfully</span><br />
-						<span>Registration ID: {props.registrationID!=0 ? props.registrationID : `Processing...`}</span>
+					<br />
+					<span>Applied Successfully</span><br />
+					<span>Registration ID: {props.registrationID!=0 ? props.registrationID : `Processing...`}</span>
 					</b></code></big></p>
 				</div>
 			</div>

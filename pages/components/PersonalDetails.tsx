@@ -82,7 +82,7 @@ const PersonalDetails = (props: Props) => {
 		) {
 			error = true;
 			console.log("Wrong Email ID!!");
-			setEmailErr("Wrong Email ID!!");
+			setEmailErr("Enter Correct Email ID!!");
 		}
 		if (phone.length != 10 || isNaN(parseInt(phone))) {
 			error = true;
@@ -138,7 +138,7 @@ const PersonalDetails = (props: Props) => {
 		<div className={detailsStyles.oneSection}>
 			<div className={detailsStyles.sectionHeader}>
 				<span>Step {props.currentSlide + 1}/4</span>
-				<h1>Envice yourself</h1>
+				<h1 style={{marginTop: "5px"}}>Envice yourself</h1>
 				<p>Reveal your Identity!!</p>
 			</div>
 			<div className={detailsStyles.sectionContent}>

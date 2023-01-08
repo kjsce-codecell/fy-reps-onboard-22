@@ -102,7 +102,7 @@ const Motivation = (props: Props) => {
 		<div className={detailsStyles.oneSection}>
 			<div className={detailsStyles.sectionHeader}>
 				<span>Step {props.currentSlide + 1}/4</span>
-				<h1>Present your Goals</h1>
+				<h1 style={{marginTop: "5px"}}>Present your Goals</h1>
 				<p>What motivates you ??</p>
 			</div>
 			<div className={detailsStyles.sectionContent}>
@@ -113,7 +113,7 @@ const Motivation = (props: Props) => {
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>
-						What are you planning to make into CodeCell (35 - 100 Words)
+						What are you planning to make into CodeCell ?? (35 - 100 Words)
 					</label>
 					<textarea value={plan} onChange={handlePlanChange} />
 					{planErr ? `Enter Proper Answer` : ``}
