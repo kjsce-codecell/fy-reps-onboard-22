@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import sendEmail from "../../services/sendEmail";
 import format from '../../templates/appliedEmail';
+import NextCors from 'nextjs-cors';
 
 interface PartialResponse {
     code: string,
@@ -15,6 +16,12 @@ interface ExtendedNextApiRequest extends NextApiRequest {
 }
 
 export default async function handler(req: ExtendedNextApiRequest, res: NextApiResponse<PartialResponse>) {
+
+    await NextCors(req, res, {
+        methods: ['POST'],
+        origin: '*',
+        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+     });
 
     const email = req.body.email;
     const registrationID = req.body.registrationID;
