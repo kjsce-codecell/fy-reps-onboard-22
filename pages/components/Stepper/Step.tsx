@@ -34,9 +34,9 @@ const Step = (props: Props) => {
 			<div
 				className={
 					active ? styles.activeicon : prev ? styles.previcon : styles.icon
-				}
+				} onClick={handleOnClick}
 			>
-				{icon && <img src={icon.src} alt={title} style={{ height: "2rem" }} onClick={handleOnClick}/>}
+				{icon && <img src={icon.src} alt={title} style={{ height: "2rem" }}/>}
 			</div>
 		</div>
 	);

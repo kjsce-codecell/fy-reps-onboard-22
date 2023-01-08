@@ -113,7 +113,7 @@ const Motivation = (props: Props) => {
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>
-						What are you planning to make into CodeCell ?? (35 - 100 Words)
+						What motivates you to join CodeCell ?? (35 - 100 Words)
 					</label>
 					<textarea value={plan} onChange={handlePlanChange} />
 					{planErr ? `Enter Proper Answer` : ``}
