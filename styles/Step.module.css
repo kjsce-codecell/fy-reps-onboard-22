@@ -41,7 +41,8 @@
   height: 80px;
   width: 80px;
   transition: all ease-in-out;
-  transition-duration: 1000ms;
+  transition-duration: 40ms; 
+  /* Over excessive transition duration may generate a feeling of latency of app thus directly affecting UX */
   text-align: center;
   display: flex;
   justify-content: center;
@@ -78,27 +79,31 @@
   }
 
   .title {
-    font-size: 0.6rem;
+    font-size: 0.83rem;
   }
 
   .icon,
   .activeicon,
   .previcon {
-    height: 50px;
-    width: 50px;
+    height: 65px;
+    width: 67px;
   }
 
   .icon img, 
   .activeicon img, 
   .previcon img {
-    width: 1.5rem;
+    width: 1.55rem;
     transform: scale(0.9);
   }
 }
 
 @media only screen and (max-width: 500px) {
+
   .container {
-    margin: 0 5px;
+    margin: 0 6px;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
   }
 
   .icon img, 
@@ -108,14 +113,15 @@
     transform: scale(0.9);
   }
 
-  .title {
-    width: 40px;
+  .leftcontainer {
+    width: fit-content;
+    text-align: center;
   }
 
   .icon,
   .activeicon,
   .previcon {
-    height: 3rem;
-    width: 3rem;
+    height: 3.1rem;
+    width: 3.1rem;
   }
 }

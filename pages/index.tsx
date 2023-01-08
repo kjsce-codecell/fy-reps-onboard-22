@@ -10,9 +10,7 @@ import { code, CodecellLogo, fire, user, legal, codecellFavicon } from "../asset
 import Modal from "./components/Modal";
 import LegalDocuments from "./components/LegalDocuments";
 import SubmitModal from "./components/SubmitModal";
-import { submitAPI } from "../config/next.config";
 import aesjs from 'aes-js';
-import { KEY, secretKEY } from "../config/next.config";
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -31,7 +29,7 @@ export default function Home() {
 	const [submitModalVisible, setSubmitModalVisible] = useState<boolean>(false);
 	const [entryModalVisible, setEntryModalVisible] = useState<boolean>(false);
 	useEffect(() => {
-		console.log("Do not paste any code or script here.")
+		console.log("Do not paste any code or script here")
 		console.log("Hacker can use this to hack the connection!!")
 		if (localStorage.getItem("submitted") === "true") {
 			setregistrationID(parseInt(localStorage.getItem("registrationID") || "0"))
@@ -100,16 +98,17 @@ export default function Home() {
 			changeSlide(2);
 		} else {
 
+			const KEY = process.env.NEXT_PUBLIC_KEY || "";
 			let superKey: Array<number> = []
 			for (let i=0; i<KEY.length; ++i) {
 				superKey.push(KEY.charCodeAt(i));
 			}
-			var textBytes = aesjs.utils.utf8.toBytes(secretKEY+currEmail)
+			var textBytes = aesjs.utils.utf8.toBytes(process.env.NEXT_PUBLIC_secretKEY+currEmail)
 			var aesCtr = new aesjs.ModeOfOperation.ctr(superKey, new aesjs.Counter(3));
 			var encryptedBytes = aesCtr.encrypt(textBytes);
 			const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
 			SetPage(-1)
-			fetch(submitAPI, {
+			fetch(process.env.NEXT_PUBLIC_HOST+"/api/register", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -155,12 +154,12 @@ export default function Home() {
 								Change={(n: number) => changeSlide(n)}
 								items={[
 									{
-										title: "Personal Details",
+										title: "Selfhood",
 										description: "",
 										icon: user,
 									},
 									{
-										title: "Show us what you got",
+										title: "Unveil Talent",
 										description: "",
 										icon: code,
 									},
