@@ -40,6 +40,10 @@ body {
   width: 0px;
 }
 
+.ErrorMsg{
+  color:var(--codecell-red)
+}
+
 /* .ant-steps-item-wait .ant-steps-item-icon{
   background-color: #8687A8 ;
 } */

@@ -123,7 +123,7 @@ const Show = (props: Props) => {
 							placeholder="https://github.com/"
 							onFocus={() => github==="" ? setGithub("https://github.com/") : ''}
 						/>
-						<div>{!githubError ? "" : "Enter Correct GitHub Profile Link"}</div>
+						<p className="ErrorMsg">{!githubError ? "" : "Enter Correct GitHub Profile Link"}</p>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>CodeChef / Codeforces / Leetcode Profile Link</label>
@@ -132,7 +132,7 @@ const Show = (props: Props) => {
 							value={cp}
 							onChange={(e) => setCP(e.target.value)}
 						/>
-						{!cpError ? "" : "Enter Correct Profile Link"}
+						<p className="ErrorMsg">{!cpError ? "" : "Enter Correct Profile Link"}</p>
 
 					</div>
 					<div className={detailsStyles.oneField}>
@@ -144,7 +144,7 @@ const Show = (props: Props) => {
 							placeholder="https://linkedin.com/in/"
 							onFocus={() => linkedin==="" ? setLinkedin("https://linkedin.com/in/"): ''}
 						/>
-						{!linkedinError ? "" : "Enter Correct Linkedin Profile Link"}
+						<p className="ErrorMsg">{!linkedinError ? "" : "Enter Correct Linkedin Profile Link"}</p>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>Link to Resume (PDF)</label>
@@ -155,7 +155,7 @@ const Show = (props: Props) => {
 							onChange={(e) => setResume(e.target.value)}
 							onKeyDown={handleKeypress}
 						/>
-						{!resumeError ? "" : "Enter Correct Link to Resume"}
+						<p className="ErrorMsg">{!resumeError ? "" : "Enter Correct Link to Resume"}</p>
 					</div>
 					<div>
 						<button type="submit" onClick={handleSubmit}>

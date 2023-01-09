@@ -112,14 +112,14 @@ const Motivation = (props: Props) => {
 				<div className={detailsStyles.oneField}>
 					<label>Describe yourself in 1 line (2 - 6 Words)</label>
 					<input type="text" value={oneLine} onChange={handleOneLineChange} />
-					{oneLineErr ? `Enter Proper Answer` : ``}
+					<p className="ErrorMsg">{oneLineErr ? `Enter Proper Answer` : ``}</p>
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>
 						What motivates you to join CodeCell? (40 - 100 Words)
 					</label>
 					<textarea value={plan} onChange={handlePlanChange} />
-					{planErr ? `Enter Proper Answer` : ``}
+					<p className="ErrorMsg">{planErr ? `Enter Proper Answer` : ``}</p>
 				</div>
 				<div className={detailsStyles.multiple_buttons} >
 					<button type="button" onClick={handleSave} disabled={!submitActive}>

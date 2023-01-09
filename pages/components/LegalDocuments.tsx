@@ -99,7 +99,7 @@ const LegalDocuments = (props: Props) => {
 							placeholder="Google Drive Link"
 							onChange={(e) => setCover(e.target.value)}
 						/>
-						<div>{!coverError ? "" : "Enter Correct Cover Letter Link"}</div>
+						<p className="ErrorMsg">{!coverError ? "" : "Enter Correct Cover Letter Link"}</p>
 						<a href="https://docs.google.com/document/u/1/export?format=docx&id=1e-YPRefmTm1yudBOWABCcOmeJQXUWaFQ&token=AC4w5Vg2bT7B2-A2nikZEZBNVhCskrDTdw:1673004153091&ouid=115299860843869653843"><big>Download Cover Letter Format</big></a>
 					</div>
 					<div className={detailsStyles.oneField}>
@@ -110,7 +110,7 @@ const LegalDocuments = (props: Props) => {
 							{position2!="CreativeTeam" && <option value="CreativeTeam">Creative Team</option>}
 							{position2!="MarketingTeam" && <option value="MarketingTeam">Marketing Team</option>}
 						</select>
-						{positionError1 ? `Select Position Preference` : ``}
+						<p className="ErrorMsg">{positionError1 ? `Select Position Preference` : ``}</p>
 					</div>
 					<div className={detailsStyles.oneField}>
 						<label>Position Preference 2</label>
@@ -120,7 +120,7 @@ const LegalDocuments = (props: Props) => {
 							{position1!="CreativeTeam" && <option value="CreativeTeam">Creative Team</option>}
 							{position1!="MarketingTeam" && <option value="MarketingTeam">Marketing Team</option> }
 						</select>
-						{positionError2 ? `Select Position Preference` : ``}
+						<p className="ErrorMsg">{positionError2 ? `Select Position Preference` : ``}</p>
 					</div>
 					<div className={detailsStyles.emptyField}>
 					</div>
