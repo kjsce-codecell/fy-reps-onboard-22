@@ -181,7 +181,6 @@ const PersonalDetails = (props: Props) => {
 						<option value="IT">Information Technology</option>
 						<option value="EXCP">Electronics & Computer Engineering</option>
 						<option value="EXTC">Electronics & Telecommunication Engineering</option>
-						<option value="ETRX">Electronics Engineering</option>
 						<option value="MECH">Mechanical Engineering</option>
 					</select>
 					<p className="ErrorMsg">{branchErr ? `Select Correct Branch` : ``}</p>
