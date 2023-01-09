@@ -81,22 +81,18 @@ const PersonalDetails = (props: Props) => {
 			email.includes(" ")
 		) {
 			error = true;
-			console.log("Wrong Email ID!!");
 			setEmailErr("Enter Correct Email ID");
 		}
 		if (phone.length != 10 || isNaN(parseInt(phone))) {
 			error = true;
-			console.log("Wrong Phone Number!!");
 			setPhoneErr(true);
 		}
 		if (name.trim().split(" ").length < 2 || name.length < 4) {
 			error = true;
-			console.log("Wrong Name!!");
 			setNameErr(true);
 		}
 		if (branch === "NA") {
 			error = true;
-			console.log("Select Appropriate Branch!!");
 			setBranchErr(true);
 		}
 		return error;

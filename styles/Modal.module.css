@@ -71,7 +71,7 @@
 	--slice-4: inset(40% -6px 43% 0);
 	--slice-5: inset(80% -6px 5% 0);
 
-	content: "ALTERNATE TEXT";
+	content: "CodeCell";
 	display: block;
 	position: absolute;
 	top: 0;

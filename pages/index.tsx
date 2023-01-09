@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PersonalDetails from "./components/PersonalDetails";
 import Show from "./components/Show";
 import Motivation from "./components/Motivation";
@@ -40,16 +40,14 @@ export default function Home() {
 
 	// Main Data
 	const [formData, setFormData] = useState<object>({});
+	const formRef = useRef({});
 
 	// 3 Sections Data
-	const [personalDetailsData, setPersonalDetailsData] = useState<
-		object | undefined
-	>({});
+	const [personalDetailsData, setPersonalDetailsData] = useState<object | undefined>({});
 	const [showUsData, setShowUsData] = useState<object | undefined>({});
 	const [motivationData, setMotivationData] = useState<object | undefined>({});
-	const [legalDocumentsData, setLegalDocumentsData] = useState<
-		object | undefined
-	>({});
+	const [legalDocumentsData, setLegalDocumentsData] = useState<object | undefined>({});
+	formRef.current = formData;
 
 	const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
 		useState<boolean>(false);
@@ -58,22 +56,6 @@ export default function Home() {
 		useState<boolean>(false);
 	const [motivationDataFilled, setmotivationDataFilled] =
 		useState<boolean>(false);
-
-	const updatePersonalDetailsData = (newData: any) => {
-		setPersonalDetailsData(newData);
-	};
-
-	const updateShowUsData = (newData: any) => {
-		setShowUsData(newData);
-	};
-
-	const updateMotivationData = (newData: any) => {
-		setMotivationData(newData);
-	};
-
-	const updateLegalDocumentsData = (newData: any) => {
-		setLegalDocumentsData(newData);
-	};
 
 	useEffect(() => {
 		setFormData({
@@ -97,36 +79,37 @@ export default function Home() {
 			SetPage(2)
 			changeSlide(2);
 		} else {
-
-			const KEY = process.env.NEXT_PUBLIC_KEY || "";
-			let superKey: Array<number> = []
-			for (let i=0; i<KEY.length; ++i) {
-				superKey.push(KEY.charCodeAt(i));
-			}
-			var textBytes = aesjs.utils.utf8.toBytes(process.env.NEXT_PUBLIC_secretKEY+currEmail)
-			var aesCtr = new aesjs.ModeOfOperation.ctr(superKey, new aesjs.Counter(3));
-			var encryptedBytes = aesCtr.encrypt(textBytes);
-			const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
-			SetPage(-1)
-			fetch(process.env.NEXT_PUBLIC_HOST+"/api/register", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({...formData, ciphertext: encryptedHex}),
-			})
-				.then((response) => response.json())
-				.then((data) => {
-					console.log("Registration ID: " + data.registrationID);
-					console.log("Hurrayy!! Applied Successfully");
-					setregistrationID(data.registrationID);
-					localStorage.setItem("submitted", "true");
-					localStorage.setItem("registrationID", data.registrationID);
-					setSubmitModalVisible(true);
+			setTimeout(async () => {
+				const KEY = process.env.NEXT_PUBLIC_KEY || "";
+				let superKey: Array<number> = []
+				for (let i=0; i<KEY.length; ++i) {
+					superKey.push(KEY.charCodeAt(i));
+				}
+				var textBytes = aesjs.utils.utf8.toBytes(process.env.NEXT_PUBLIC_secretKEY+currEmail)
+				var aesCtr = new aesjs.ModeOfOperation.ctr(superKey, new aesjs.Counter(3));
+				var encryptedBytes = aesCtr.encrypt(textBytes);
+				const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+				SetPage(-1)
+				fetch(process.env.NEXT_PUBLIC_HOST+"/api/register", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({...formRef.current, ciphertext: encryptedHex}),
 				})
-				.catch((e) => {
-					console.error("API Call for Registration Failed - Error: ", e);
-				});
+					.then((response) => response.json())
+					.then((data) => {
+						console.log("Registration ID: " + data.registrationID);
+						console.log("Hurrayy!! Applied Successfully");
+						setregistrationID(data.registrationID);
+						localStorage.setItem("submitted", "true");
+						localStorage.setItem("registrationID", data.registrationID);
+						setSubmitModalVisible(true);
+					})
+					.catch((e) => {
+						console.error("API Call for Registration Failed - Error: ", e);
+					});
+			}, 250);
 		}
 	};
 
@@ -182,7 +165,7 @@ export default function Home() {
 								<PersonalDetails
 									currentSlide={currentSlide}
 									setCurrentSlide={changeSlide}
-									updateForm={updatePersonalDetailsData}
+									updateForm={setPersonalDetailsData}
 									formState={setPersonalDetailsDataFilled}
 									updateEmail={setCurrEmail}
 									page={page}
@@ -194,7 +177,7 @@ export default function Home() {
 								<Show
 									currentSlide={currentSlide}
 									setCurrentSlide={changeSlide}
-									updateForm={updateShowUsData}
+									updateForm={setShowUsData}
 									formState={setShowUsDataFilled}
 									page={page}
 									setPage={SetPage}
@@ -206,7 +189,7 @@ export default function Home() {
 								<LegalDocuments
 									currentSlide={currentSlide}
 									setCurrentSlide={changeSlide}
-									updateForm={updateLegalDocumentsData}
+									updateForm={setLegalDocumentsData}
 									formState={setLegalDocumentsDataFilled}
 									page={page}
 									setPage={SetPage}
@@ -217,7 +200,7 @@ export default function Home() {
 								<Motivation
 									currentSlide={currentSlide}
 									setCurrentSlide={changeSlide}
-									updateForm={updateMotivationData}
+									updateForm={setMotivationData}
 									formState={setmotivationDataFilled}
 									finalSubmit={finalSubmit}
 									page={page}

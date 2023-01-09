@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import detailsStyles from "../../styles/Details.module.css";
 
 type Props = {
@@ -51,7 +51,6 @@ const LegalDocuments = (props: Props) => {
 		}
 		if (position1==="NA" || position2==="NA") {
 			error = true;
-			console.log("Select Position Preference/s !!");
 			if (position1==="NA") setPositionError1(true);
 			else setPositionError2(true);
 		}

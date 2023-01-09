@@ -46,7 +46,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 
         methods: ['POST'],
         origin: '*',
-        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        optionsSuccessStatus: 200,
      });
 
 
@@ -65,9 +65,6 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
 
     const timestamp = new Date(Date.now()).toString();
     try {
-        if (await checkRegistered(email) === true) {
-            return res.status(409).json({code: "failed", registrationID: 0, status: "submitted", flag: 0, message: "Document Conflict"});
-        }
 
         let superKey: Array<number> = [];
         let KEY = process.env.NEXT_PUBLIC_KEY || "";
@@ -84,6 +81,10 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
         }
 
         delete formData.ciphertext;
+
+        if (await checkRegistered(email) === true) {
+            return res.status(409).json({code: "failed", registrationID: 0, status: "submitted", flag: 0, message: "Document Conflict"});
+        }
 
 		const regRef = doc(db, "FY_2022-23", email);
         registrationID=Math.round((Date.now())/10e5) + Math.round(Math.random() * 10e3);
