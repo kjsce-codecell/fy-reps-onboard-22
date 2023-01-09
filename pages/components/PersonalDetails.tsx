@@ -146,7 +146,7 @@ const PersonalDetails = (props: Props) => {
 						onChange={handleEmailChange}
 						placeholder="abc@somaiya.edu" 
 					/>
-					{emailErr}
+					<p className="ErrorMsg">{emailErr}</p>
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter your Full Name</label>
@@ -156,7 +156,7 @@ const PersonalDetails = (props: Props) => {
 						onChange={handleNameChange}
 						placeholder="First-Name Last-Name"
 					/>
-					{nameErr ? `Enter Correct Full Name` : ``}
+					<p className="ErrorMsg">{nameErr ? `Enter Correct Full Name` : ``}</p>
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter your Phone Number (10 Digits)</label>
@@ -166,7 +166,7 @@ const PersonalDetails = (props: Props) => {
 						onChange={handlePhoneChange}
 						placeholder="93XXXXXX06"
 					/>
-					{phoneErr ? `Enter Correct Phone Number` : ``}
+					<p className="ErrorMsg">{phoneErr ? `Enter Correct Phone Number` : ``}</p>
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>Enter your Branch</label>
@@ -184,7 +184,7 @@ const PersonalDetails = (props: Props) => {
 						<option value="ETRX">Electronics Engineering</option>
 						<option value="MECH">Mechanical Engineering</option>
 					</select>
-					{branchErr ? `Select Correct Branch` : ``}
+					<p className="ErrorMsg">{branchErr ? `Select Correct Branch` : ``}</p>
 				</div>
 				<div>
 					<button type="submit" onClick={handleNext}>
