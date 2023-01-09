@@ -135,7 +135,7 @@ const PersonalDetails = (props: Props) => {
 			<div className={detailsStyles.sectionHeader}>
 				<span>Step {props.currentSlide + 1}/4</span>
 				<h1 style={{marginTop: "5px"}}>Envice yourself</h1>
-				<p>Reveal your Identity!!</p>
+				<p>Reveal your Identity</p>
 			</div>
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>

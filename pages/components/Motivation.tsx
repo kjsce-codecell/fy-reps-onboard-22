@@ -59,6 +59,8 @@ const Motivation = (props: Props) => {
 		setPlan(e.target.value);
 	};
 
+	const [submitActive, setSubmitActive] = useState<boolean>(true);
+
 	const validate=()=>{
 		let error = false;
 		setOneLineErr(false);
@@ -85,6 +87,7 @@ const Motivation = (props: Props) => {
 			props.updateForm({ oneLine, plan });
 			props.formState(true);
 			props.finalSubmit();
+			setSubmitActive(false);
 			setTimeout(() => {
 				setsubmissionStatus(0);
 			}, 8000)
@@ -103,7 +106,7 @@ const Motivation = (props: Props) => {
 			<div className={detailsStyles.sectionHeader}>
 				<span>Step {props.currentSlide + 1}/4</span>
 				<h1 style={{marginTop: "5px"}}>Present your Goals</h1>
-				<p>Lets stand out!!</p>
+				<p>Lets stand out</p>
 			</div>
 			<div className={detailsStyles.sectionContent}>
 				<div className={detailsStyles.oneField}>
@@ -113,16 +116,16 @@ const Motivation = (props: Props) => {
 				</div>
 				<div className={detailsStyles.oneField}>
 					<label>
-						What motivates you to join CodeCell ?? (40 - 100 Words)
+						What motivates you to join CodeCell? (40 - 100 Words)
 					</label>
 					<textarea value={plan} onChange={handlePlanChange} />
 					{planErr ? `Enter Proper Answer` : ``}
 				</div>
-				<div className={detailsStyles.multiple_buttons}>
-					<button type="button" onClick={handleSave}>
+				<div className={detailsStyles.multiple_buttons} >
+					<button type="button" onClick={handleSave} disabled={!submitActive}>
 						Save
 					</button>
-					<button type="button" onClick={submitForm}>
+					<button type="button" onClick={submitForm} disabled={!submitActive}>
 						{submissionStatus===0 && `Submit`}
 						<img src={submissionStatus===1 ? loader.src : `` } style={{width: "13px", transform: "scale(1.8)", marginTop: "4px"}}/>
 					</button>
