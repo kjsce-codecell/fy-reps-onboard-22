@@ -211,7 +211,7 @@ export default function Home() {
 					</div>
 					<div className={styles.footer}>
 						{/* {"Made with ❤️ by CodeCell"} */}
-						Developed with 💖 by <a className={styles.footerlink} href="https://kjscecodecell.com/" rel="noreferrer" target="_blank"><b>KJSCE CodeCell</b></a>
+						Made with 💖 by <a className={styles.footerlink} href="https://www.kjscecodecell.com/" rel="noreferrer" target="_blank"><b>KJSCE CodeCell</b></a>
 					</div>
 				</div>
 			</main>

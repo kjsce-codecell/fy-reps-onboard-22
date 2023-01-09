@@ -16,7 +16,7 @@ const SubmitModal = (props: Props) => {
 				<div className={styles.container}>
 					<img src={CodecellLogo.src} alt="Codecell logo" />
 					<h3>Hurrayyyy 🚀</h3>
-					<p><big><b>Lets sail on this 🚢 to code as you have 🔥ed the floor!!<br />Its your time to celebrate 🥂
+					<p><big><b>Let&apos;s sail on this 🚢 to code as you have 🔥ed the floor!!<br />It&apos;s your time to celebrate 🥂
 					</b></big></p>
 					<p><big><code><b>
 					<br />
