@@ -11,6 +11,7 @@ import Modal from "./components/Modal";
 import LegalDocuments from "./components/LegalDocuments";
 import SubmitModal from "./components/SubmitModal";
 import aesjs from 'aes-js';
+import ClosedModal from './components/ClosedModal'
 
 export default function Home() {
 	const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -122,6 +123,7 @@ export default function Home() {
 				<link rel="icon" href={codecellFavicon.src} />
 			</Head>
 			<main className={styles.main}>
+				<ClosedModal/>
 				{entryModalVisible && <Modal setVisible={setEntryModalVisible} />}
 				{submitModalVisible && <SubmitModal registrationID={registrationID} />}
 				<div className={styles.mainContainer}>
