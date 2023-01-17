@@ -46,6 +46,7 @@ const PersonalDetails = (props: Props) => {
 	const [branchErr, setBranchErr] = useState<boolean>(false);
 
 	const checkRegistered = async (emailID: string) => {
+		return false;
 		const docRef = doc(db, "FY_2022-23", emailID);
 		const docSnap = await getDoc(docRef);
 

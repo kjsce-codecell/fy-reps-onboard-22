@@ -30,10 +30,11 @@ const Modal = (props: Props) => {
 				<div className={styles.overlay}>
 					<div className={styles.container}>
 						<img src={CodecellLogo.src} alt="CodeCell Logo" />
-						<h3>Error: TLE </h3>
+						<h3>Applications not accepted 📫</h3>
 						<p>
 							<big>
-								<b>The form is now closed</b>
+								<b>The form is closed for now 🤘</b><br />
+								<b>But don't loose hopes!! You will soon get an Email from us when we start inviting applications for next season... <br />Till then,<br /> Happy Hacking <br />KJSCE CodeCell</b>
 							</big>
 						</p>
 						{/* <div onClick={handleClose}>Let&apos;s Go</div> */}

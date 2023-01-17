@@ -221,3 +221,11 @@ export default function Home() {
 		</>
 	);
 }
+
+
+// To open the form - 
+// 1) Update closing date in components/ClosedModal.tsx (Line 13)
+// 2) Enable API in api/register.ts (By deleting Line 52)
+// 3) Include all required configurations in .env.local (Keeping NEXT_PUBLIC as continued preifix for every Secret Key)
+// 4) Update as disabled={!submitActive} attribute in final Submit button in components/Motivation.tsx
+// 5) Delete Line 49 in components/PersonalDetails.tsx
