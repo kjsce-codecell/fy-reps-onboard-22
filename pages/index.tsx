@@ -136,9 +136,9 @@ export default function Home() {
       }, 250);
     }
   };
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+//   useEffect(() => {
+//     console.log(formData);
+//   }, [formData]);
 
   return (
     <>
