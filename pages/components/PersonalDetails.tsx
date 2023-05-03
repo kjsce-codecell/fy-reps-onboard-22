@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import detailsStyles from '../../styles/Details.module.css';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../services/connectFirestore';
+import { useEffect, useState } from "react";
+import detailsStyles from "../../styles/Details.module.css";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../services/connectFirestore";
 
 type Props = {
   currentSlide: number;
@@ -15,11 +15,11 @@ type Props = {
 };
 
 const fallbackValues = {
-  name: '',
-  email: '',
-  phone: '',
-  branch: 'NA',
-  year: 'NA',
+  name: "",
+  email: "",
+  phone: "",
+  branch: "NA",
+  year: "NA",
 };
 
 let flag = 1;
@@ -34,29 +34,29 @@ const PersonalDetails = (props: Props) => {
 
   useEffect(() => {
     defaultValues = JSON.parse(
-      localStorage.getItem('PersonalDetails') || JSON.stringify(fallbackValues)
+      localStorage.getItem("PersonalDetails") || JSON.stringify(fallbackValues)
     );
-    setName(defaultValues.name || '');
-    setEmail(defaultValues.email || '');
-    setPhone(defaultValues.phone || '');
-    setBranch(defaultValues.branch || '');
-	setYear(defaultValues.year || '');
+    setName(defaultValues.name || "");
+    setEmail(defaultValues.email || "");
+    setPhone(defaultValues.phone || "");
+    setBranch(defaultValues.branch || "");
+    setYear(defaultValues.year || "");
     flag = 0;
   }, []);
 
   const [nameErr, setNameErr] = useState<boolean>(false);
-  const [emailErr, setEmailErr] = useState('');
+  const [emailErr, setEmailErr] = useState("");
   const [phoneErr, setPhoneErr] = useState<boolean>(false);
   const [branchErr, setBranchErr] = useState<boolean>(false);
   const [yearErr, setYearErr] = useState<boolean>(false);
 
   const checkRegistered = async (emailID: string) => {
-    return false;
-    const docRef = doc(db, 'SY_TY_2023-24', emailID);
+    // return false;
+    const docRef = doc(db, "SY_TY_2023-24", emailID);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log('Email ID already registered!!');
+      console.log("Email ID already registered!!");
       return true;
     }
     return false;
@@ -81,31 +81,31 @@ const PersonalDetails = (props: Props) => {
 
   const validate = () => {
     let error = false;
-    setEmailErr('');
+    setEmailErr("");
     setPhoneErr(false);
     setNameErr(false);
 
     if (
-      !email.includes('@somaiya.edu') ||
-      email.indexOf('@') === 0 ||
-      email.includes(' ')
+      !email.includes("@somaiya.edu") ||
+      email.indexOf("@") === 0 ||
+      email.includes(" ")
     ) {
       error = true;
-      setEmailErr('Enter Correct Email ID');
+      setEmailErr("Enter Correct Email ID");
     }
     if (phone.length != 10 || isNaN(parseInt(phone))) {
       error = true;
       setPhoneErr(true);
     }
-    if (name.trim().split(' ').length < 2 || name.length < 4) {
+    if (name.trim().split(" ").length < 2 || name.length < 4) {
       error = true;
       setNameErr(true);
     }
-    if (branch === 'NA') {
+    if (branch === "NA") {
       error = true;
       setBranchErr(true);
     }
-    if (year === 'NA') {
+    if (year === "NA") {
       error = true;
       setYearErr(true);
     }
@@ -114,7 +114,7 @@ const PersonalDetails = (props: Props) => {
 
   const handleNext = async () => {
     localStorage.setItem(
-      'PersonalDetails',
+      "PersonalDetails",
       JSON.stringify({
         name,
         email,
@@ -128,10 +128,10 @@ const PersonalDetails = (props: Props) => {
 
     if (!error) {
       if ((await checkRegistered(email)) === true) {
-        setEmailErr('Email ID already registered');
+        setEmailErr("Email ID already registered");
       } else {
         props.updateForm({ name, email, phone, branch, year });
-        localStorage.setItem('email', email);
+        localStorage.setItem("email", email);
         props.setCurrentSlide(props.currentSlide + 1);
       }
       props.formState(true);
@@ -149,7 +149,7 @@ const PersonalDetails = (props: Props) => {
     <div className={detailsStyles.oneSection}>
       <div className={detailsStyles.sectionHeader}>
         <span>Step {props.currentSlide + 1}/4</span>
-        <h1 style={{ marginTop: '5px' }}>Envice yourself</h1>
+        <h1 style={{ marginTop: "5px" }}>Envice yourself</h1>
         <p>Reveal your Identity</p>
       </div>
       <div className={detailsStyles.sectionContent}>
@@ -210,7 +210,8 @@ const PersonalDetails = (props: Props) => {
             <option value="NA">Select Branch</option>
             <option value="ComputerEngg">Computer Engineering</option>
             <option value="IT">Information Technology</option>
-            <option value="EXCP">Electronics Engineering</option>
+            <option value="EE">Electronics Engineering</option>
+            <option value="EXCP">Electronics and Computer Engineering</option>
             <option value="EXTC">
               Electronics & Telecommunication Engineering
             </option>

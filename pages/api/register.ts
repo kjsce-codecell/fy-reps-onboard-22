@@ -30,7 +30,7 @@ interface ExtendedNextApiRequest extends NextApiRequest {
 }
 
 const checkRegistered = async (emailID: string) => {
-    const docRef = doc(db, "FY_2022-23", emailID);
+    const docRef = doc(db, "SY_TY_2023-24", emailID);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -49,7 +49,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
         optionsSuccessStatus: 200,
      });
 
-     return res.status(404).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: "applications not accepted"});
+    //  return res.status(404).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: "applications not accepted"});
 
     const formData = req.body;
     // console.log(formData);
@@ -87,7 +87,7 @@ export default async function handler(req: ExtendedNextApiRequest, res: NextApiR
             return res.status(409).json({code: "failed", registrationID: 0, status: "submitted", flag: 0, message: "Document Conflict"});
         }
 
-		const regRef = doc(db, "FY_2022-23", email);
+		const regRef = doc(db, "SY_TY_2023-24", email);
         registrationID=Math.round((Date.now())/10e5) + Math.round(Math.random() * 10e3);
 		const finalData = { registrationID, ...formData, timestamp };
 

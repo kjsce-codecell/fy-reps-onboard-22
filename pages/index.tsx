@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import { useEffect, useRef, useState } from 'react';
-import PersonalDetails from './components/PersonalDetails';
-import Show from './components/Show';
-import Motivation from './components/Motivation';
-import Stepper from './components/Stepper';
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import { useEffect, useRef, useState } from "react";
+import PersonalDetails from "./components/PersonalDetails";
+import Show from "./components/Show";
+import Motivation from "./components/Motivation";
+import Stepper from "./components/Stepper";
 import {
   code,
   CodecellLogo,
@@ -13,12 +13,13 @@ import {
   user,
   legal,
   codecellFavicon,
-} from '../assets';
-import Modal from './components/Modal';
-import LegalDocuments from './components/LegalDocuments';
-import SubmitModal from './components/SubmitModal';
-import aesjs from 'aes-js';
-import ClosedModal from './components/ClosedModal';
+} from "../assets";
+import Modal from "./components/Modal";
+import LegalDocuments from "./components/LegalDocuments";
+import SubmitModal from "./components/SubmitModal";
+import aesjs from "aes-js";
+import ClosedModal from "./components/ClosedModal";
+import { log } from "console";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -26,25 +27,25 @@ export default function Home() {
 
   const changeSlide = (slide: number) => {
     setCurrentSlide(slide);
-    localStorage.setItem('slide', JSON.stringify(slide));
+    localStorage.setItem("slide", JSON.stringify(slide));
   };
   let defaultSlide = 0;
   useEffect(() => {
-    defaultSlide = parseInt(localStorage.getItem('slide') || '0');
+    defaultSlide = parseInt(localStorage.getItem("slide") || "0");
     changeSlide(defaultSlide || 0);
   }, []);
 
   const [submitModalVisible, setSubmitModalVisible] = useState<boolean>(false);
   const [entryModalVisible, setEntryModalVisible] = useState<boolean>(false);
   useEffect(() => {
-    console.log('Do not paste any code or script here');
-    console.log('Hacker can use this to hack the connection!!');
-    if (localStorage.getItem('submitted') === 'true') {
+    console.log("Do not paste any code or script here");
+    console.log("Hacker can use this to hack the connection!!");
+    if (localStorage.getItem("submitted") === "true") {
       setregistrationID(
-        parseInt(localStorage.getItem('registrationID') || '0')
+        parseInt(localStorage.getItem("registrationID") || "0")
       );
       setSubmitModalVisible(true);
-    } else setEntryModalVisible(localStorage.getItem('visited') !== 'true');
+    } else setEntryModalVisible(localStorage.getItem("visited") !== "true");
   }, []);
 
   // Main Data
@@ -63,7 +64,7 @@ export default function Home() {
   formRef.current = formData;
 
   //   year state
-  const [mainYear, setMainYear] = useState('NA');
+  const [mainYear, setMainYear] = useState("NA");
 
   const [personalDetailsDataFilled, setPersonalDetailsDataFilled] =
     useState<boolean>(false);
@@ -82,7 +83,7 @@ export default function Home() {
     });
   }, [personalDetailsData, showUsData, legalDocumentsData, motivationData]);
 
-  const [currEmail, setCurrEmail] = useState<string>('noreply');
+  const [currEmail, setCurrEmail] = useState<string>("noreply");
   const [page, SetPage] = useState(-1);
   const finalSubmit = async () => {
     if (!personalDetailsDataFilled) {
@@ -96,7 +97,7 @@ export default function Home() {
       changeSlide(2);
     } else {
       setTimeout(async () => {
-        const KEY = process.env.NEXT_PUBLIC_KEY || '';
+        const KEY = process.env.NEXT_PUBLIC_KEY || "";
         let superKey: Array<number> = [];
         for (let i = 0; i < KEY.length; ++i) {
           superKey.push(KEY.charCodeAt(i));
@@ -111,10 +112,10 @@ export default function Home() {
         var encryptedBytes = aesCtr.encrypt(textBytes);
         const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
         SetPage(-1);
-        fetch(process.env.NEXT_PUBLIC_HOST + '/api/register', {
-          method: 'POST',
+        fetch(process.env.NEXT_PUBLIC_HOST + "/api/register", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             ...formRef.current,
@@ -123,29 +124,27 @@ export default function Home() {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('Registration ID: ' + data.registrationID);
-            console.log('Hurrayy!! Applied Successfully');
+            console.log("Registration ID: " + data.registrationID);
+            console.log("Hurrayy!! Applied Successfully");
             setregistrationID(data.registrationID);
-            localStorage.setItem('submitted', 'true');
-            localStorage.setItem('registrationID', data.registrationID);
+            localStorage.setItem("submitted", "true");
+            localStorage.setItem("registrationID", data.registrationID);
             setSubmitModalVisible(true);
           })
           .catch((e) => {
-            console.error('API Call for Registration Failed - Error: ', e);
+            console.error("API Call for Registration Failed - Error: ", e);
           });
       }, 250);
     }
   };
-//   useEffect(() => {
-//     console.log(formData);
-//   }, [formData]);
+  //   useEffect(() => {
+  //     console.log(formData);
+  //   }, [formData]);
 
   return (
     <>
       <Head>
-        <title>
-          CodeCell FY Representatives Applications January 2023 | KJSCE
-        </title>
+        <title>CodeCell SY/TY Applications 2023-24 | KJSCE</title>
         <meta name="description" content="Generated by create next app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={codecellFavicon.src} />
@@ -171,23 +170,23 @@ export default function Home() {
                 Change={(n: number) => changeSlide(n)}
                 items={[
                   {
-                    title: 'Identity',
-                    description: '',
+                    title: "Identity",
+                    description: "",
                     icon: user,
                   },
                   {
-                    title: 'Unveil',
-                    description: '',
+                    title: "Unveil",
+                    description: "",
                     icon: code,
                   },
                   {
-                    title: 'Officials',
-                    description: '',
+                    title: "Officials",
+                    description: "",
                     icon: legal,
                   },
                   {
-                    title: 'Drive',
-                    description: '',
+                    title: "Drive",
+                    description: "",
                     icon: fire,
                   },
                 ]}
@@ -246,7 +245,7 @@ export default function Home() {
           </div>
           <div className={styles.footer}>
             {/* {"Made with ❤️ by CodeCell"} */}
-            Made with 💖 by{' '}
+            Made with 💖 by{" "}
             <a
               className={styles.footerlink}
               href="https://www.kjscecodecell.com/"
