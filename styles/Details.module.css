@@ -83,6 +83,69 @@
   resize: none;
 }
 
+/* half width dropdown */
+
+.oneFieldHalf {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-family: 'Bakbak One', cursive;
+  font-size: 13.5px;
+  width: 47%; /* Adjusted width to be half */
+}
+
+.oneFieldHalf a {
+  user-select: none;
+}
+
+.oneFieldHalf label {
+  margin-bottom: 5px;
+  user-select: none;
+  font-family: 'Bakbak One', cursive;
+  font-weight: 100;
+  font-size: 16px;
+}
+
+.oneFieldHalf option {
+  background-color: var(--deep-blue);
+  color: var(--white);
+  border: 1px solid var(--dark-blue);
+  border-radius: 20px;
+}
+
+.oneFieldHalf input,
+.oneFieldHalf textarea,
+.oneFieldHalf select {
+  max-width: 100%;
+  padding: 9px;
+  font-size: 18.5px;
+  font-weight: 400;
+  color: whitesmoke;
+  border: 2px solid var(--codecell-red-morph);
+  border-radius: 8px;
+  height: 50px;
+  margin-bottom: 5px;
+  background-color: transparent;
+  outline: none;
+  font-family: 'Bakbak One', cursive;
+}
+
+.oneFieldHalf input:hover,
+.oneFieldHalf select,
+.oneFieldHalf textarea {
+  border: 2px solid var(--codecell-red);
+}
+
+.oneFieldHalf select {
+  user-select: none;
+}
+
+.oneFieldHalf textarea {
+  height: 239.5px;
+  resize: none;
+}
+
+
 .sectionContent {
   position: relative;
   height: 100%;
@@ -157,6 +220,24 @@
     font-size: 13px;
   }
 
+  .oneFieldHalf input,
+  .oneFieldHalf select {
+    max-height: 38px;
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .oneFieldHalf select {
+    font-size: 14px;
+    padding: 2px;
+  }
+  
+  .oneFieldHalf input::placeholder, 
+  .oneFieldHalf textarea::placeholder, 
+  .oneFieldHalf select::placeholder {
+    font-size: 13px;
+  }
+
   .oneSection button {
     width: 120px;
     height: 34px;
@@ -196,6 +277,12 @@
     font-size: 14px;
   }
   .oneField label {
+    font-size: 14px;
+  }
+  .oneFieldHalf input::placeholder {
+    font-size: 14px;
+  }
+  .oneFieldHalf label {
     font-size: 14px;
   }
 }
