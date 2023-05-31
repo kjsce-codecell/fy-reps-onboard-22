@@ -150,7 +150,7 @@ export default function Home() {
         <link rel="icon" href={codecellFavicon.src} />
       </Head>
       <main className={styles.main}>
-        <ClosedModal />
+        {/* <ClosedModal /> */}
         {entryModalVisible && <Modal setVisible={setEntryModalVisible} />}
         {submitModalVisible && <SubmitModal registrationID={registrationID} />}
         <div className={styles.mainContainer}>
