@@ -45,7 +45,7 @@ const LegalDocuments = (props: Props) => {
     let error = false;
     setCoverError(false);
 
-    if (!cover.includes('drive.google.com/')) {
+    if (!cover.includes('drive.google.com/') || cover === "drive.google.com/") {
       setCoverError(true);
       error = true;
     }

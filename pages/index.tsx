@@ -40,7 +40,7 @@ export default function Home() {
   useEffect(() => {
     console.log("Do not paste any code or script here");
     console.log("Hacker can use this to hack the connection!!");
-    if (localStorage.getItem("submitted") === "true") {
+    if (localStorage.getItem("submitted-jun-2023") === "true") {
       setregistrationID(
         parseInt(localStorage.getItem("registrationID") || "0")
       );
@@ -127,7 +127,7 @@ export default function Home() {
             console.log("Registration ID: " + data.registrationID);
             console.log("Hurrayy!! Applied Successfully");
             setregistrationID(data.registrationID);
-            localStorage.setItem("submitted", "true");
+            localStorage.setItem("submitted-jun-2023", "true");
             localStorage.setItem("registrationID", data.registrationID);
             setSubmitModalVisible(true);
           })
@@ -261,9 +261,9 @@ export default function Home() {
   );
 }
 
-// To open the form -
-// 1) Update closing date in components/ClosedModal.tsx (Line 13)
-// 2) Enable API in api/register.ts (By deleting Line 52)
+// To close the form -
+// 1) Update closing date in components/ClosedModal.tsx (Line 13) [DO NOT, IF ALREADY SET]
+// 2) Enable API in api/register.ts (By deleting Line 53)
 // 3) Include all required configurations in .env.local (Keeping NEXT_PUBLIC as continued preifix for every Secret Key)
 // 4) Update as disabled={!submitActive} attribute in final Submit button in components/Motivation.tsx
-// 5) Delete Line 49 in components/PersonalDetails.tsx
+// 5) Uncomment line 54 in components/PersonalDetails.tsx
