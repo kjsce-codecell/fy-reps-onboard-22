@@ -10,15 +10,10 @@ const Modal = (props: Props) => {
 	const [visible, setVisible] = useState<boolean>(false);
 
 	useEffect(() => {
-		let c = new Date("2022-01-18T00:00:00");
+		let c = new Date("2023-06-15T00:00:00");
 		setInterval(() => {
-			let d = new Date();
-			if (
-				d.getHours() >= c.getHours() &&
-				d.getDate() >= c.getDate() &&
-				d.getMinutes() >= c.getMinutes() &&
-				d.getSeconds() >= c.getSeconds()
-			) {
+			let d = new Date(Date.now());
+			if (d >= c) {
 				setVisible(true);
 			}
 		}, 1000);

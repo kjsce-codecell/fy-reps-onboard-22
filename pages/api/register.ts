@@ -26,6 +26,7 @@ interface ExtendedNextApiRequest extends NextApiRequest {
     position2: string,
     oneLine: string,
     plan: string,
+    mainYear: string,
     ciphertext: string
 }
 

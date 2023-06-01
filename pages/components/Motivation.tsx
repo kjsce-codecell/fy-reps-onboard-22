@@ -126,7 +126,8 @@ const Motivation = (props: Props) => {
 						Save
 					</button>
 					{/* update disabled attriubte as {!submitActive} in button below for opening form */}
-					<button type="button" onClick={submitForm} disabled={true}>
+					{/* update disabled attriubte as false in button below for closing form */}
+					<button type="button" onClick={submitForm} disabled={!submitActive}>
 						{submissionStatus===0 && `Submit`}
 						<img src={submissionStatus===1 ? loader.src : `` } style={{width: "13px", transform: "scale(1.8)", marginTop: "4px"}}/>
 					</button>
