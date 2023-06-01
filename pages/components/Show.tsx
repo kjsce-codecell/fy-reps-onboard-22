@@ -72,7 +72,7 @@ const Show = (props: Props) => {
 			setCPError(true);
 		}
 
-		if (!resume.includes("drive.google.com/")) {
+		if (!resume.includes("drive.google.com/") || resume === "drive.google.com/") {
 			error = true;
 			setResumeError(true);
 		}
