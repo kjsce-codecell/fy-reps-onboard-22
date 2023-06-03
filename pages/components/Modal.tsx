@@ -24,7 +24,7 @@ const Modal = (props: Props) => {
           <h3>Hello there 👋</h3>
           <p>
             <big>
-              <b>Welcome to KJSCE CodeCell SY/TY Applications January 2023</b>
+              <b>Welcome to KJSCE CodeCell SY/TY Applications June 2023</b>
             </big>
           </p>
           <div onClick={handleClose}>Let&apos;s Go</div>
