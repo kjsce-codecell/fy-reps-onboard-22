@@ -71,7 +71,7 @@ const Motivation = (props: Props) => {
 			setOneLineErr(true);
 			error = true;
 		}
-		if (getWordCount(plan) < 40 || getWordCount(plan) > 100) {
+		if (plan.trim().split(/[\s\n]+/).length < 40 || plan.trim().split(/[\s\n]+/).length > 100) {
 			console.log("2nd Input Word Count is "+getWordCount(plan));
 			setPlanErr(true);
 			error = true;
@@ -115,9 +115,10 @@ const Motivation = (props: Props) => {
 					<p className="ErrorMsg">{oneLineErr ? `Enter Proper Answer` : ``}</p>
 				</div>
 				<div className={detailsStyles.oneField}>
-					<label>
-						What motivates you to join CodeCell? (40 - 100 Words)
-					</label>
+					<span style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+						<label>What motivates you to join CodeCell? (40 - 100 Words)</label>
+						<label>{plan === "" ? "0" : plan.trim().split(/[\s\n]+/).length} / 100</label>
+					</span>
 					<textarea value={plan} onChange={handlePlanChange} />
 					<p className="ErrorMsg">{planErr ? `Enter Proper Answer` : ``}</p>
 				</div>
