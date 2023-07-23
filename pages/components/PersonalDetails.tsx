@@ -51,7 +51,7 @@ const PersonalDetails = (props: Props) => {
   const [yearErr, setYearErr] = useState<boolean>(false);
 
   const checkRegistered = async (emailID: string) => {
-    // return false;
+    return false;
     const docRef = doc(db, "SY_TY_2023-24", emailID);
     const docSnap = await getDoc(docRef);
 

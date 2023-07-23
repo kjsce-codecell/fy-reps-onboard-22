@@ -44,16 +44,14 @@ const checkRegistered = async (emailID: string) => {
 export default async function handler(req: ExtendedNextApiRequest, res: NextApiResponse<PartialResponse>) {
 
     await NextCors(req, res, {
-
         methods: ['POST'],
         origin: '*',
         optionsSuccessStatus: 200,
      });
 
-    //  return res.status(404).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: "applications not accepted"});
+     return res.status(406).json({code: "failed", registrationID: 0, status: "not-submitted", flag: 0, message: "applications not accepted"});
 
     const formData = req.body;
-    // console.log(formData);
     const email = req.body.email;
     const name = req.body.name;
     const ciphertext = req.body.ciphertext;

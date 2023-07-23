@@ -19,7 +19,6 @@ import LegalDocuments from "./components/LegalDocuments";
 import SubmitModal from "./components/SubmitModal";
 import aesjs from "aes-js";
 import ClosedModal from "./components/ClosedModal";
-import { log } from "console";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -261,9 +260,8 @@ export default function Home() {
   );
 }
 
-// To close the form -
-// 1) Update closing date in components/ClosedModal.tsx (Line 13) [DO NOT, IF ALREADY SET]
-// 2) Enable API in api/register.ts (By deleting Line 53)
-// 3) Include all required configurations in .env.local (Keeping NEXT_PUBLIC as continued preifix for every Secret Key)
-// 4) Update as disabled={!submitActive} attribute in final Submit button in components/Motivation.tsx
-// 5) Uncomment line 54 in components/PersonalDetails.tsx
+// To open the form -
+// 1) Update closing date in components/ClosedModal.tsx in line 13
+// 2) Enable Register API in api/register.ts by commenting out line 52
+// 3) Comment out line 54 in components/PersonalDetails.tsx
+// 4) Include all required configurations in .env.local file, Keeping NEXT_PUBLIC as preifix for every Secret Key
